@@ -65,13 +65,20 @@ h2 {
     font-size: 1.5em;
 }
 
+.content-container {
+    display:flex;
+    flex-direction: column;
+    box-shadow: 3px 3px 3px 3px #dee2e6;
+    border-radius: 5px;
+}
+
 .nodisplay {
     display:none;
 }
 
-.weather {
-    box-shadow: 5px 5px 5px 5px #dee2e6;
-    border-radius: 5px;
+.weather,
+.tide {
+    
     width: 100%;
     margin: auto;
 }
@@ -86,7 +93,7 @@ h2 {
     display:flex;
     flex-direction: row;
     justify-content: center;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     padding-top: 2em;
 }
 
@@ -127,6 +134,18 @@ h2 {
     flex-direction: row;
     justify-content: space-around;
     padding-bottom: 2em;
+}
+
+.tide__container {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+
+.tide__nextTide--title {
+    padding: 1em 0.5em;
+    font-weight:bold;
 }
 
 .page-link {
@@ -180,7 +199,13 @@ footer .links a:hover {
         font-size: 36px;
     }
 
-    .weather {
+    .content-container {
+        display:flex;
+        flex-direction: row;
+    }
+
+    .weather, 
+    .tide {
         width: 50%;
         margin: auto;
     }

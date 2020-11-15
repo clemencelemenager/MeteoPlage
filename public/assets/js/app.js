@@ -7,9 +7,15 @@ let app = {
 
         // console.log('function app.init');
 
+        // Set latitud & longitud for Omaha Beach
+        let lat = 49.369682 ;
+        let long = -0.871084;
+
         // collect datas from API
         app.loadCurrentWeather();
         app.loadForecastWeather();
+        //! API Tides limited to 100 requests/month
+        // app.loadTides();
 
         // add event listener
         app.listenSeeForecast();
@@ -73,7 +79,8 @@ let app = {
     loadForecastWeather: function() {
         app.fetchForecastWeatherData().then( function(data) {
             // console.log(data);
-
+            
+            // init object of forecast datas
             let forecastData = {};
 
             // Set values from API
@@ -99,14 +106,9 @@ let app = {
                 forecastData[i]["windSpeed"]        = windSpeed;
                 forecastData[i]["windDir"]          = windDir;
 
+                // display forecast
                 weather.displayForecast(forecastData[i]);
             }
-
-            // // Display in webpage forecast 
-            // let forecast3h = forecastData[0];
-            
-            // weather.displayForecast(forecast3h);
-            
 
         });
     },
@@ -133,15 +135,69 @@ let app = {
 
     },
 
+    /**
+     * Add event listener on "see forecast" 
+     */
     listenSeeForecast: function() {
         let seeForecastElement = document.querySelector(".weather__forecast--title");
         seeForecastElement.addEventListener('click', app.seeForecast);
     },
 
+    /**
+     * Display on/off on weather forecast content
+     */
     seeForecast: function() {
         let forecastElement = document.querySelector(".weather__forecast--content");
         forecastElement.classList.toggle('nodisplay');
-    }
+    },
+
+    /**
+     * Display tides 
+     */
+    loadTides: function() {
+
+        app.fetchTidesData().then( function(data) {
+            console.log(data);
+
+            // set values
+            let currentTide     = tide.translateTideType(data.heights[0].state);
+            let nextTideType    = tide.translateTideType(data.extremes[0].state);
+            let nextTideHour    = tide.getTideTime(data.extremes[0].timestamp);
+      
+            // display on webpage
+            tide.displayCurrentTide(currentTide);
+            tide.displayNextTide(nextTideType, nextTideHour);
+
+        });
+    },
+
+    /**
+     * Get tides datas from API
+     */
+    fetchTidesData: function() {
+        // API Tides
+        // @see https://rapidapi.com/apihood/api/tides/endpoints
+        // ! LIMIT 100 REQUESTS PER MONTH
+        let endPoint = 'https://tides.p.rapidapi.com/tides?latitude=49.369682&longitude=-0.871084&interval=60&duration=1440&radius=10'
+
+        let fetchOptions = {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            "headers": {
+                "x-rapidapi-key": "f189a2aa50msh73dd958991d441ep1301b9jsn9c4346a2dec5",
+                "x-rapidapi-host": "tides.p.rapidapi.com"
+            }
+        };
+
+        let fetchResponse = fetch(endPoint,fetchOptions).then(function(response) {
+            return response.json();
+            })
+        
+            
+
+        return fetchResponse;
+    },
 
      
 

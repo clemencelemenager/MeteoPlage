@@ -15,7 +15,7 @@
 
 </footer>
 
-
+<script src="assets/js/tide.js"></script>
 <script src="assets/js/weather.js"></script>
 <script src="assets/js/app.js"></script>
 
