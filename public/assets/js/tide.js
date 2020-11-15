@@ -11,7 +11,7 @@ let tide = {
     },
 
     /**
-     * Display next tide informations : type (low/high) and time
+     * Display the next tide : type (low/high) and time
      * 
      * @param string nextTideType translated in french
      * @param string nextTideHour converted from unix in HH:mm
@@ -25,6 +25,21 @@ let tide = {
         nextTideTimeContainer.textContent = nextTideHour; 
     },
 
+    /**
+     * Display the second next tide : type (low/high) and time
+     * 
+     * @param string secondTideType translated in french
+     * @param string secondTideHour onverted from unix in HH:mm
+     */
+    displaySecondTide: function(secondTideType,secondTideHour) {
+
+        let secondTideTypeContainer = document.querySelector(".secondTide-type");
+        secondTideTypeContainer.textContent = secondTideType; 
+
+        let secondTideTimeContainer = document.querySelector(".secondTide-time");
+        secondTideTimeContainer.textContent = secondTideHour; 
+
+    },
 
     // --------------------------------------------------------
     // Tools

@@ -125,8 +125,10 @@ h2 {
 }
 
 .weather__forecast--title {
-    color: #17A2B8;
     padding: 0.5em;
+    color: #666;
+    font-size: 0.9em;
+    text-decoration: underline;
 }
 
 .weather__forecast--nextHours {
@@ -143,9 +145,21 @@ h2 {
     margin-bottom: 1em;
 }
 
+.tide__currentTide {
+    color: #17A2B8;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
 .tide__nextTide--title {
-    padding: 1em 0.5em;
     font-weight:bold;
+    margin-top: 0.5em;
+    margin-bottom:0;
+}
+
+.tide__secondTide--title {
+    margin-top: 0.2em;
+    color: #888;
 }
 
 .page-link {

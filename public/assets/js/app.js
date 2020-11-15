@@ -160,13 +160,17 @@ let app = {
             console.log(data);
 
             // set values
-            let currentTide     = tide.translateTideType(data.heights[0].state);
-            let nextTideType    = tide.translateTideType(data.extremes[0].state);
-            let nextTideHour    = tide.getTideTime(data.extremes[0].timestamp);
+            let currentTide         = tide.translateTideType(data.heights[0].state);
+            let nextTideType        = tide.translateTideType(data.extremes[0].state);
+            let nextTideHour        = tide.getTideTime(data.extremes[0].timestamp);
+            let secondTideType   = tide.translateTideType(data.extremes[1].state);
+            let secondTideHour   = tide.getTideTime(data.extremes[1].timestamp);
+
       
             // display on webpage
             tide.displayCurrentTide(currentTide);
             tide.displayNextTide(nextTideType, nextTideHour);
+            tide.displaySecondTide(secondTideType,secondTideHour)
 
         });
     },

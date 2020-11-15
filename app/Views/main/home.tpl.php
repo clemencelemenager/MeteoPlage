@@ -113,7 +113,7 @@
                         <!-- load from API -->
                         La mer monte !
                     </div>
-                    <div class="tide__nextTide">
+                    <div class="tide__nextTides">
                         <p class="tide__nextTide--title">
                             Prochaine marée 
                             <span class="nextTide-type">
@@ -124,6 +124,18 @@
                             <span class="nextTide-time">
                                 <!-- load from API-->
                                 22:05
+                            </span>
+                        </p>
+                        <p class="tide__secondTide--title">
+                            Prochaine marée 
+                            <span class="secondTide-type">
+                                <!-- load from API-->
+                                basse
+                            </span>
+                            à 
+                            <span class="secondTide-time">
+                                <!-- load from API-->
+                                08:05
                             </span>
                         </p>
                     </div>
