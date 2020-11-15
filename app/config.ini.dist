@@ -1,0 +1,9 @@
+; Sample file of configuration 
+; to connect with database. 
+; Copy this file and rename it in config.ini 
+; Of course, fill it with your connexion values
+
+DB_HOST=localhost
+DB_USERNAME=
+DB_PASSWORD=
+DB_NAME=

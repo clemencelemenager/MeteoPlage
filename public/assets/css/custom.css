@@ -1,0 +1,187 @@
+/*
+Device      = idBootstrap   => MinWidth
+Mobile      = sm            => 576px
+Tablet      = md            => 768px
+PC          = lg            => 992px
+Large PC    = xl            => 1200px
+
+*/
+
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+header {
+    margin-bottom: 1em;
+}
+
+header {
+    color: #333;
+    text-align: center;
+    padding-bottom: 0.2em;
+}
+
+.navbar,
+.navbar-light .navbar-brand,
+.navbar-light .navbar-toggler {
+    color: #444;
+    font-weight: 800;
+}
+
+header hr {
+    border-width: 3px;
+    border-color: #444;
+    width: 60px;
+}
+
+.navbar-light .navbar-brand {
+    font-size: 18px;
+}
+
+.navbar-toggler,
+.nav-link {
+    font-size: 12px;
+    text-transform: uppercase;
+    transition: 400ms;
+}
+
+.marquee {
+    border-radius: 5px;
+}
+
+.synthesis {
+    margin: 0.5em 0 2em 0;
+    text-align:center;
+}
+
+h1 {
+    padding-top: 0.5em;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+.weather {
+    box-shadow: 5px 5px 5px 5px #dee2e6;
+    border-radius: 5px;
+}
+
+.weather__title {
+    text-align: left;
+    margin: 1rem;
+    padding-top: 1rem;
+}
+
+.weather__container {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 1em;
+    padding-top: 2em;
+    padding-bottom: 1.2em;
+}
+
+.weather__picture {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weather__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.weather__description {
+    padding: 0.5em;
+    text-align:center;
+    text-transform: capitalize;
+}
+
+.weather__temperature,
+.weather__content--wind {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding : 0.5em 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.weather__forecast {
+    border: 1px solid #dee2e6;
+    /* border-radius: 5px; */
+    color: #17A2B8;
+    padding: 0.5em;
+}
+
+
+.page-link {
+    text-transform: uppercase;
+    color: inherit;
+    font-size: 0.8em;
+}
+
+.page-link:hover {
+    background-color: #dee2e6;
+    color: inherit;
+}
+
+footer {
+    color: #888;
+    font-size:0.9em;
+    margin: 3em 0 1em 0;
+}
+
+.row {
+    margin: 0;
+}
+
+footer .links a {
+    color: inherit;
+}
+
+footer .links a:hover {
+    color: grey;
+    text-decoration: none;
+}
+
+
+/* DEVICE TABLET => md in bootstrap */
+@media (min-width:768px) {
+
+    header {
+        padding-bottom: 0;
+    }
+
+    .navbar-light .navbar-nav .nav-link:hover {
+        color: #17A2B8;
+    }
+
+    .navbar-nav .nav-item.active .nav-link, {
+        color : #17A2B8;
+    }
+
+
+    h1 {
+        font-size: 36px;
+    }
+
+    .weather__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+}
+
+/* DEVICE PC => lg in bootstrap */
+@media (min-width:992px) {
+
+    header h1 {
+        font-size: 2em;
+    }
+
+}
