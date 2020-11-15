@@ -191,6 +191,15 @@ let weather = {
 
     },
 
+    /** 
+     * Get hour from unix timestamp
+     * 
+     */
+    getForecastHour: function(unix) {
+        let date = new Date(unix*1000);
+        let hour = date.getHours();
+        return hour;
+    },
 
 
 }

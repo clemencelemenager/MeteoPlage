@@ -24,14 +24,10 @@
         <!-- section Weather -->
 
         <section class="weather left-0 text-center">
-            
-            <!-- <h2 class="weather__title section-heading">
-                Météo
-            </h2> -->
 
             <div class ="weather__container">
                 
-                <div class="weather-content">
+                <div class="weather__content">
                     <div class="weather__picture">
                         <!-- load icon from API -->
                     </div>
@@ -57,55 +53,58 @@
                 </div>
             </div>
             <div class="weather__forecast">
-                Prévisions pour les prochaines heures
-            </div>
-            <div class="weather__forecast--nextHours">
-                <div class="forecast0">
-                    <div class ="weather__forecast--time">
-                        <!-- load from API-->
-                    </div>    
-                    <div class ="weather__forecast--icon">
-                        <!-- load from API-->
-                    </div>
-                    <div class ="weather__forecast--temp">
-                        <!-- load from API-->
-                    </div>
-                    <div class ="weather__forecast--wind">
-                       <!-- load from API-->
-                    </div>
-                </div>
-                <div class="forecast1">
-                    <div class ="weather__forecast--time">
-                        <!-- load from API-->
-                    </div>    
-                    <div class ="weather__forecast--icon">
-                        <!-- load from API-->
-                    </div>
-                    <div class ="weather__forecast--temp">
-                        <!-- load from API-->
-                    </div>
-                    <div class ="weather__forecast--wind">
-                       <!-- load from API-->
-                    </div>
-                </div>  
-                <div class="forecast2">
-                    <div class ="weather__forecast--time">
-                        <!-- load from API-->
-                    </div>    
-                    <div class ="weather__forecast--icon">
-                        <!-- load from API-->
-                    </div>
-                    <div class ="weather__forecast--temp">
-                        <!-- load from API-->
-                    </div>
-                    <div class ="weather__forecast--wind">
-                       <!-- load from API-->
-                    </div>
-                </div>
-                
+                <p class="weather__forecast--title">Prévisions pour les prochaines heures</p>
+            
+                <div class="weather__forecast--content nodisplay">
 
-            </div>
+                    <div class="weather__forecast--nextHours">
+                        <div class="forecast0">
+                            <div class ="weather__forecast--time">
+                                <!-- load from API-->
+                            </div>    
+                            <div class ="weather__forecast--icon">
+                                <!-- load from API-->
+                            </div>
+                            <div class ="weather__forecast--temp">
+                                <!-- load from API-->
+                            </div>
+                            <div class ="weather__forecast--wind">
+                            <!-- load from API-->
+                            </div>
+                        </div>
+                        <div class="forecast1">
+                            <div class ="weather__forecast--time">
+                                <!-- load from API-->
+                            </div>    
+                            <div class ="weather__forecast--icon">
+                                <!-- load from API-->
+                            </div>
+                            <div class ="weather__forecast--temp">
+                                <!-- load from API-->
+                            </div>
+                            <div class ="weather__forecast--wind">
+                            <!-- load from API-->
+                            </div>
+                        </div>  
+                        <div class="forecast2">
+                            <div class ="weather__forecast--time">
+                                <!-- load from API-->
+                            </div>    
+                            <div class ="weather__forecast--icon">
+                                <!-- load from API-->
+                            </div>
+                            <div class ="weather__forecast--temp">
+                                <!-- load from API-->
+                            </div>
+                            <div class ="weather__forecast--wind">
+                            <!-- load from API-->
+                            </div>
+                        </div>
+                    </div>
+                    
 
+                </div>
+            </div>
             
             
         </section>

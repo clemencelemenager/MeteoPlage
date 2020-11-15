@@ -11,9 +11,14 @@ let app = {
         app.loadCurrentWeather();
         app.loadForecastWeather();
 
+        // add event listener
+        app.listenSeeForecast();
+
     },
 
-
+    /**
+     * Display current weather 
+     */
     loadCurrentWeather: function() {
 
         app.fetchCurrentWeatherData().then( function(data) {
@@ -37,6 +42,9 @@ let app = {
 
     },
 
+    /**
+     * Get current weather data from API
+     */
     fetchCurrentWeatherData: function() {
         // API current Weather from OpenWeatherMap
         // @see https://openweathermap.org/api
@@ -59,7 +67,9 @@ let app = {
         return fetchResponse;
     },
 
-
+    /**
+     * Display forecast weather
+     */
     loadForecastWeather: function() {
         app.fetchForecastWeatherData().then( function(data) {
             // console.log(data);
@@ -75,7 +85,7 @@ let app = {
 
                 // set values
                 let querySelector   = "forecast"+i;
-                let time            = app.displayHour(forecast.dt);
+                let time            = weather.getForecastHour(forecast.dt);
                 let icon            = forecast.weather[0].icon;
                 let temp            = Math.round(forecast.main.temp);
                 let windSpeed       = weather.getKmhSpeed(forecast.wind.speed);
@@ -101,6 +111,9 @@ let app = {
         });
     },
 
+    /**
+     * Get forecast weather data from API
+     */
     fetchForecastWeatherData: function() {
         // API 5 day weather forecast from OpenWeatherMap
         // @see https://openweathermap.org/forecast5
@@ -120,13 +133,17 @@ let app = {
 
     },
 
-    displayHour: function(unix) {
-        let date = new Date(unix*1000);
-        let hour = date.getHours();
-        return hour;
+    listenSeeForecast: function() {
+        let seeForecastElement = document.querySelector(".weather__forecast--title");
+        seeForecastElement.addEventListener('click', app.seeForecast);
+    },
+
+    seeForecast: function() {
+        let forecastElement = document.querySelector(".weather__forecast--content");
+        forecastElement.classList.toggle('nodisplay');
     }
 
-   
+     
 
 }
 

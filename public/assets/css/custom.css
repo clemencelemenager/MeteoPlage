@@ -65,9 +65,15 @@ h2 {
     font-size: 1.5em;
 }
 
+.nodisplay {
+    display:none;
+}
+
 .weather {
     box-shadow: 5px 5px 5px 5px #dee2e6;
     border-radius: 5px;
+    width: 100%;
+    margin: auto;
 }
 
 .weather__title {
@@ -79,10 +85,9 @@ h2 {
 .weather__container {
     display:flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     margin-bottom: 1em;
     padding-top: 2em;
-    padding-bottom: 1.2em;
 }
 
 .weather__picture {
@@ -94,6 +99,8 @@ h2 {
 .weather__content {
     display: flex;
     flex-direction: column;
+    margin: 0.5em 1.5em;
+    width:50%;
 }
 
 .weather__description {
@@ -110,7 +117,7 @@ h2 {
     margin-bottom: 0.5em;
 }
 
-.weather__forecast {
+.weather__forecast--title {
     color: #17A2B8;
     padding: 0.5em;
 }
@@ -173,11 +180,16 @@ footer .links a:hover {
         font-size: 36px;
     }
 
+    .weather {
+        width: 50%;
+        margin: auto;
+    }
+
     .weather__content {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        align-items: flex-start;
+        /* align-items: flex-start; */
     }
 
     .weather__forecast--nextHours {
