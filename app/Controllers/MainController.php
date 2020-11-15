@@ -26,35 +26,10 @@ class MainController extends CoreController
      * @var $viewVars [array] Optionnal - Set of informations used for page content 
     */
     public function about() {
-        $this->show('about');
+        $this->show('main/about');
     }
 
-    /**
-     * Function to display Contact
-     * 
-     * @var $viewVars [array] Optionnal - Set of informations used for page content 
-    */
-    public function contact() {
-        $this->show('contact');
-    }
     
-    /**
-     * Function to display blog 
-     * 
-     * @var $viewVars [array] Optionnal - Set of informations used for page content 
-    */
-    public function blog() { 
-        $this->show('blog');
-    }
-
-    /**
-     * Function to display admin 
-     * 
-     * @var $viewVars [array] Optionnal - Set of informations used for page content 
-    */
-    public function register() { 
-        $this->show('register');
-    }
     
 
 }
