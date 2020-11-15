@@ -1,3 +1,4 @@
 vendor
 composer.lock
 app/config.ini
+public/assets/js/api.js

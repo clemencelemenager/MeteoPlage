@@ -1,4 +1,55 @@
 let tide = {
+    
+    /**
+     * Display tides 
+     */
+    loadTides: function() {
+
+        tide.fetchTidesData().then( function(data) {
+            console.log(data);
+
+            // set values
+            let currentTide         = tide.translateTideType(data.heights[0].state);
+            let nextTideType        = tide.translateTideType(data.extremes[0].state);
+            let nextTideHour        = tide.getTideTime(data.extremes[0].timestamp);
+            let secondTideType   = tide.translateTideType(data.extremes[1].state);
+            let secondTideHour   = tide.getTideTime(data.extremes[1].timestamp);
+
+      
+            // display on webpage
+            tide.displayCurrentTide(currentTide);
+            tide.displayNextTide(nextTideType, nextTideHour);
+            tide.displaySecondTide(secondTideType,secondTideHour)
+
+        });
+    },
+
+    /**
+     * Get tides datas from API
+     * ! set your API Key
+     */
+    fetchTidesData: function() {
+        // API Tides
+        // @see https://rapidapi.com/apihood/api/tides/endpoints
+        let endPoint = 'https://tides.p.rapidapi.com/tides?latitude=49.369682&longitude=-0.871084&interval=60&duration=1440&radius=10'
+
+        // ! LIMIT 100 REQUESTS PER MONTH
+        let fetchOptions = {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            "headers": {
+                "x-rapidapi-key": api.getTidesAPIKey(),
+                "x-rapidapi-host": "tides.p.rapidapi.com"
+            }
+        };
+
+        let fetchResponse = fetch(endPoint,fetchOptions).then(function(response) {
+            return response.json();
+            })
+        
+        return fetchResponse;
+    },
 
     /**
      * Display status of current tide
@@ -41,9 +92,10 @@ let tide = {
 
     },
 
-    // --------------------------------------------------------
+
+    // ========================================================
     // Tools
-    // --------------------------------------------------------
+    // ========================================================
 
 
     /**
