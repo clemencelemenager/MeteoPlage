@@ -111,12 +111,16 @@ h2 {
 }
 
 .weather__forecast {
-    border: 1px solid #dee2e6;
-    /* border-radius: 5px; */
     color: #17A2B8;
     padding: 0.5em;
 }
 
+.weather__forecast--nextHours {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 2em;
+}
 
 .page-link {
     text-transform: uppercase;
@@ -174,6 +178,10 @@ footer .links a:hover {
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
+    }
+
+    .weather__forecast--nextHours {
+    justify-content: center;
     }
 }
 
