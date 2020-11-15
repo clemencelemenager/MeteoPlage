@@ -1,12 +1,26 @@
 let weather = {
 
-    displayWeatherDescription: function(description) {
+    // --------------------------------------------------------
+    // Current weather
+    // --------------------------------------------------------
+
+    /**
+     * Display current weather description
+     * 
+     * @param string description 
+     */
+    displayCurrentDescription: function(description) {
 
         let descriptionElement = document.querySelector(".weather__description");
         descriptionElement.textContent = description;
     },
 
-    displayWeatherIcon: function(icon) {
+    /**
+     * Display current weather icon
+     * 
+     * @param string icon 
+     */
+    displayCurrentIcon: function(icon) {
 
         let iconURL = "http://openweathermap.org/img/wn/"+icon+"@2x.png";
 
@@ -17,34 +31,114 @@ let weather = {
         iconContainer.appendChild(iconElement);
     },
     
-    displayWeatherTemperature: function(temperature) {
-        let temperatureElement = document.querySelector(".weather__temperature--Air");
-        temperatureElement.textContent = temperature;
+    /**
+     * Display current temperature 
+     * 
+     * @param number temperature 
+     */
+    displayCurrentTemperature: function(temperature) {
+        let temperatureContainer = document.querySelector(".weather__temperature--Air");
+        temperatureContainer.textContent = temperature;
+    },
 
+    /**
+     * Display current wind values
+     * 
+     * @param number windSpeed : speed in kmh
+     * @param string windDirection : cardinal direction
+     */
+    displayCurrentWind: function (windSpeed,windDirection) {
+
+        let windContainer = document.querySelector(".weather__content--wind");
+        windContainer.textContent = windSpeed+"km/h "+windDirection;
+    },
+
+
+    // --------------------------------------------------------
+    // Forecast weather
+    // --------------------------------------------------------
+
+    displayForecast: function(indexForecast) {
+        weather.displayForecastIcon(indexForecast["icon"], indexForecast["querySelector"]);
+        weather.displayForecastTime(indexForecast['time'], indexForecast["querySelector"]);
+        weather.displayForecastTemp(indexForecast['temperature'],indexForecast["querySelector"]);
+        weather.displayForecastWind(indexForecast['windSpeed'],indexForecast['windDir'],indexForecast["querySelector"]);
+    },
+
+
+    /**
+     * Display the correspondant hour of forecast 
+     * 
+     * @param number hour of the forecast
+     * @param string querySelector : id for forecast
+     */
+    displayForecastTime: function(hour, querySelector) {
+        let hourContainer = document.querySelector("."+querySelector+" .weather__forecast--time");
+        hourContainer.textContent = hour+"h";
+    },
+
+    /**
+     * Display the weather icon of forecast
+     * 
+     * @param string icon 
+     * @param string querySelector : id for forecast
+     */
+    displayForecastIcon: function(icon, querySelector) {
+
+        let iconURL = "http://openweathermap.org/img/wn/"+icon+"@2x.png";
+        let iconElement = document.createElement("img");
+        iconElement.setAttribute("src",iconURL);
+
+        let iconContainer = document.querySelector("."+querySelector+" .weather__forecast--icon");
+        iconContainer.appendChild(iconElement);
 
     },
 
-    displayWeatherWind: function (windSpeed,windDirection) {
+    /**
+     * Display the temperature of forecast 
+     * 
+     * @param number temperature
+     * @param string querySelector : id for forecast
+     */
+    displayForecastTemp: function(temp, querySelector) {
+        let tempContainer = document.querySelector("."+querySelector+" .weather__forecast--temp");
+        tempContainer.textContent = temp+"°"; 
+    },
 
-        // convert windSpeed from m/s to km/h
-        windSpeed = weather.getKmhSpeed(windSpeed);
-        // display in webpage
-        let windSpeedElement = document.querySelector(".weather__content--wind .speed");
-        windSpeedElement.textContent = windSpeed;
-
-        // get cardinal point for wind direction
-        windDirection = weather.getCardinalDirection(windDirection);
-        // display in webpage
-        let windDirectionElement = document.querySelector(".weather__content--wind .direction");
-        windDirectionElement.textContent = windDirection;
+    /**
+     * Display wind values of forecast
+     * 
+     * @param number windSpeed 
+     * @param number windDirection 
+     * @param string querySelector : id for forecast
+     */
+    displayForecastWind: function(windSpeed, windDirection, querySelector) {
+        let windContainer = document.querySelector("."+querySelector+" .weather__forecast--wind");
+        windContainer.textContent = windSpeed+"km/h "+windDirection; 
 
     },
 
+
+
+    // --------------------------------------------------------
+    // Tools
+    // --------------------------------------------------------
+
+    /**
+     * Convert speed from m/s to km/h
+     * 
+     * @param numb speed in m/s
+     */
     getKmhSpeed(speed) {
         speed = Math.round(speed*3.6);
         return speed;
     },
-
+    
+    /**
+     * Convert degrees in cardinal direction
+     * 
+     * @param number windDegree 
+     */
     getCardinalDirection(windDegree) {
         if(windDegree => 348.75 && windDegree < 11.25) {
             return "N";
@@ -97,6 +191,15 @@ let weather = {
 
     },
 
+    /** 
+     * Get hour from unix timestamp
+     * 
+     */
+    getForecastHour: function(unix) {
+        let date = new Date(unix*1000);
+        let hour = date.getHours();
+        return hour;
+    },
 
 
 }
