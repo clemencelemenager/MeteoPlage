@@ -16,7 +16,6 @@ let app = {
         // load tide datas from API
         //! API Tides limited to 100 requests/month
         // tide.loadTides();
-        tide.displayTideChart();
 
         // add event listener
         app.seeForecast();
@@ -123,6 +122,9 @@ let app = {
     expandForecast: function() {
         let forecastElement = document.querySelector(".forecast__content");
         forecastElement.classList.toggle('nodisplay');
+
+        tide.loadTideChart();
+
     },
 
 

@@ -101,7 +101,10 @@
             <!-- section forecast next hours -->
             <section class="forecast">
 
-                <p class="forecast__title">Voir les prévisons des prochaines heures</p>
+                <div class="forecast__title">
+                    <p>Prévisons des prochaines heures </p>
+                    <i class="fas fa-caret-down"></i>
+                </div>
 
                 <div class="forecast__content nodisplay">
 

@@ -34,3 +34,9 @@ Free plan limited to 1M calls / month - [API doc]("https://openweathermap.org/ap
 > weather.fetchCurrentWeatherData()
 > weather.fetchForecastWeatherData()
 > ```
+
+## About code
+
+- Framework CSS : [Bootstrap]("https://getbootstrap.com/")
+- Icon Library : [Font-awesome]("http://fontawesome.io") 
+- Javascript Library : [chart.js]("https://www.chartjs.org/") (for tides chart)

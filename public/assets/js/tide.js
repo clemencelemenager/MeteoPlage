@@ -100,7 +100,7 @@ let tide = {
     /**
      * Display chart to represent tides for next hours
      */
-    displayTideChart: function() {
+    loadTideChart: function() {
 
         var ctx = document.getElementById('myChart');
         var myChart = new Chart(ctx, {
@@ -114,8 +114,7 @@ let tide = {
                     borderWidth: 2,
                     pointRadius: 0,
                     borderCapStyle : "round",
-                    fill: false,
-                    responsive: true,
+                    fill: false,                    
                 }]
             },
             options: {
@@ -128,6 +127,14 @@ let tide = {
                             beginAtZero: true
                         }
                     }]
+                },
+                title: {
+                    display:true,
+                    text:'Hauteur de marée à venir',
+                    position:'top',
+                    fontSize:16,
+                    fontColor: '#444',
+                    responsive: true,
                 }
             }
         });
