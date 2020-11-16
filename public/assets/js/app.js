@@ -14,8 +14,12 @@ let app = {
         weather.loadForecastWeather();
 
         // load tide datas from API
-        //! API Tides limited to 100 requests/month
-        // tide.loadTides();
+        // ! API Tides limited to 100 requests/month
+        // ! API default setting is inactive
+        // ! Set true to activate API :
+        let activateAPI = false;
+        tide.loadTides(activateAPI);
+        
 
         // add event listener
         app.seeForecast();
