@@ -5,8 +5,6 @@ let app = {
      */ 
     init: function() {
 
-        // console.log('function app.init');
-
         // Set latitud & longitud for Omaha Beach
         let lat = 49.369682 ;
         let long = -0.871084;
@@ -21,7 +19,7 @@ let app = {
         tide.displayTideChart();
 
         // add event listener
-        weather.listenSeeForecast();
+        app.seeForecast();
 
     }, 
     
@@ -108,6 +106,23 @@ let app = {
             return "NNO";
         }
 
+    },
+
+    /**
+    * Add event listener on "see forecast" 
+    */
+    seeForecast: function() {
+        let seeForecastElement = document.querySelector(".forecast__title");
+        seeForecastElement.addEventListener('click', app.expandForecast);
+    },
+
+    /**
+     * Expand forecast content (on/off)
+     * Display weather and tide for next hours
+     */
+    expandForecast: function() {
+        let forecastElement = document.querySelector(".forecast__content");
+        forecastElement.classList.toggle('nodisplay');
     },
 
 

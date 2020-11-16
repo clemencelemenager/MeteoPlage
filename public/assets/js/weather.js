@@ -191,7 +191,7 @@ let weather = {
      * @param string querySelector : id for forecast
      */
     displayForecastTime: function(hour, querySelector) {
-        let hourContainer = document.querySelector("."+querySelector+" .weather__forecast--time");
+        let hourContainer = document.querySelector("."+querySelector+" .forecast__weather--time");
         hourContainer.textContent = hour+"h";
     },
 
@@ -207,7 +207,7 @@ let weather = {
         let iconElement = document.createElement("img");
         iconElement.setAttribute("src",iconURL);
 
-        let iconContainer = document.querySelector("."+querySelector+" .weather__forecast--icon");
+        let iconContainer = document.querySelector("."+querySelector+" .forecast__weather--icon");
         iconContainer.appendChild(iconElement);
 
     },
@@ -219,7 +219,7 @@ let weather = {
      * @param string querySelector : id for forecast
      */
     displayForecastTemp: function(temp, querySelector) {
-        let tempContainer = document.querySelector("."+querySelector+" .weather__forecast--temp");
+        let tempContainer = document.querySelector("."+querySelector+" .forecast__weather--temp");
         tempContainer.textContent = temp+"°"; 
     },
 
@@ -231,30 +231,13 @@ let weather = {
      * @param string querySelector : id for forecast
      */
     displayForecastWind: function(windSpeed, windDirection, querySelector) {
-        let windContainer = document.querySelector("."+querySelector+" .weather__forecast--wind");
+        let windContainer = document.querySelector("."+querySelector+" .forecast__weather--wind");
         windContainer.textContent = windSpeed+"km/h "+windDirection; 
 
     },
 
 
     
-
-
-    /**
-     * Add event listener on "see forecast" 
-     */
-    listenSeeForecast: function() {
-        let seeForecastElement = document.querySelector(".weather__forecast--title");
-        seeForecastElement.addEventListener('click', weather.seeForecast);
-    },
-
-    /**
-     * Display on/off on weather forecast content
-     */
-    seeForecast: function() {
-        let forecastElement = document.querySelector(".weather__forecast--content");
-        forecastElement.classList.toggle('nodisplay');
-    },
 
 }
 
