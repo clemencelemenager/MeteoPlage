@@ -88,7 +88,7 @@ let weather = {
      * @param number temperature 
      */
     displayCurrentTemperature: function(temperature) {
-        let temperatureContainer = document.querySelector(".weather__temperature--Air");
+        let temperatureContainer = document.querySelector(".weather__temperature--Air span");
         temperatureContainer.textContent = temperature;
     },
 
@@ -100,7 +100,7 @@ let weather = {
      */
     displayCurrentWind: function (windSpeed,windDirection) {
 
-        let windContainer = document.querySelector(".weather__content--wind");
+        let windContainer = document.querySelector(".weather__content--wind span");
         windContainer.textContent = windSpeed+"km/h "+windDirection;
     },
 

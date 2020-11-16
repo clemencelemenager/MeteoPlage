@@ -28,7 +28,7 @@
                     
                     <div class="weather__content">
                         <div class="weather__picture">
-                            <!-- load icon from API -->
+                                <!-- load icon from API -->
                         </div>
                         <div class="weather__description">
                             <!-- load description from API -->
@@ -37,16 +37,25 @@
                 
                     <div class="weather__content">
                         <div class="weather__temperature">
-                            <span class="weather__temperature--Air">
-                                <!-- load temp from API-->
-                            </span>°
+                            <div class="weather__temperature--Air">
+                                <i class="fas fa-thermometer-half"></i>
+                                <span>
+                                    <!-- load temp from API-->
+                                </span>° 
+                            </div>
+                            <div class="weather__temperature--Sea">
+                                <i class="fas fa-water"></i>
+                                <span>13</span>°
+                            </div>
+                            
                         </div>
                         <div class="weather__content--wind">
-                            <!-- load wind from API-->
+                            <i class="fas fa-wind"></i>
+                            <span>
+                                <!-- load from API -->
+                            </span>
                         </div>
-                        <div class="weather__temperature">
-                            Eau :  <span class="weather__temperature--Sea">13</span>°
-                        </div>
+
 
                     </div>
                 </div>
