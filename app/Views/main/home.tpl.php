@@ -140,6 +140,10 @@
                         </p>
                     </div>
 
+                    <div class="tide__graph">
+                        test graph
+                    </div>
+
                 </div>
 
             </section>
