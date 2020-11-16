@@ -12,9 +12,9 @@ let tide = {
             let currentTide         = tide.translateTideType(data.heights[0].state);
             let nextTideType        = tide.translateTideType(data.extremes[0].state);
             let nextTideHour        = tide.getTideTime(data.extremes[0].timestamp);
-            let secondTideType   = tide.translateTideType(data.extremes[1].state);
-            let secondTideHour   = tide.getTideTime(data.extremes[1].timestamp);
-
+            let secondTideType      = tide.translateTideType(data.extremes[1].state);
+            let secondTideHour      = tide.getTideTime(data.extremes[1].timestamp);
+            // TODO save datas for chart
       
             // display on webpage
             tide.displayCurrentTide(currentTide);
@@ -26,6 +26,7 @@ let tide = {
 
     /**
      * Get tides datas from API
+     * ! LIMIT 100 REQUESTS PER MONTH
      * ! set your API Key
      */
     fetchTidesData: function() {
@@ -33,7 +34,6 @@ let tide = {
         // @see https://rapidapi.com/apihood/api/tides/endpoints
         let endPoint = 'https://tides.p.rapidapi.com/tides?latitude=49.369682&longitude=-0.871084&interval=60&duration=1440&radius=10'
 
-        // ! LIMIT 100 REQUESTS PER MONTH
         let fetchOptions = {
             method: 'GET',
             mode: 'cors',
@@ -94,6 +94,81 @@ let tide = {
 
 
     // ========================================================
+    // Tide Chart
+    // ========================================================
+
+    /**
+     * Display chart to represent tides for next hours
+     */
+    displayTideChart: function() {
+
+        var ctx = document.getElementById('myChart');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: tide.getChartLabels(),
+                datasets: [{
+                    label: null,
+                    data: tide.getTideHeights(),
+                    borderColor: 'rgba(23, 162, 184,1)',
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    borderCapStyle : "round",
+                    fill: false,
+                    responsive: true,
+                }]
+            },
+            options: {
+                legend: {
+                    display: false,
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    },
+
+   
+
+    getChartLabels: function() {
+        // TODO data from API
+        let chartData = tide.getChartData();
+       
+        // init array 
+        let labels = [];
+        // chartData contains tide details for next 24 hours 
+        // for each index, get the hour number as a label for X axe
+        for(const index in chartData){
+            let hour = app.getHour(chartData[index].timestamp);
+            labels.push(hour+"h");
+        }
+        return labels;
+
+    },
+
+    getTideHeights: function() {
+        let chartData = tide.getChartData();
+
+        // init array 
+        let heights = [];
+        // chartData contains tide details for next 24 hours 
+        // for each index, get the hour number as a label for X axe
+        for(const index in chartData){
+            let height = chartData[index].height;
+            heights.push(height);
+        }
+        return heights;
+
+    },
+    
+
+
+    // ========================================================
     // Tools
     // ========================================================
 
@@ -129,6 +204,29 @@ let tide = {
         }
          
         return hour + ":" + minute;
+    },
+
+    /**
+     * Get tide data for chart
+     * TODO : data from API
+     */
+    getChartData: function() {
+        
+        let chartData = {
+            0: {timestamp: 1605462966, datetime: "2020-11-15T17:56:06+00:00", height: -1.0075273508763711, state: "RISING"},
+            1: {timestamp: 1605466566, datetime: "2020-11-15T18:56:06+00:00", height: 1.3282136010455832, state: "RISING"},
+            2: {timestamp: 1605470166, datetime: "2020-11-15T19:56:06+00:00", height: 2.7711124808243794, state: "RISING"},
+            3: {timestamp: 1605473766, datetime: "2020-11-15T20:56:06+00:00", height: 3.1760213745839456, state: "RISING"},
+            4: {timestamp: 1605477366, datetime: "2020-11-15T21:56:06+00:00", height: 3.075157430072668, state: "FALLING"},
+            5: {timestamp: 1605480966, datetime: "2020-11-15T22:56:06+00:00", height: 2.632354240421295, state: "FALLING"},
+            6: {timestamp: 1605484566, datetime: "2020-11-15T23:56:06+00:00", height: 1.5428480707252064, state: "FALLING"},
+            7: {timestamp: 1605488166, datetime: "2020-11-16T00:56:06+00:00", height: -0.11059584574574294, state: "FALLING"},
+            8: {timestamp: 1605491766, datetime: "2020-11-16T01:56:06+00:00", height: -1.7617573325279117, state: "FALLING"},
+            9: {timestamp: 1605495366, datetime: "2020-11-16T02:56:06+00:00", height: -3.0744115196055657, state: "FALLING"},
+            10: {timestamp: 1605498966, datetime: "2020-11-16T03:56:06+00:00", height: -3.861516255952961, state: "FALLING"},
+            11: {timestamp: 1605502566, datetime: "2020-11-16T04:56:06+00:00", height: -3.5715966729537225, state: "RISING"},
+        };
+        return chartData;
     },
 
 }

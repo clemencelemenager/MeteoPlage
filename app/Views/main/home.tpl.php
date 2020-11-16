@@ -140,8 +140,9 @@
                         </p>
                     </div>
 
-                    <div class="tide__graph">
-                        test graph
+                    <div class="tide__chart--container">
+                        <canvas id="myChart"></canvas>
+
                     </div>
 
                 </div>
