@@ -128,6 +128,32 @@ let app = {
 
     },
 
+    /**
+     * Display an alert message in webpage
+     * 
+     * @param string messageHTML : message to display
+     */
+    alertMessage: function(messageHTML) {
+
+        // identify the container where to display the message
+        let alertContainer = document.querySelector(".alertMessage");
+        // add html to the container
+        alertContainer.innerHTML = "<p>"+messageHTML+"</br><span class=\"alertMessage--close\">Ne plus afficher ce message</span></p>";
+
+        // add event listener to close alert message
+        let closeAlertMessage = document.querySelector(".alertMessage--close");
+        closeAlertMessage.addEventListener('click', app.handleCloseAlertMessage);
+
+    },
+
+    /**
+     * Remove alert message 
+     */
+    handleCloseAlertMessage: function() {
+        let alertMessage = document.querySelector(".alertMessage");
+        alertMessage.classList.add('nodisplay');
+    },
+
 
 
 

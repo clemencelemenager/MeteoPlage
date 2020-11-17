@@ -51,7 +51,7 @@ header hr {
 }
 
 .synthesis {
-    margin: 0.5em 0 2em 0;
+    margin: 0.5em 0 1em 0;
     text-align:center;
 }
 
@@ -64,6 +64,27 @@ h1 {
 h2 {
     font-size: 1.5em;
 }
+
+.alertMessage {
+    background-color: #ff000025;
+    font-size:0.9em;
+    padding: 0.5em 1em;
+    border: 1px solid #ff000080;
+    border-radius:2px;
+    color: #a50606;
+    text-align:center;
+}
+
+.alertMessage p {
+    margin-bottom:0;
+}
+
+.alertMessage--close {
+    color: #890505;
+    text-decoration: underline;
+    display: block;
+    text-align: right;
+    padding-top: 0.5em;}
 
 .currentContent-container,
 .forecastContent-container {

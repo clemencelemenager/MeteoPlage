@@ -49,6 +49,10 @@ let tide = {
 
             // display data on webpage
             tide.displayTideData(tideDataSet);
+
+            // display an alert message about sample data
+            let messageHTML = "Attention : les données de marée sont des exemples. Contactez l'administrateur pour activer les données réelles." 
+            app.alertMessage(messageHTML);
         }
     },
 

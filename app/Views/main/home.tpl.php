@@ -19,6 +19,10 @@
             </div>
         </section>
 
+        <div class="alertMessage">
+            <!-- app.alertMessage() -->
+        </div>
+
         <div class="currentContent-container">
 
             <!-- section current Weather -->
