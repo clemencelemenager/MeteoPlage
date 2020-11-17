@@ -17,7 +17,7 @@ let app = {
         // ! API Tides limited to 100 requests/month
         // ! API default setting is inactive
         // ! Set true to activate API :
-        let activateAPI = false;
+        let activateAPI = true;
         tide.loadTides(activateAPI);
         
 

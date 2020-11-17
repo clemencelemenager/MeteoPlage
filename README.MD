@@ -35,6 +35,12 @@ Free plan limited to 1M calls / month - [API doc]("https://openweathermap.org/ap
 > weather.fetchForecastWeatherData()
 > ```
 
+### Activate API data for tides
+
+Give the limited calls for Tides API in free plan, the request to API is not activated by default. When not activated, it loads some sample data for the display.
+
+To activate API, set *true* to activateAPI in app.init().
+
 ## About code
 
 - Framework CSS : [Bootstrap]("https://getbootstrap.com/")
