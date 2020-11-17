@@ -8,33 +8,48 @@ let tide = {
      */
     loadTides: function(activateAPI) {
 
+        // init variables
+        let currentTide     = "";
+        let nextTideType    = "";
+        let nextTideHour    = "";
+        let secondTideType  = "";
+        let secondTideHour  = "";
+        let tideNextHours   = {};
+
+        // if activateAPI, load data from API
         if(activateAPI == true) {
             tide.fetchTidesData().then( function(data) {
-                console.log(data);
+                // console.log(data);
     
                 // set values
-                let currentTide         = tide.translateTideType(data.heights[0].state);
-                let nextTideType        = tide.translateTideType(data.extremes[0].state);
-                let nextTideHour        = tide.getTideTime(data.extremes[0].timestamp);
-                let secondTideType      = tide.translateTideType(data.extremes[1].state);
-                let secondTideHour      = tide.getTideTime(data.extremes[1].timestamp);
-                // TODO save datas for chart
-                let tideNextHours       = data.heights;
-          
-                // display on webpage
-                tide.displayCurrentTide(currentTide);
-                tide.displayNextTide(nextTideType, nextTideHour);
-                tide.displaySecondTide(secondTideType,secondTideHour)
-                tide.loadTideChart(tideNextHours);
+                currentTide     = tide.translateTideType(data.heights[0].state);
+                nextTideType    = tide.translateTideType(data.extremes[0].state);
+                nextTideHour    = tide.getTideTime(data.extremes[0].timestamp);
+                secondTideType  = tide.translateTideType(data.extremes[1].state);
+                secondTideHour  = tide.getTideTime(data.extremes[1].timestamp);
+                tideNextHours   = data.heights;
+
+                tideDataSet     = {currentTide, nextTideType, nextTideHour, secondTideType, secondTideHour, tideNextHours};
+                
+                // display data on webpage
+                tide.displayTideData(tideDataSet);
             });
         }
 
+        // else, load sample data
         else {
-            // TODO complete sampleTideData and display in DOM
-            tide.getSampleChartData();
-        }
+            currentTide     = "La mer monte !";
+            nextTideType    = "haute";
+            nextTideHour    = "22h04";
+            secondTideType  = "basse";
+            secondTideHour  = "05:34";
+            tideNextHours   = tide.getSampleChartData();
 
-        
+            tideDataSet     = {currentTide, nextTideType, nextTideHour, secondTideType, secondTideHour, tideNextHours};
+
+            // display data on webpage
+            tide.displayTideData(tideDataSet);
+        }
     },
 
     /**
@@ -62,6 +77,18 @@ let tide = {
             })
         
         return fetchResponse;
+    },
+
+    /**
+     * Display all tide datas on webpage
+     * 
+     * @param object tideDataSet 
+     */
+    displayTideData: function(tideDataSet) {
+        tide.displayCurrentTide(tideDataSet.currentTide);
+        tide.displayNextTide(tideDataSet.nextTideType, tideDataSet.nextTideHour);
+        tide.displaySecondTide(tideDataSet.secondTideType,tideDataSet.secondTideHour)
+        tide.loadTideChart(tideDataSet.tideNextHours);
     },
 
     /**
@@ -112,7 +139,7 @@ let tide = {
 
     /**
      * Display chart to represent tides for next hours
-     * TODO : Voir le conflit de chargement de données quand on déploit le forecast (console log  : les données sont chargées avec la page, qd on déroule les données sont vides)
+     * 
      */
     loadTideChart: function(tideNextHours) {
 
@@ -155,29 +182,35 @@ let tide = {
     },
 
    
-
+    /**
+     * Treatment of the data to get only labels for the tide chart
+     * 
+     * @param array tideNextHours 
+     * @return array labels
+     */
     getChartLabels: function(tideNextHours) {
-        // TODO data from API
-        // TODO if(APIactivate) ? load api : sample data
-        // let chartData = tide.getSampleChartData();
-        // console.log(tideNextHours);
-
+        
         // init array 
         let labels = [];
+
         // chartData contains tide details for next 24 hours 
         // for each index, get the hour number as a label for X axe
         for(const index in tideNextHours){
             let hour = app.getHour(tideNextHours[index].timestamp);
             labels.push(hour+"h");
         }
-        // console.log(labels);
         return labels;
-
     },
 
+    /**
+     * Treatment of the data to get only values for the tide chart
+
+     * @param array tideNextHours 
+     * @return array heights
+     */
     getTideHeights: function(tideNextHours) {
+
         // let chartData = tide.getSampleChartData();
-        console.log(tideNextHours);
         // init array 
         let heights = [];
         // chartData contains tide details for next 24 hours 

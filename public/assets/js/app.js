@@ -17,10 +17,9 @@ let app = {
         // ! API Tides limited to 100 requests/month
         // ! API default setting is inactive
         // ! Set true to activate API :
-        let activateAPI = true;
+        let activateAPI = false;
         tide.loadTides(activateAPI);
         
-
         // add event listener
         app.seeForecast();
 
@@ -126,8 +125,6 @@ let app = {
     expandForecast: function() {
         let forecastElement = document.querySelector(".forecast__content");
         forecastElement.classList.toggle('nodisplay');
-
-        tide.loadTideChart();
 
     },
 
