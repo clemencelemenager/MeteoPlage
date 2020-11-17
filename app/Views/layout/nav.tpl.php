@@ -5,7 +5,7 @@
           
     <!-- LOGO -->    
     <a class="navbar-brand" href="<?=$baseUri?>/">
-        Se baigner à...
+        GoToBeach
         
     </a>
 
