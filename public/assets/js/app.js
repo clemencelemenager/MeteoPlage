@@ -60,52 +60,52 @@ let app = {
      */
     getCardinalDirection(windDegree) {
         if(windDegree => 348.75 && windDegree < 11.25) {
-            return "N";
+            return "Nord";
         }
         if(windDegree => 11.25 && windDegree < 33.75) {
-            return "NNE";
+            return "Nord Nord-Est";
         }
         if(windDegree => 33.75 && windDegree < 56.25) {
-            return "NE";
+            return "Nord-Est";
         }
         if(windDegree => 56.25 && windDegree < 78.75) {
-            return "ENE";
+            return "Est Nord-Est";
         }
         if(windDegree => 78.75 && windDegree < 101.25) {
-            return "E";
+            return "Est";
         }
         if(windDegree => 101.25 && windDegree < 123.75) {
-            return "ESE";
+            return "Est Sud-Est";
         }
         if(windDegree => 123.75 && windDegree < 146.25) {
-            return "SE";
+            return "Sud-Est";
         }
         if(windDegree => 146.25 && windDegree < 168.75) {
-            return "SSE";
+            return "Sud Sud-Est";
         }
         if(windDegree => 168.75 && windDegree < 191.25) {
-            return "S";
+            return "Sud";
         }
         if(windDegree => 191.25 && windDegree < 213.75) {
-            return "SSO";
+            return "Sud Sud-Ouest";
         }
         if(windDegree => 213.75 && windDegree < 236.25) {
-            return "SO";
+            return "Sud-Ouest";
         }
         if(windDegree => 236.25 && windDegree < 258.75) {
-            return "OSO";
+            return "Ouest Sud-Ouest";
         }
         if(windDegree => 258.75 && windDegree < 281.25) {
-            return "O";
+            return "Ouest";
         }
         if(windDegree => 281.25 && windDegree < 303.75) {
-            return "ONO";
+            return "Ouest Nord-Ouest";
         }
         if(windDegree => 303.75 && windDegree < 326.25) {
-            return "NO";
+            return "Nord-Ouest";
         }
         if(windDegree => 326.25 && windDegree < 348.75) {
-            return "NNO";
+            return "Nord Nord-Ouest";
         }
 
     },
