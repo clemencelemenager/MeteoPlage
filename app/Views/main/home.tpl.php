@@ -28,6 +28,7 @@
 
                 <div class ="weather__container">
                     
+                    <!-- weather description -->
                     <div class="weather__content" id="wc1">
                         <div class="weather__picture">
                                 <!-- load icon from API -->
@@ -37,6 +38,7 @@
                         </div>
                     </div>
                 
+                    <!-- temperature -->
                     <div class="weather__content weather__temperature" id="wc2">
                             <div class="weather__temperature--Air">
                                 <i class="fas fa-thermometer-half"></i>
@@ -51,7 +53,18 @@
                                 </span>°
                             </div>
                     </div>
+
+                    <!-- rain -->
                     <div class="weather__content" id="wc3">
+                        <div class="weather__content--rain">
+                            <i class="fas fa-cloud-rain"></i>                                <span>
+                            <!-- load from API -->
+                            <span>Pas de pluie </span>
+                        </div>
+                    </div>
+
+                    <!-- wind -->
+                    <div class="weather__content" id="wc4">
                         <div class="weather__content--wind">
                             <div class="wind-normal">
                                 <i class="fas fa-wind"></i>
@@ -70,18 +83,17 @@
                                 Nord
                             </span>
                         </div>
+                    </div>
 
                 </div>
-                </div>
-                
 
             </section>
-
 
             <!-- section current Tide -->
             <section class="tide left-0 text-center">
 
-                <div class ="tide__container">
+                <!-- current tide's timetable -->
+                <div class ="tide__container" id="tc1">
 
                     <div class="tide__currentTide">
                         <!-- load from API -->
@@ -91,8 +103,8 @@
                          à 
                         <span class="nextTide-time">22:05</span>
                     </div>
+
                     <div class="tide__nextTides">
-                        
                         <p class="tide__secondTide--title">
                             Prochaine marée 
                             <span class="secondTide-type">
@@ -109,7 +121,24 @@
 
                 </div>
 
+                <!-- sea informations -->
+                <div class ="tide__container" id="tc2">
+                    <div class="sea__details sea-temperature">
+                        <i class="fas fa-swimmer"></i>
+                        12°
+                    </div>
+                    <div class="sea__details sea-wave">
+                        <i class="fas fa-water"></i>
+                        calme
+                    </div>
+                    <div class="sea__details sea-visibility">
+                        <i class="fas fa-ship"></i>
+                        bonne
+                    </div>
+                </div>
+
             </section>
+
 
         </div>
 
@@ -128,7 +157,7 @@
                     <!-- forecast weather next 12hours --> 
                     <div class="forecast__content--weather">
                         <div class="forecast__weather--nextHours">
-                            <div class="forecast0">
+                            <div class="forecast--nextHours forecast0">
                                 <div class ="forecast__weather--time">
                                     <!-- load from API-->
                                 </div>    
@@ -142,7 +171,7 @@
                                 <!-- load from API-->
                                 </div>
                             </div>
-                            <div class="forecast1">
+                            <div class="forecast--nextHours forecast1">
                                 <div class ="forecast__weather--time">
                                     <!-- load from API-->
                                 </div>    
@@ -156,7 +185,7 @@
                                 <!-- load from API-->
                                 </div>
                             </div>  
-                            <div class="forecast2">
+                            <div class="forecast--nextHours forecast2">
                                 <div class ="forecast__weather--time">
                                     <!-- load from API-->
                                 </div>    

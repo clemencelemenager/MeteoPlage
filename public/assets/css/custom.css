@@ -99,13 +99,13 @@ h2 {
 .forecastContent-container {
     display:flex;
     flex-direction: column;
-    margin: 1em auto;
+    margin: 0.5em auto;
     padding:0.5em 0;
 }
 
-.forecastContent-container {
-    background-color: #F8F9FA70;
-    box-shadow: 3px 3px 3px 3px #eaebed;
+.forecast__title {
+    background-color: #e9eaea;
+    border-radius: 10px;
 }
 
 .nodisplay,
@@ -173,6 +173,17 @@ h2 {
     border-radius: 10px;
 }
 
+#wc4 {
+    width: 97%;
+    margin-top: 1em;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid #44BBA4;
+    background-color: #44BBA4;
+    border-radius: 10px;
+}
+
 .weather__temperature--Felt {
     font-size: 1rem;
     padding-top:0.8em;
@@ -182,6 +193,19 @@ h2 {
     padding: 0.5em;
     text-align:center;
     text-transform: capitalize;
+}
+
+.weather__content--rain {
+    display: flex;
+    padding: 0.5em;
+    font-size: 1.3rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.weather__content--rain span {
+    margin-left:0.3em;
 }
 
 .weather__temperature,
@@ -226,28 +250,38 @@ h2 {
     flex-direction: row;
     justify-content: space-around;
     padding-bottom: 2em;
-    padding-top: 1em;
+    padding-top: 1.5em;
     text-align: center;
 }
 
 .tide__container {
     display:flex;
+    width: 97%;
+    border-radius: 10px;
+    margin: 0.5em auto;
+    align-items: flex-start;
+}
+
+#tc1 {
     flex-direction: column;
     justify-content: center;
     border: 2px solid #3F88C5;
     background-color: #3F88C5;
     color:#fff;
-    width: 97%;
-    border-radius: 10px;
-    margin: 0.5em auto;
-    align-items: flex-start;
-    padding-left: 0.5em;
+}
+
+#tc2 {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top:0.9em;
 }
 
 .tide__currentTide {
     font-size: 1.1em;
     padding-top: 0.4em;
-    text-align: left;}
+    text-align: left;
+    padding-left: 0.5em;
+}
 
 .currentTide-status {
     font-weight: bold;
@@ -257,10 +291,21 @@ h2 {
     font-weight:bold;
     margin-top: 0.5em;
     margin-bottom:0;
+    padding-left: 0.5em;
 }
 
 .tide__secondTide--title {
     margin-top: 0.2em;
+    padding-left: 0.5em;
+}
+
+.sea__details {
+    width: 32%;
+    border: 2px solid #44BBA4;
+    background-color: #44BBA4;
+    border-radius:10px;
+    font-size: 1.3rem;
+    padding: 0.4em 0;
 }
 
 .forecast {
@@ -294,10 +339,21 @@ h2 {
 
 }
 
+.forecast--nextHours {
+    border: 2px solid #44BBA4;
+    border-radius:10px;
+}
+
 .forecast__content {
     display:flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
+}
+
+.forecast__content--tideChart {
+    background-color: #3F88C5;
+    border-radius: 10px;
 }
 
 .page-link {

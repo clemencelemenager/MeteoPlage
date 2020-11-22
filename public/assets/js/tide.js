@@ -155,7 +155,7 @@ let tide = {
                 datasets: [{
                     label: null,
                     data: tide.getTideHeights(tideNextHours),
-                    borderColor: 'rgba(23, 162, 184,1)',
+                    borderColor: 'rgba(255, 255, 255,1)',
                     borderWidth: 2,
                     pointRadius: 0,
                     borderCapStyle : "round",
@@ -166,19 +166,12 @@ let tide = {
                 legend: {
                     display: false,
                 },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                },
                 title: {
                     display:true,
                     text:'Hauteur de marée à venir',
                     position:'top',
                     fontSize:16,
-                    fontColor: '#444',
+                    fontColor: '#fff',
                     responsive: true,
                 }
             }
