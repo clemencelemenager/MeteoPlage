@@ -149,13 +149,14 @@ let tide = {
 
         var ctx = document.getElementById('myChart');
         var myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: tide.getChartLabels(tideNextHours),
                 datasets: [{
                     label: null,
                     data: tide.getTideHeights(tideNextHours),
-                    borderColor: 'rgba(255, 255, 255,1)',
+                    borderColor: 'rgba(63, 136, 197,1)',
+                    backgroundColor: 'rgba(63, 136, 197,1)',
                     borderWidth: 2,
                     pointRadius: 0,
                     borderCapStyle : "round",
@@ -171,7 +172,7 @@ let tide = {
                     text:'Hauteur de marée à venir',
                     position:'top',
                     fontSize:16,
-                    fontColor: '#fff',
+                    fontColor: '#333',
                     responsive: true,
                 }
             }
