@@ -12,9 +12,9 @@
                 Météo & marée à Omaha Beach (14)
                 </p>
             </div>
-            <div class="marquee">
+            <!-- <div class="marquee">
                 Le moment idéal pour se baigner ! 
-            </div>
+            </div> -->
         </section>
 
         <div class="alertMessage">
@@ -28,7 +28,7 @@
 
                 <div class ="weather__container">
                     
-                    <div class="weather__content">
+                    <div class="weather__content" id="wc1">
                         <div class="weather__picture">
                                 <!-- load icon from API -->
                         </div>
@@ -37,30 +37,43 @@
                         </div>
                     </div>
                 
-                    <div class="weather__content">
-                        <div class="weather__temperature">
+                    <div class="weather__content weather__temperature" id="wc2">
                             <div class="weather__temperature--Air">
                                 <i class="fas fa-thermometer-half"></i>
                                 <span>
                                     <!-- load temp from API-->
                                 </span>° 
                             </div>
-                            <div class="weather__temperature--Sea">
-                                <i class="fas fa-water"></i>
-                                <span>13</span>°
+                            <div class="weather__temperature--Felt">
+                                Ressenti 
+                                <span>
+                                    <!-- load temp from API-->
+                                </span>°
                             </div>
-                            
-                        </div>
+                    </div>
+                    <div class="weather__content" id="wc3">
                         <div class="weather__content--wind">
-                            <i class="fas fa-wind"></i>
+                            <div class="wind-normal">
+                                <i class="fas fa-wind"></i>
+                                <span>
+                                    <!-- load from API -->
+                                </span>
+                            </div>
+                            <div class="wind-max">
+                                Rafales à
+                                <span >60 km/h</span>
+                            </div>
+                        </div>
+                        <div class="weather__content--windDir">
+                            <i class="fas fa-location-arrow"></i>  
                             <span>
-                                <!-- load from API -->
+                                Nord
                             </span>
                         </div>
 
-
-                    </div>
                 </div>
+                </div>
+                
 
             </section>
 
@@ -72,21 +85,14 @@
 
                     <div class="tide__currentTide">
                         <!-- load from API -->
-                        La mer monte !
+                        <span class="currentTide-status">La mer monte</span>,
+                         elle sera 
+                        <span class="nextTide-type">haute</span>
+                         à 
+                        <span class="nextTide-time">22:05</span>
                     </div>
                     <div class="tide__nextTides">
-                        <p class="tide__nextTide--title">
-                            Prochaine marée 
-                            <span class="nextTide-type">
-                                <!-- load from API-->
-                                haute
-                            </span>
-                            à 
-                            <span class="nextTide-time">
-                                <!-- load from API-->
-                                22:05
-                            </span>
-                        </p>
+                        
                         <p class="tide__secondTide--title">
                             Prochaine marée 
                             <span class="secondTide-type">

@@ -38,7 +38,7 @@ let tide = {
 
         // else, load sample data
         else {
-            currentTide     = "La mer monte !";
+            currentTide     = "La mer monte";
             nextTideType    = "haute";
             nextTideHour    = "22h04";
             secondTideType  = "basse";
@@ -101,7 +101,7 @@ let tide = {
      * @param string tideType : french description of current tide (rising/falling)
      */
     displayCurrentTide: function(tideType) {
-        let currentTideElement = document.querySelector(".tide__currentTide");
+        let currentTideElement = document.querySelector(".currentTide-status");
         currentTideElement.textContent = tideType;
     },
 
@@ -242,8 +242,8 @@ let tide = {
     translateTideType: function(tideType) {
         if(tideType == "HIGH TIDE") {return tideType = "haute"           ;}
         if(tideType == "LOW TIDE")  {return tideType = "basse"           ;}
-        if(tideType == "RISING")    {return tideType = "La mer monte!"   ;}
-        if(tideType == "FALLING")   {return tideType = "La mer descend!" ;}
+        if(tideType == "RISING")    {return tideType = "La mer monte"   ;}
+        if(tideType == "FALLING")   {return tideType = "La mer descend" ;}
         
         else {
             return tideType = "NC";
@@ -269,7 +269,6 @@ let tide = {
 
     /**
      * Get sample tide data for chart
-     * TODO : data from API
      */
     getSampleChartData: function() {
         
