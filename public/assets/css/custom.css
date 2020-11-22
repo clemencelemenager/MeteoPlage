@@ -9,11 +9,7 @@ Large PC    = xl            => 1200px
 
 
 body {
-    font-family: 'Open Sans', sans-serif;
-}
-
-header {
-    margin-bottom: 1em;
+    font-family: 'Nunito', sans-serif;
 }
 
 header {
@@ -25,13 +21,14 @@ header {
 .navbar,
 .navbar-light .navbar-brand,
 .navbar-light .navbar-toggler {
-    color: #444;
+    color: #fff;
     font-weight: 800;
+    background-color: #17a2b8;
 }
 
 header hr {
     border-width: 3px;
-    border-color: #444;
+    border-color: #fff;
     width: 60px;
 }
 
@@ -40,14 +37,20 @@ header hr {
 }
 
 .navbar-toggler,
-.nav-link {
+.nav-link,
+.navbar-light .navbar-nav .active>.nav-link {
+    color: #fff;
     font-size: 12px;
     text-transform: uppercase;
     transition: 400ms;
 }
 
 .marquee {
-    border-radius: 5px;
+    border-radius: 2px;
+    color: #444;
+    background-color: #FFD53A;
+    padding: 0.4em;
+    margin: 0.4em 0;
 }
 
 .synthesis {

@@ -8,14 +8,12 @@
         <section class="synthesis">
             <div class="title">
                 <h1>Omaha Beach</h1>
-                <p class="mb-4">
+                <p class="mb-2">
                 Météo & marée à Omaha Beach (14)
                 </p>
             </div>
-            <div class="marquee bg-info py-2">
-            <span class="text-white text-center">
+            <div class="marquee">
                 Le moment idéal pour se baigner ! 
-            </span>
             </div>
         </section>
 

@@ -1,7 +1,7 @@
 
 
 <!-- MAIN NAV -->
-<nav class="navbar navbar-expand-md navbar-light bg-light d-flex justify-content-between">
+<nav class="navbar navbar-expand-md navbar-light d-flex justify-content-between">
           
     <!-- LOGO -->    
     <a class="navbar-brand" href="<?=$baseUri?>/">
@@ -14,7 +14,7 @@
     <!-- Display text & burger menu on mobile screens -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> 
-    Menu </button>
+    <i class="fas fa-bars"></i> </button>
 
     <!-- Navbar collapsed on mobile screens -->
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
