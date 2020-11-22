@@ -20,6 +20,18 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
+h1 {
+    padding-top: 0.5em;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+/* --------------- NAVBAR -------------- */
+
 header {
     color: #F6F7EB;
     text-align: center;
@@ -32,16 +44,8 @@ header {
     color: #F6F7EB;
     font-weight: 800;
     background-color: #393E41;
-}
-
-header hr {
-    border-width: 3px;
-    border-color: #F6F7EB;
-    width: 60px;
-}
-
-.navbar-light .navbar-brand {
     font-size: 18px;
+
 }
 
 .navbar-toggler,
@@ -52,6 +56,8 @@ header hr {
     text-transform: uppercase;
     transition: 400ms;
 }
+
+/* --------------- MAIN ELEMENTS -------------- */
 
 .marquee {
     border-radius: 2px;
@@ -66,15 +72,28 @@ header hr {
     text-align:center;
 }
 
-h1 {
-    padding-top: 0.5em;
-    font-size: 28px;
-    font-weight: bold;
+.currentContent-container,
+.forecastContent-container {
+    display:flex;
+    flex-direction: column;
+    margin: 0.5em auto;
+    padding:0.5em 0;
 }
 
-h2 {
-    font-size: 1.5em;
+.weather,
+.tide {
+    width: 100%;
+    margin: auto;
 }
+
+/* --------------- CUSTOM DISPLAY -------------- */
+
+.nodisplay,
+.forecast__content.nodisplay {
+    display:none;
+}
+
+/* --------------- ALERT MESSAGE -------------- */
 
 .alertMessage {
     background-color: #E94F3760;
@@ -93,37 +112,10 @@ h2 {
     text-decoration: underline;
     display: block;
     text-align: right;
-    padding-top: 0.5em;}
-
-.currentContent-container,
-.forecastContent-container {
-    display:flex;
-    flex-direction: column;
-    margin: 0.5em auto;
-    padding:0.5em 0;
+    padding-top: 0.5em;
 }
 
-.forecast__title {
-    background-color: #e9eaea;
-    border-radius: 10px;
-}
-
-.nodisplay,
-.forecast__content.nodisplay {
-    display:none;
-}
-
-.weather,
-.tide {
-    width: 100%;
-    margin: auto;
-}
-
-.weather__title {
-    text-align: left;
-    margin: 1rem;
-    padding-top: 1rem;
-}
+/* --------------- WEATHER ELEMENTS -------------- */
 
 .weather__container {
     display:flex;
@@ -142,7 +134,6 @@ h2 {
 .weather__content {
     display: flex;
     flex-direction: column;
-    /* margin: 0.5em; */
     width:47%;
     justify-content: center;
 }
@@ -208,29 +199,20 @@ h2 {
     margin-left:0.3em;
 }
 
-.weather__temperature,
 .weather__content--wind {
-    padding : 0.5em 1.5em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.weather__content--wind{
     justify-content: center;
     flex-direction: column;
     width:65%;
     font-size: 1.3em;
 }
 
+.weather__content--wind span {
+    padding-left:0.2em;
+}
+
 .wind-max {
     font-size:1rem;
     padding-top:0.4em;
-}
-
-.weather__content--wind span {
-    padding-left:0.2em;
 }
 
 .weather__content--windDir {
@@ -245,14 +227,7 @@ h2 {
     margin-left:0.4em;
 }
 
-.forecast__weather--nextHours {
-    display:flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding-bottom: 2em;
-    padding-top: 1.5em;
-    text-align: center;
-}
+/* --------------- SEA ELEMENTS -------------- */
 
 .tide__container {
     display:flex;
@@ -308,6 +283,8 @@ h2 {
     padding: 0.4em 0;
 }
 
+/* --------------- FORECAST ELEMENTS -------------- */
+
 .forecast {
     display: flex;
     flex-direction: column;
@@ -315,18 +292,26 @@ h2 {
     font-size:0.9em;
 }
 
+.forecast__weather--nextHours {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 2em;
+    padding-top: 1.5em;
+    text-align: center;
+}
+
 .forecast__title {
-    width: 100%;
-    color: #666;
-    font-size: 1.1em;
-    border-radius: 5px;
-    padding: 0.5em;
-    margin:auto 1em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-right: 1em;
-    padding-left: 1em;
+    width: 100%;
+    background-color: #e9eaea;
+    border-radius: 10px;
+    color: #666;
+    font-size: 1.1em;
+    padding: 0.5em 1em;
+    margin:auto 1em;
 }
 
 .forecast__title p {
@@ -339,16 +324,16 @@ h2 {
 
 }
 
-.forecast--nextHours {
-    border: 2px solid #44BBA4;
-    border-radius:10px;
-}
-
 .forecast__content {
     display:flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
+}
+
+.forecast--nextHours {
+    border: 2px solid #44BBA4;
+    border-radius:10px;
 }
 
 .forecast__content--tideChart {

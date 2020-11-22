@@ -59,7 +59,7 @@
                         <div class="weather__content--rain">
                             <i class="fas fa-cloud-rain"></i>                                <span>
                             <!-- load from API -->
-                            <span>Pas de pluie </span>
+                            <span>- </span>
                         </div>
                     </div>
 
@@ -74,13 +74,13 @@
                             </div>
                             <div class="wind-max">
                                 Rafales à
-                                <span >60 km/h</span>
+                                <span ></span>km/h
                             </div>
                         </div>
                         <div class="weather__content--windDir">
                             <i class="fas fa-location-arrow"></i>  
                             <span>
-                                Nord
+                                <!-- load from API -->
                             </span>
                         </div>
                     </div>
@@ -130,11 +130,11 @@
                     </div>
                     <div class="sea__details sea-wave">
                         <i class="fas fa-water"></i>
-                        calme
+                        <span>-</span>
                     </div>
                     <div class="sea__details sea-visibility">
                         <i class="fas fa-ship"></i>
-                        bonne
+                        <span>-</span>
                     </div>
                 </div>
 
