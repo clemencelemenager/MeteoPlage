@@ -38,7 +38,7 @@ let tide = {
 
         // else, load sample data
         else {
-            currentTide     = "La mer monte !";
+            currentTide     = "La mer monte";
             nextTideType    = "haute";
             nextTideHour    = "22h04";
             secondTideType  = "basse";
@@ -101,7 +101,7 @@ let tide = {
      * @param string tideType : french description of current tide (rising/falling)
      */
     displayCurrentTide: function(tideType) {
-        let currentTideElement = document.querySelector(".tide__currentTide");
+        let currentTideElement = document.querySelector(".currentTide-status");
         currentTideElement.textContent = tideType;
     },
 
@@ -149,13 +149,14 @@ let tide = {
 
         var ctx = document.getElementById('myChart');
         var myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: tide.getChartLabels(tideNextHours),
                 datasets: [{
                     label: null,
                     data: tide.getTideHeights(tideNextHours),
-                    borderColor: 'rgba(23, 162, 184,1)',
+                    borderColor: 'rgba(63, 136, 197,1)',
+                    backgroundColor: 'rgba(63, 136, 197,1)',
                     borderWidth: 2,
                     pointRadius: 0,
                     borderCapStyle : "round",
@@ -166,19 +167,12 @@ let tide = {
                 legend: {
                     display: false,
                 },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                },
                 title: {
                     display:true,
                     text:'Hauteur de marée à venir',
                     position:'top',
                     fontSize:16,
-                    fontColor: '#444',
+                    fontColor: '#333',
                     responsive: true,
                 }
             }
@@ -242,8 +236,8 @@ let tide = {
     translateTideType: function(tideType) {
         if(tideType == "HIGH TIDE") {return tideType = "haute"           ;}
         if(tideType == "LOW TIDE")  {return tideType = "basse"           ;}
-        if(tideType == "RISING")    {return tideType = "La mer monte!"   ;}
-        if(tideType == "FALLING")   {return tideType = "La mer descend!" ;}
+        if(tideType == "RISING")    {return tideType = "La mer monte"   ;}
+        if(tideType == "FALLING")   {return tideType = "La mer descend" ;}
         
         else {
             return tideType = "NC";
@@ -269,7 +263,6 @@ let tide = {
 
     /**
      * Get sample tide data for chart
-     * TODO : data from API
      */
     getSampleChartData: function() {
         

@@ -17,8 +17,8 @@
     <script src="https://kit.fontawesome.com/02c552602c.js" crossorigin="anonymous"></script>
     
     <!-- Custom fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,400;0,600;1,400&display=swap" rel="stylesheet"> 
 
     <!-- Custom styles CSS -->
     <link href="<?= $assetsBaseUri ?>css/custom.css" rel="stylesheet">

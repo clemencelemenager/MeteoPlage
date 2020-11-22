@@ -5,54 +5,19 @@ Tablet      = md            => 768px
 PC          = lg            => 992px
 Large PC    = xl            => 1200px
 
+Colors:
+
+green #44BBA4
+blue #3F88C5
+grey #393E41
+red #E94F37
+ivory #F6F7EB
+
 */
 
 
 body {
-    font-family: 'Open Sans', sans-serif;
-}
-
-header {
-    margin-bottom: 1em;
-}
-
-header {
-    color: #333;
-    text-align: center;
-    padding-bottom: 0.2em;
-}
-
-.navbar,
-.navbar-light .navbar-brand,
-.navbar-light .navbar-toggler {
-    color: #444;
-    font-weight: 800;
-}
-
-header hr {
-    border-width: 3px;
-    border-color: #444;
-    width: 60px;
-}
-
-.navbar-light .navbar-brand {
-    font-size: 18px;
-}
-
-.navbar-toggler,
-.nav-link {
-    font-size: 12px;
-    text-transform: uppercase;
-    transition: 400ms;
-}
-
-.marquee {
-    border-radius: 5px;
-}
-
-.synthesis {
-    margin: 0.5em 0 1em 0;
-    text-align:center;
+    font-family: 'Nunito', sans-serif;
 }
 
 h1 {
@@ -65,45 +30,54 @@ h2 {
     font-size: 1.5em;
 }
 
-.alertMessage {
-    background-color: #ff000025;
-    font-size:0.9em;
-    padding: 0.5em 1em;
-    border: 1px solid #ff000080;
-    border-radius:2px;
-    color: #a50606;
+/* --------------- NAVBAR -------------- */
+
+header {
+    color: #F6F7EB;
+    text-align: center;
+    padding-bottom: 0.2em;
+}
+
+.navbar,
+.navbar-light .navbar-brand,
+.navbar-light .navbar-toggler {
+    color: #F6F7EB;
+    font-weight: 800;
+    background-color: #393E41;
+    font-size: 18px;
+
+}
+
+.navbar-toggler,
+.nav-link,
+.navbar-light .navbar-nav .active>.nav-link {
+    color: #F6F7EB;
+    font-size: 12px;
+    text-transform: uppercase;
+    transition: 400ms;
+}
+
+/* --------------- MAIN ELEMENTS -------------- */
+
+.marquee {
+    border-radius: 2px;
+    color: #F6F7EB;
+    background-color: #F3CA40;
+    padding: 0.4em;
+    margin: 0.4em 0;
+}
+
+.synthesis {
+    margin: 0.5em 0 1em 0;
     text-align:center;
 }
-
-.alertMessage p {
-    margin-bottom:0;
-}
-
-.alertMessage--close {
-    color: #890505;
-    text-decoration: underline;
-    display: block;
-    text-align: right;
-    padding-top: 0.5em;}
 
 .currentContent-container,
 .forecastContent-container {
     display:flex;
     flex-direction: column;
-    box-shadow: 3px 3px 3px 3px #dee2e6;
-    border-radius: 5px;
-    margin: 1em auto;
+    margin: 0.5em auto;
     padding:0.5em 0;
-}
-
-.forecastContent-container {
-    background-color: #F8F9FA70;
-    box-shadow: 3px 3px 3px 3px #eaebed;
-}
-
-.nodisplay,
-.forecast__content.nodisplay {
-    display:none;
 }
 
 .weather,
@@ -112,17 +86,43 @@ h2 {
     margin: auto;
 }
 
-.weather__title {
-    text-align: left;
-    margin: 1rem;
-    padding-top: 1rem;
+/* --------------- CUSTOM DISPLAY -------------- */
+
+.nodisplay,
+.forecast__content.nodisplay {
+    display:none;
 }
+
+/* --------------- ALERT MESSAGE -------------- */
+
+.alertMessage {
+    background-color: #E94F3760;
+    font-size: 0.9em;
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.alertMessage p {
+    margin-bottom:0;
+}
+
+.alertMessage--close {
+    color: #E94F37;
+    text-decoration: underline;
+    display: block;
+    text-align: right;
+    padding-top: 0.5em;
+}
+
+/* --------------- WEATHER ELEMENTS -------------- */
 
 .weather__container {
     display:flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     margin-bottom: 0.5em;
+    flex-wrap:wrap;
 }
 
 .weather__picture {
@@ -134,9 +134,50 @@ h2 {
 .weather__content {
     display: flex;
     flex-direction: column;
-    margin: 0.5em;
-    width:50%;
+    width:47%;
     justify-content: center;
+}
+
+#wc1 {
+    border: 2px solid #F3CA40;
+    background-color: #F3CA40;
+    border-radius: 10px;
+}
+
+#wc2 {
+    border: 2px solid #44BBA4;
+    background-color: #44BBA4;
+    border-radius:10px;
+    font-size: 1.5em;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#wc3 {
+    width: 97%;
+    margin-top: 1em;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid #44BBA4;
+    background-color: #44BBA4;
+    border-radius: 10px;
+}
+
+#wc4 {
+    width: 97%;
+    margin-top: 1em;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid #44BBA4;
+    background-color: #44BBA4;
+    border-radius: 10px;
+}
+
+.weather__temperature--Felt {
+    font-size: 1rem;
+    padding-top:0.8em;
 }
 
 .weather__description {
@@ -145,59 +186,104 @@ h2 {
     text-transform: capitalize;
 }
 
-.weather__temperature,
-.weather__content--wind {
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
-    padding : 0.5em 1.5em;
-    margin-bottom: 0.5em;
+.weather__content--rain {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    padding: 0.5em;
+    font-size: 1.3rem;
+    justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
-.weather__content--wind{
+.weather__content--rain span {
+    margin-left:0.3em;
+}
+
+.weather__content--wind {
     justify-content: center;
+    flex-direction: column;
+    width:65%;
+    font-size: 1.3em;
 }
 
 .weather__content--wind span {
     padding-left:0.2em;
 }
 
-
-.forecast__weather--nextHours {
-    display:flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding-bottom: 2em;
-    padding-top: 1em;
-    text-align: center;
+.wind-max {
+    font-size:1rem;
+    padding-top:0.4em;
 }
+
+.weather__content--windDir {
+    padding:1em;
+    height: 100%;
+    font-size:1.2em;
+    align-items: center;
+    display: flex;
+}
+
+.weather__content--windDir span {
+    margin-left:0.4em;
+}
+
+/* --------------- SEA ELEMENTS -------------- */
 
 .tide__container {
     display:flex;
+    width: 97%;
+    border-radius: 10px;
+    margin: 0.5em auto;
+    align-items: flex-start;
+}
+
+#tc1 {
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 1em;
+    border: 2px solid #3F88C5;
+    background-color: #3F88C5;
+    color:#fff;
+}
+
+#tc2 {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top:0.9em;
 }
 
 .tide__currentTide {
-    color: #17A2B8;
+    font-size: 1.1em;
+    padding-top: 0.4em;
+    text-align: left;
+    padding-left: 0.5em;
+}
+
+.currentTide-status {
     font-weight: bold;
-    font-size: 1.2em;
 }
 
 .tide__nextTide--title {
     font-weight:bold;
     margin-top: 0.5em;
     margin-bottom:0;
+    padding-left: 0.5em;
 }
 
 .tide__secondTide--title {
     margin-top: 0.2em;
-    color: #888;
+    padding-left: 0.5em;
 }
+
+.sea__details {
+    width: 32%;
+    border: 2px solid #44BBA4;
+    background-color: #44BBA4;
+    border-radius:10px;
+    font-size: 1.3rem;
+    padding: 0.4em 0;
+}
+
+/* --------------- FORECAST ELEMENTS -------------- */
 
 .forecast {
     display: flex;
@@ -206,18 +292,26 @@ h2 {
     font-size:0.9em;
 }
 
+.forecast__weather--nextHours {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 2em;
+    padding-top: 1.5em;
+    text-align: center;
+}
+
 .forecast__title {
-    width: 100%;
-    color: #666;
-    font-size: 1.1em;
-    border-radius: 5px;
-    padding: 0.5em;
-    margin:auto 1em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-right: 1em;
-    padding-left: 1em;
+    width: 100%;
+    background-color: #e9eaea;
+    border-radius: 10px;
+    color: #666;
+    font-size: 1.1em;
+    padding: 0.5em 1em;
+    margin:auto 1em;
 }
 
 .forecast__title p {
@@ -234,6 +328,17 @@ h2 {
     display:flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
+}
+
+.forecast--nextHours {
+    border: 2px solid #44BBA4;
+    border-radius:10px;
+}
+
+.forecast__content--tideChart {
+    /* background-color: #3F88C5; */
+    border-radius: 10px;
 }
 
 .page-link {

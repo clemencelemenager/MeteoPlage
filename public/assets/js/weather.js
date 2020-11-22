@@ -24,7 +24,8 @@ let weather = {
             weather.displayCurrentDescription(description); 
             weather.displayCurrentIcon(icon);
             weather.displayCurrentTemperature(temperature);
-            weather.displayCurrentWind(windSpeed,windDirection);
+            weather.displayCurrentWind(windSpeed);
+            weather.displayCurrentWindDirection(windDirection);
 
         });
     },
@@ -96,12 +97,21 @@ let weather = {
      * Display current wind values
      * 
      * @param number windSpeed : speed in kmh
-     * @param string windDirection : cardinal direction
      */
-    displayCurrentWind: function (windSpeed,windDirection) {
+    displayCurrentWind: function (windSpeed) {
 
         let windContainer = document.querySelector(".weather__content--wind span");
-        windContainer.textContent = windSpeed+"km/h "+windDirection;
+        windContainer.textContent = windSpeed+"km/h ";
+    },
+
+    /**
+     * Display current wind direction
+     * 
+     * @param string windDirection : cardinal direction
+     */
+    displayCurrentWindDirection: function(windDirection) {
+        let windDirContainer = document.querySelector('.weather__content--windDir span');
+        windDirContainer.textContent = windDirection;
     },
 
 
