@@ -12,9 +12,9 @@ let app = {
         // ------------------------------------------
         // OLD DATA
 
-        // load weather datas from API
-        weather.loadCurrentWeather();
-        weather.loadForecastWeather();
+        // // load weather datas from API
+        // weather.loadCurrentWeather();
+        // weather.loadForecastWeather();
 
         // load tide datas from API
         // ! API Tides limited to 100 requests/month
@@ -35,7 +35,7 @@ let app = {
 
         /// API StormGlass
         // ! API StormGlass limited to 50 calls/day
-        app.loadData(latitude, longitude);
+        // app.loadData(latitude, longitude);
         
         // add event listener
         app.seeForecast();

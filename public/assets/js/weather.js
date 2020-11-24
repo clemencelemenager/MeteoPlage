@@ -44,11 +44,11 @@ let weather = {
                 let windDir                 = app.getCardinalDirection(windDegree);
                 let windSpeed               = app.getKmhSpeed(data.current.wind_speed); 
                 let weatherDescr            = data.current.weather[0].description;
-                let weatherIcon             = weather.getWeatherIconUrl(data.current.weather[0].icon); 
-                let rainNextHour            = data.minutely;   // TODO boucle sur le tableau et somme
+                let weatherIcon             = data.current.weather[0].icon; 
+                let rainNextHour            = weather.getTotalRainForNextHour(data.minutely);
 
                 // weather next hours
-                let weatherNextHours        = data.hourly;   // TODO boucle
+                let weatherNextHours        = data.hourly;   // TODO loop
 
                 // weather today
                 let airTemp_Today           = Math.round(data.daily[0].temp.day);
@@ -74,7 +74,26 @@ let weather = {
                 let windDir_AfterTomorrow       = app.getCardinalDirection(windDegree_AfterTomorrow);
                 let windSpeed_AfterTomorrow     = app.getKmhSpeed(data.daily[2].wind_speed); 
         
-            
+                
+                // Display in webpage -------------------------------------------------------------------------
+
+                // current weather
+                weather.displayCurrentDescription(weatherDescr); 
+                weather.displayCurrentIcon(weatherIcon);
+                weather.displayCurrentTemperature(airTemp);
+                weather.displayCurrentTempFeelsLike(airTempFeelsLike);
+                weather.displayCurrentWind(windSpeed);
+                weather.displayCurrentWindDirection(windDir);
+                // TODO rain precipitation
+                weather.displayRainForNextHour(rainNextHour);
+                // TODO humidity
+                // TODO cloud cover
+                // TODO visibility
+                // TODO wind gust
+                // TODO orientate wind icon depending on wind degree value
+                // TODO uv
+                // TODO sunrise/sunset
+
             })
     },
 
@@ -83,58 +102,6 @@ let weather = {
     // Current weather
     // ========================================================
 
-    // TODO : SUPPR APRES TRANSFERT SUR loadOpenWeatherData()
-
-    /**
-     * Display current weather 
-     */
-    loadCurrentWeather: function() {
-
-        weather.fetchCurrentWeatherData().then( function(data) {
-            // console.log(data);
-
-            // Set values from API
-            let description     = data.weather[0].description;
-            let icon            = data.weather[0].icon
-            let temperature     = data.main.temp_min;
-            let windSpeed       = app.getKmhSpeed(data.wind.speed);
-            let windDirection   = app.getCardinalDirection(data.wind.deg);
-
-            // Display in webpage
-            weather.displayCurrentDescription(description); 
-            weather.displayCurrentIcon(icon);
-            weather.displayCurrentTemperature(temperature);
-            weather.displayCurrentWind(windSpeed);
-            weather.displayCurrentWindDirection(windDirection);
-
-        });
-    },
-
-    /**
-     * Get current weather data from API
-     * ! set your API Key
-     */
-    fetchCurrentWeatherData: function() {
-        // API current Weather from OpenWeatherMap
-        // @see https://openweathermap.org/api
-        let endPoint = 'https://api.openweathermap.org/data/2.5/weather?lat=49.369682&lon=-0.871084&units=Metric&lang=fr&appid='+api.getAPIKeyForCurrentWeather();
-
-        // Set up configuration for HTTP request in fetch function
-        let fetchOptions = {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'no-cache'
-        };
-
-        // Lauch HTTP request
-        // and then, when we receive response,
-        // convert the response (json) in js object
-        let fetchRequest = fetch(endPoint,fetchOptions);
-        let fetchResponse = fetchRequest.then(function(response) {
-            return response.json();
-            })
-        return fetchResponse;
-    },
 
     /**
      * Display current weather description
@@ -174,6 +141,16 @@ let weather = {
     },
 
     /**
+     * Display current temperature feels like 
+     * 
+     * @param number temperature feels like
+     */
+    displayCurrentTempFeelsLike: function(tempFeelsLike) {
+        let tempFeelsLikeContainer = document.querySelector(".weather__temperature--Felt span");
+        tempFeelsLikeContainer.textContent = tempFeelsLike;
+    },
+
+    /**
      * Display current wind values
      * 
      * @param number windSpeed : speed in kmh
@@ -193,6 +170,20 @@ let weather = {
         let windDirContainer = document.querySelector('.weather__content--windDir span');
         windDirContainer.textContent = windDirection;
     },
+
+    /**
+     * Display total rain precipitations for next hour
+     * 
+     * @params mixed 
+     */
+    displayRainForNextHour: function(rain) {
+        let rainContainer = document.querySelector(".weather__content--rain span");
+        rainContainer.textContent = rain;
+
+    },
+
+
+
 
 
     // ========================================================
@@ -362,6 +353,32 @@ let weather = {
         }
         else if(empty(visibility)) {
             return "NC";
+        }
+    },
+
+    /**
+     * Sum total rain for next hour
+     * 
+     * @param array rainData : precipitation rain per minute for next hour
+     */
+    getTotalRainForNextHour: function(rainData) {
+
+        // init variable
+        let totalPrecipitation = 0;
+
+        // add precipitations of each minute
+        for(let i=0; i < rainData.length; i++) {
+            totalPrecipitation += Number(rainData[i].precipitation);
+        }
+
+        // return total value or message
+        if(totalPrecipitation == 0){
+            return "Pas de pluie :)";
+        }
+        else {
+            // TODO add a comment to indicate what represents value
+            return totalPrecipitation;
+
         }
     },
 

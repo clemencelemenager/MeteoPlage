@@ -57,7 +57,7 @@
                     <!-- rain -->
                     <div class="weather__content" id="wc3">
                         <div class="weather__content--rain">
-                            <i class="fas fa-cloud-rain"></i>                                <span>
+                            <i class="fas fa-cloud-rain"></i> 
                             <!-- load from API -->
                             <span>- </span>
                         </div>
