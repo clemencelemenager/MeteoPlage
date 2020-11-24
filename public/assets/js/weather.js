@@ -1,10 +1,90 @@
 let weather = {
 
 
+    
+    // ========================================================
+    // API Open Weather Map
+    // ========================================================
+
+    loadOpenWeatherMap: function(latitude,longitude) {
+        
+        // API One Call from openweathermap
+        // @see https://openweathermap.org/api/one-call-api
+        let endPoint = 'https://api.openweathermap.org/data/2.5/onecall?lang=fr&lat='+latitude+'&lon='+longitude+'&units=metric&appid='+api.getAPIKeyForOpenWeatherMap();
+
+        // Set up configuration for HTTP request in fetch function
+        let fetchOptions = {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache'
+        };
+
+        // Lauch HTTP request
+        // and then, when we receive response,
+        // convert the response (json) in js object
+        fetch(endPoint,fetchOptions)
+            .then(function(response) {
+                return response.json();
+                })
+            .then(function(data) {
+                console.log(data);
+
+                // Save values -------------------------------------------------------------------------
+
+                // current weather
+                let airTemp                 = Math.round(data.current.temp); 
+                let airTempFeelsLike        = Math.round(data.current.feels_like);
+                let cloudCoverRate          = data.current.clouds;
+                let humidityRate            = data.current.humidity;
+                let UV                      = Math.round(data.current.uvi);
+                let visibility              = weather.getVisibilityText(data.current.visibility);
+                let sunrise                 = app.getTime(data.current.sunrise);
+                let sunset                  = app.getTime(data.current.sunset);
+                let windDegree              = data.current.wind_deg;                
+                let windDir                 = app.getCardinalDirection(windDegree);
+                let windSpeed               = app.getKmhSpeed(data.current.wind_speed); 
+                let weatherDescr            = data.current.weather[0].description;
+                let weatherIcon             = weather.getWeatherIconUrl(data.current.weather[0].icon); 
+                let rainNextHour            = data.minutely;   // TODO boucle sur le tableau et somme
+
+                // weather next hours
+                let weatherNextHours        = data.hourly;   // TODO boucle
+
+                // weather today
+                let airTemp_Today           = Math.round(data.daily[0].temp.day);
+                let weatherDescr_Today      = data.daily[0].weather[0].description;
+                let weatherIcon_Today       = weather.getWeatherIconUrl(data.daily[0].weather[0].icon);
+                let windDegree_Today        = data.daily[0].wind_deg;
+                let windDir_Today           = app.getCardinalDirection(windDegree_Today);
+                let windSpeed_Today         = app.getKmhSpeed(data.daily[0].wind_speed); 
+            
+                // weather tomorrow
+                let airTemp_Tomorrow        = Math.round(data.daily[1].temp.day);
+                let weatherDescr_Tomorrow   = data.daily[1].weather[0].description;
+                let weatherIcon_Tomorrow    = weather.getWeatherIconUrl(data.daily[1].weather[0].icon);
+                let windDegree_Tomorrow     = data.daily[1].wind_deg;  
+                let windDir_Tomorrow        = app.getCardinalDirection(windDegree_Tomorrow);
+                let windSpeed_Tomorrow      = app.getKmhSpeed(data.daily[1].wind_speed);
+            
+                // weather after tomorrow
+                let airTemp_AfterTomorrow       = Math.round(data.daily[2].temp.day);
+                let weatherDescr_AfterTomorrow  = data.daily[2].weather[0].description;
+                let weatherIcon_AfterTomorrow   = weather.getWeatherIconUrl(data.daily[2].weather[0].icon);
+                let windDegree_AfterTomorrow    = data.daily[2].wind_deg
+                let windDir_AfterTomorrow       = app.getCardinalDirection(windDegree_AfterTomorrow);
+                let windSpeed_AfterTomorrow     = app.getKmhSpeed(data.daily[2].wind_speed); 
+        
+            
+            })
+    },
+
+
     // ========================================================
     // Current weather
     // ========================================================
-    
+
+    // TODO : SUPPR APRES TRANSFERT SUR loadOpenWeatherData()
+
     /**
      * Display current weather 
      */
@@ -246,8 +326,44 @@ let weather = {
 
     },
 
+    // =============================================================
+    // TOOLS    
+    // =============================================================
 
-    
+    /**
+     * Get icon URL from icon code
+     * 
+     * @param string icon : code given by API open weather map
+     * @return string iconURL : url to display weather icon in img element
+     */
+    getWeatherIconUrl: function(icon) {
+        let iconURL = "http://openweathermap.org/img/wn/"+icon+"@2x.png";
+        return iconURL;
+    },
+
+    /**
+     * Convert visibility value into a text description 
+     * 
+     * @param integer visibility : value in meters
+     * @return string visibility description 
+     */
+    getVisibilityText: function(visibility) {
+        if(visibility >= 10000) {
+            return "Bonne visibilité";
+        }
+        else if( visibility >=5000 && visibility < 10000) {
+            return "Moyenne visibilité";
+        }
+        else if( visibility > 0 && visibility < 5000) {
+            return "Mauvaise visibilité";
+        }
+        else if (visibility == 0) {
+            return "Très mauvaise visibilité";
+        }
+        else if(empty(visibility)) {
+            return "NC";
+        }
+    },
 
 }
 

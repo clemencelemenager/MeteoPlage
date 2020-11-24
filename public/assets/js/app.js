@@ -6,8 +6,11 @@ let app = {
     init: function() {
 
         // Set latitud & longitud for Omaha Beach
-        let lat = 49.369682 ;
-        let long = -0.871084;
+        let latitude = 49.369682 ;
+        let longitude = -0.871084;
+
+        // ------------------------------------------
+        // OLD DATA
 
         // load weather datas from API
         weather.loadCurrentWeather();
@@ -19,11 +22,48 @@ let app = {
         // ! Set true to activate API :
         let activateAPI = false;
         tide.loadTides(activateAPI);
+        // ------------------------------------------
+
+
+        // TODO --------------------------------------
+        // NEW DATA
+
+        // API Open Weather Map 
+        // @see https://openweathermap.org/api/one-call-api
+
+        weather.loadOpenWeatherMap(latitude,longitude);
+
+        /// API StormGlass
+        // ! API StormGlass limited to 50 calls/day
+        app.loadData(latitude, longitude);
         
         // add event listener
         app.seeForecast();
 
     }, 
+
+    // TODO
+    loadData: function(latitude, longitude) {
+        
+        const lat = latitude;
+        const lng = longitude;
+        const params = [
+                        'airTemperature', 'cloudCover',
+                        'gust', 'humidity', 'precipitation',
+                        'windDirection','windSpeed', 
+                        'seaLevel','waterTemperature','waveHeight'
+                        ].join(',');
+
+        fetch(`https://api.stormglass.io/v2/weather/point?lat=${latitude}&lng=${lng}&params=${params}`, {
+            headers: {
+                // Get your key by signing up.
+                'Authorization': '22261836-2ceb-11eb-a53d-0242ac130002-222618fe-2ceb-11eb-a53d-0242ac130002'
+            }
+        }).then((response) => response.json()).then((jsonData) => {
+        // Do something with response data.
+        console.log(jsonData);
+        });
+    },
     
     
     // ========================================================
@@ -51,6 +91,23 @@ let app = {
             hour="0"+ hour;
         }
         return hour;
+    },
+
+    /** 
+     * Get hh:mm format from unix timestamp
+     * 
+     */
+    getTime: function(unix) {
+
+        let date = new Date(unix*1000);
+        let hour = date.getHours();
+        let minute = date.getMinutes();
+
+        if (minute < 10) {
+            minute="0"+ minute;
+        }
+         
+        return hour + ":" + minute;
     },
 
     /**
