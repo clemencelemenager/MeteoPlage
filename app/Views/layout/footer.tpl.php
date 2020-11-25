@@ -18,7 +18,7 @@
 <script src="<?= $assetsBaseUri ?>/node_modules/chart.js/dist/Chart.js"></script>
 
 <script src="<?= $assetsBaseUri ?>js/api.js"></script>
-<script src="<?= $assetsBaseUri ?>js/tide.js"></script>
+<script src="<?= $assetsBaseUri ?>js/sea.js"></script>
 <script src="<?= $assetsBaseUri ?>js/weather.js"></script>
 <script src="<?= $assetsBaseUri ?>js/app.js"></script>
 

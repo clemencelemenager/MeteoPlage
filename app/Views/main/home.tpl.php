@@ -72,10 +72,8 @@
                                     <!-- load from API -->
                                 </span>
                             </div>
-                            <div class="wind-max">
-                                Rafales à
-                                <span ></span>km/h
-                            </div>
+                            <!-- <div class="wind-max">
+                            </div> -->
                         </div>
                         <div class="weather__content--windDir">
                             <i class="fas fa-location-arrow"></i>  
@@ -126,14 +124,16 @@
                 <div class ="tide__container" id="tc2">
                     <div class="sea__details sea-temperature">
                         <i class="fas fa-swimmer"></i>
-                        12°
+                        <span>
+                            <!-- load temp from API-->
+                        </span>° 
                     </div>
                     <div class="sea__details sea-wave">
                         <i class="fas fa-water"></i>
-                        <span>-</span>
+                        <span>-</span>m
                     </div>
                     <div class="sea__details sea-visibility">
-                        <i class="fas fa-ship"></i>
+                    <i class="fas fa-eye"></i>
                         <span>-</span>
                     </div>
                 </div>
