@@ -1,17 +1,16 @@
 let sea = {
     
     // ========================================================
-    // API StormGlass
+    // API StormGlass Weather
     // ========================================================
 
-    // TODO
-    loadStormGlass: function(latitude, longitude) {
+    loadStormGlassWeather: function(latitude, longitude) {
             
         // API StormGlass Marine Weather
         // @see doc https://docs.stormglass.io/#/weather
         const params = [
                         'gust','precipitation','windDirection','windSpeed', 
-                        'seaLevel','waterTemperature','waveHeight'
+                        'waterTemperature','waveHeight'
                         ].join(',');
         const source = 'sg';
         let endpoint = `https://api.stormglass.io/v2/weather/point?source=${source}&lat=${latitude}&lng=${longitude}&params=${params}`;
@@ -32,7 +31,7 @@ let sea = {
             .then((response) => response.json())
             .then((data) => {
 
-                // console.log(data);
+                console.log(data);
 
                 // Save values -------------------------------------------------------------------------
 
@@ -41,7 +40,6 @@ let sea = {
                 let index   = now.getHours();
 
                 // current data (live)
-                let seaLevel    = data.hours[index].seaLevel.sg;
                 let seaTemp     = Math.round(data.hours[index].waterTemperature.sg);
                 let waveHeight  = Math.round(data.hours[index].waveHeight.sg);
                 let windSpeed   = app.getKmhSpeed(data.hours[index].windSpeed.sg);
@@ -49,8 +47,7 @@ let sea = {
                 let windDegree  = data.hours[index].windDirection.sg;
                 let windDir     = app.getCardinalDirection(windDegree);
 
-                // TODO tide data
-                // récupérer la donnée sealevel de chaque heure pour contruire le mareagramme
+                
 
 
                 // Display in webpage -------------------------------------------------------------------------
@@ -65,12 +62,12 @@ let sea = {
                 }
                 weather.displayCurrentWindDirection(windDir);
                
-                // TODO : afficher le mareagramme avec focus sur l'heure actuelle
-
+               
 
 
             });
     },
+
 
     /**
      * Display current sea temperature in c°
@@ -82,12 +79,57 @@ let sea = {
         seaTempContainer.textContent = seaTemperature;
     },
 
+    /**
+     * Display wave height
+     * 
+     * @param integer waveHeight in meters
+     */
     displayWaveHeight: function(waveHeight) {
         let waveHeightContainer = document.querySelector(".sea-wave span");
         waveHeightContainer.textContent = waveHeight;
     },
 
 
+    // ========================================================
+    // API StormGlass Tide
+    // ========================================================
+
+    loadStormGlassTide: function(latitude, longitude) { 
+
+        // API StormGlass Tide
+        // @see doc https://docs.stormglass.io/#/tide
+        
+        let endpoint = `https://api.stormglass.io/v2/tide/extremes/point?lat=${latitude}&lng=${longitude}`;
+
+        // Set up configuration for HTTP request in fetch function
+        let fetchOptions = {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {
+            // Get your key by signing up.
+            'Authorization': api.getAPIStormGlass()
+        }
+        };
+
+         // Lauch HTTP request, convert result in json and display data
+         fetch(endpoint,fetchOptions)
+         .then((response) => response.json())
+         .then((data) => {
+
+            console.log(data);
+            
+            // TODO tide data 
+            
+
+            // TODO : afficher le type & l'heure de la prochaine marée, et la marée suivante
+            // TODO : afficher le mareagramme avec focus sur l'heure actuelle
+
+        });
+
+
+    },
+            
 
     // ========================================================
     // API Tides

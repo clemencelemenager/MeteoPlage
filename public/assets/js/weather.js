@@ -23,7 +23,7 @@ let weather = {
                 return response.json();
             })
             .then(function(data) {
-                console.log(data);
+                // console.log(data);
 
                 // Save values -------------------------------------------------------------------------
                 
@@ -390,7 +390,7 @@ let weather = {
         // get average
         let averagePrecipitation = Math.round(precipitation/rainData.length);
 
-        console.log(averagePrecipitation);
+        // console.log(averagePrecipitation);
 
         // return total value with message
         if(averagePrecipitation == 0){

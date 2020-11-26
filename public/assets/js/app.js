@@ -33,10 +33,17 @@ let app = {
 
         weather.loadOpenWeatherMap(latitude,longitude);
 
-        /// API StormGlass
+        /// API StormGlass Weather
+        // @see https://docs.stormglass.io/#/weather
         // ! API StormGlass limited to 50 calls/day
-        sea.loadStormGlass(latitude, longitude);
-        
+        sea.loadStormGlassWeather(latitude, longitude);
+
+        // API StormGlass Tide
+        // @see https://docs.stormglass.io/#/tide
+        // ! API StormGlass limited to 50 calls/day
+        sea.loadStormGlassTide(latitude,longitude);
+        // ------------------------------------------
+
         // add event listener
         app.seeForecast();
 
@@ -61,11 +68,11 @@ let app = {
     /**
      * Convert speed from m/s to km/h
      * 
-     * @param numb speed in m/s
+     * @param number speed in m/s
      */
-    getKmhSpeed: function (speed) {
-        speed = Math.round(speed*3.6);
-        return speed;
+    getKmhSpeed: function (speedData) {
+        speedData = Math.round(speedData*3.6);
+        return speedData;
     },
 
     /** 
