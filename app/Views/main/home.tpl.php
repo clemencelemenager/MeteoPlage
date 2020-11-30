@@ -17,7 +17,7 @@
             </div> -->
         </section>
 
-        <div class="alertMessage">
+        <div class="alertMessage nodisplay">
             <!-- app.alertMessage() -->
         </div>
 
@@ -91,7 +91,7 @@
             <section class="tide left-0 text-center">
 
                 <!-- current tide's timetable -->
-                <div class ="tide__container" id="tc1">
+                <div class ="sea__container" id="sc1">
 
                     <div class="tide__currentTide">
                         <!-- load from API -->
@@ -120,8 +120,7 @@
                 </div>
 
                 <!-- sea informations -->
-                <!-- * TODO *-->
-                <div class ="tide__container" id="tc2">
+                <div class ="sea__container" id="sc2">
                     <div class="sea__details sea-temperature">
                         <i class="fas fa-swimmer"></i>
                         <span>

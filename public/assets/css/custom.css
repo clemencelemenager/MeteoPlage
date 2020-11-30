@@ -93,6 +93,18 @@ header {
     display:none;
 }
 
+.bg--green {
+    border: 2px solid #44BBA4;
+    background-color: #44BBA4;
+    border-radius: 10px;
+}
+
+.bg--yellow {
+    border: 2px solid #F3CA40;
+    background-color: #F3CA40;
+    border-radius: 10px;
+}
+
 /* --------------- ALERT MESSAGE -------------- */
 
 .alertMessage {
@@ -136,12 +148,12 @@ header {
     flex-direction: column;
     width:47%;
     justify-content: center;
+    border-radius: 10px;
 }
 
 #wc1 {
     border: 2px solid #F3CA40;
     background-color: #F3CA40;
-    border-radius: 10px;
 }
 
 #wc2 {
@@ -161,7 +173,6 @@ header {
     align-items: center;
     border: 2px solid #44BBA4;
     background-color: #44BBA4;
-    border-radius: 10px;
 }
 
 #wc4 {
@@ -172,7 +183,6 @@ header {
     align-items: center;
     border: 2px solid #44BBA4;
     background-color: #44BBA4;
-    border-radius: 10px;
 }
 
 .weather__temperature--Felt {
@@ -229,7 +239,7 @@ header {
 
 /* --------------- SEA ELEMENTS -------------- */
 
-.tide__container {
+.sea__container {
     display:flex;
     width: 97%;
     border-radius: 10px;
@@ -237,7 +247,7 @@ header {
     align-items: flex-start;
 }
 
-#tc1 {
+#sc1 {
     flex-direction: column;
     justify-content: center;
     border: 2px solid #3F88C5;
@@ -245,7 +255,7 @@ header {
     color:#fff;
 }
 
-#tc2 {
+#sc2 {
     flex-direction: row;
     justify-content: space-between;
     flex-wrap:wrap;

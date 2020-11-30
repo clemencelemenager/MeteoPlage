@@ -18,15 +18,15 @@ let app = {
 
         weather.loadOpenWeatherMap(latitude,longitude);
 
-        /// API StormGlass Weather
-        // @see https://docs.stormglass.io/#/weather
-        // ! API StormGlass limited to 50 calls/day
-        sea.loadStormGlassWeather(latitude, longitude);
+        // /// API StormGlass Weather
+        // // @see https://docs.stormglass.io/#/weather
+        // // ! API StormGlass limited to 50 calls/day
+        // sea.loadStormGlassWeather(latitude, longitude);
 
-        // API StormGlass Tide
-        // @see https://docs.stormglass.io/#/tide
-        // ! API StormGlass limited to 50 calls/day
-        sea.loadStormGlassTide(latitude,longitude);
+        // // API StormGlass Tide
+        // // @see https://docs.stormglass.io/#/tide
+        // // ! API StormGlass limited to 50 calls/day
+        // sea.loadStormGlassTide(latitude,longitude);
         // ------------------------------------------
 
         // add event listener
@@ -177,6 +177,8 @@ let app = {
 
         // identify the container where to display the message
         let alertContainer = document.querySelector(".alertMessage");
+        // display the container
+        alertContainer.classList.remove('nodisplay');
         // add html to the container
         alertContainer.innerHTML = "<p>"+messageHTML+"</br><span class=\"alertMessage--close\">Ne plus afficher ce message</span></p>";
 
