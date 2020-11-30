@@ -81,9 +81,10 @@ let weather = {
                 weather.displayCurrentTemperature(airTemp);
                 weather.displayCurrentTempFeelsLike(airTempFeelsLike);
                 weather.displayRainForNextHour(rainNextHour);
+                weather.displayVisibility(visibility);
+
                 // TODO humidity
                 // TODO cloud cover
-                // TODO visibility
                 // TODO uv
                 // TODO sunrise/sunset
                 
@@ -199,6 +200,17 @@ let weather = {
 
     },
 
+    /**
+     * Display visibility description
+     * 
+     * @param string visibility text
+     */
+    displayVisibility: function (visibility) {
+        let visibilityContainer = document.querySelector(".sea-visibility span");
+        visibilityContainer.textContent = visibility;
+
+    },
+
 
 
 
@@ -207,6 +219,7 @@ let weather = {
     // Forecast weather
     // ========================================================
 
+    // TODO : change API
     /**
      * Display forecast weather
      */
@@ -360,7 +373,7 @@ let weather = {
             return "Bonne visibilité";
         }
         else if( visibility >=5000 && visibility < 10000) {
-            return "Moyenne visibilité";
+            return "Visibilité moyenne";
         }
         else if( visibility > 0 && visibility < 5000) {
             return "Mauvaise visibilité";

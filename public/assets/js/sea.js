@@ -41,14 +41,11 @@ let sea = {
 
                 // current data (live)
                 let seaTemp     = Math.round(data.hours[index].waterTemperature.sg);
-                let waveHeight  = Math.round(data.hours[index].waveHeight.sg);
+                let waveHeight  = sea.getWaveDescription(data.hours[index].waveHeight.sg);
                 let windSpeed   = app.getKmhSpeed(data.hours[index].windSpeed.sg);
                 let gust        = app.getKmhSpeed(data.hours[index].gust.sg);
                 let windDegree  = data.hours[index].windDirection.sg;
                 let windDir     = app.getCardinalDirection(windDegree);
-
-                
-
 
                 // Display in webpage -------------------------------------------------------------------------
 
@@ -60,10 +57,7 @@ let sea = {
                 if(gust > windSpeed) {
                     weather.displayCurrentGust(gust);
                 }
-                weather.displayCurrentWindDirection(windDir);
-               
-               
-
+                weather.displayCurrentWindDirection(windDir)
 
             });
     },
@@ -119,20 +113,211 @@ let sea = {
 
             console.log(data);
             
-            // TODO tide data 
-            
+            // display current tide : status, type and hour 
+            let tideStatus = sea.getTideStatus(data.data[0].type);
+            let nextTideType = sea.translateTideType(data.data[0].type);
+            let nextTideHour = sea.getTideTimeFromDate(data.data[0].time);
 
-            // TODO : afficher le type & l'heure de la prochaine marée, et la marée suivante
+            sea.displayCurrentTide(tideStatus);
+            sea.displayNextTide(nextTideType, nextTideHour);
+
+            // // display second tide : type and hour
+            // let secondTideType = sea.translateTideType(data.data[1].type);
+            // let secondTideHour = sea.translateTideType(data.data[1].time);
+            // sea.displaySecondTide(secondTideType, secondTideHour);
+
             // TODO : afficher le mareagramme avec focus sur l'heure actuelle
 
         });
-
-
     },
             
 
+    /**
+     * Display status of current tide
+     * 
+     * @param string tideType : french description of current tide (rising/falling)
+     */
+    displayCurrentTide: function(tideType) {
+        let currentTideElement = document.querySelector(".currentTide-status");
+        currentTideElement.textContent = tideType;
+    },
+
+    /**
+     * Display the next tide : type (low/high) and time
+     * 
+     * @param string nextTideType translated in french
+     * @param string nextTideHour converted in HH:mm
+     */
+    displayNextTide: function(nextTideType, nextTideHour) {
+
+        let nextTideTypeContainer = document.querySelector(".nextTide-type");
+        nextTideTypeContainer.textContent = nextTideType; 
+
+        let nextTideTimeContainer = document.querySelector(".nextTide-time");
+        nextTideTimeContainer.textContent = nextTideHour; 
+    },
+
+    /**
+     * Display the second next tide : type (low/high) and time
+     * 
+     * @param string secondTideType translated in french
+     * @param string secondTideHour converted in HH:mm
+     */
+    displaySecondTide: function(secondTideType,secondTideHour) {
+
+        let secondTideTypeContainer = document.querySelector(".secondTide-type");
+        secondTideTypeContainer.textContent = secondTideType; 
+
+        let secondTideTimeContainer = document.querySelector(".secondTide-time");
+        secondTideTimeContainer.textContent = secondTideHour; 
+
+    },
+
+
+    // ========================================================
+    // Tide Chart
+    // ========================================================
+
+    
+    /**
+     * Treatment of the data to get only labels for the tide chart
+     * 
+     * @param array tideNextHours 
+     * @return array labels
+     */
+    getChartLabels: function(tideNextHours) {
+        
+        // init array 
+        let labels = [];
+
+        // chartData contains tide details for next 24 hours 
+        // for each index, get the hour number as a label for X axe
+        for(const index in tideNextHours){
+            let hour = app.getHour(tideNextHours[index].timestamp);
+            labels.push(hour+"h");
+        }
+        return labels;
+    },
+
+    /**
+     * Treatment of the data to get only values for the tide chart
+
+     * @param array tideNextHours 
+     * @return array heights
+     */
+    getTideHeights: function(tideNextHours) {
+
+        // let chartData = tide.getSampleChartData();
+        // init array 
+        let heights = [];
+        // chartData contains tide details for next 24 hours 
+        // for each index, get the hour number as a label for X axe
+        for(const index in tideNextHours){
+            let height = tideNextHours[index].height;
+            heights.push(height);
+        }
+        return heights;
+
+    },
+    
+
+
+    // ========================================================
+    // Tools
+    // ========================================================
+
+
+    /**
+     * Translate tide information in french
+     * 
+     * @param string tideType : data transmitted in english from API
+     */
+    translateTideType: function(tideType) {
+        if(tideType == "high")      {return tideType = "haute"           ;}
+        else if(tideType == "low")  {return tideType = "basse"           ;}
+       
+        else {
+            return tideType = "NC";
+        }
+    },
+
+    /**
+     * Get tide status depending of tide type
+     * 
+     * @param string tideType : tide low or high
+     */
+    getTideStatus: function(tideType){
+        if(tideType == "high")      {return "La mer monte";}
+        else if(tideType == "low")  {return "La mer descend";}
+       
+        else {
+            return tideType = "NC";
+        }
+    },
+
+    /** 
+     * Get hh:mm format from unix timestamp
+     * 
+     */
+    getTideTimeFromUnix: function(unix) {
+
+        let date = new Date(unix*1000);
+        let hour = date.getHours();
+        let minute = date.getMinutes();
+
+        if (minute < 10) {
+            minute="0"+ minute;
+        }
+         
+        return hour + ":" + minute;
+    },
+
+    /** 
+     * Get hh:mm format from date
+     * 
+     */
+    getTideTimeFromDate: function(date) {
+        let time = new Date(date);
+        let hour = time.getHours();
+        let minute = time.getMinutes();
+
+        if (hour < 10) {
+            hour="0"+ hour;
+        }
+
+        if (minute < 10) {
+            minute="0"+ minute;
+        }
+         
+        return hour + ":" + minute;
+    },
+
+
+    /**
+     * Display a description of sea depending of the wave height
+     */
+    getWaveDescription:function (waveHeight) {
+
+        if( waveHeight < 0.5) {
+            return "Mer calme";
+        }
+        if( waveHeight >= 0.5 && waveHeight < 1) {
+            return "Mer agitée";
+        }
+        if( waveHeight >= 1 && waveHeight < 2) {
+            return "Mer très agitée !";
+        }
+        if (waveHeight >= 2) {
+            return "Wahou c'est la tempête!";
+        }
+    },
+
+
+
+
     // ========================================================
     // API Tides
+    // TODO - a supprimer - transfert API en cours
     // ========================================================
 
 
@@ -160,9 +345,9 @@ let sea = {
                 // set values
                 currentTide     = sea.translateTideType(data.heights[0].state);
                 nextTideType    = sea.translateTideType(data.extremes[0].state);
-                nextTideHour    = sea.getTideTime(data.extremes[0].timestamp);
+                nextTideHour    = sea.getTideTimeFromUnix(data.extremes[0].timestamp);
                 secondTideType  = sea.translateTideType(data.extremes[1].state);
-                secondTideHour  = sea.getTideTime(data.extremes[1].timestamp);
+                secondTideHour  = sea.getTideTimeFromUnix(data.extremes[1].timestamp);
                 tideNextHours   = data.heights;
 
                 tideDataSet     = {currentTide, nextTideType, nextTideHour, secondTideType, secondTideHour, tideNextHours};
@@ -220,187 +405,6 @@ let sea = {
     },
 
 
-
-
-
-    /**
-     * Display all tide datas on webpage
-     * 
-     * @param object tideDataSet 
-     */
-    displayTideData: function(tideDataSet) {
-        sea.displayCurrentTide(tideDataSet.currentTide);
-        sea.displayNextTide(tideDataSet.nextTideType, tideDataSet.nextTideHour);
-        sea.displaySecondTide(tideDataSet.secondTideType,tideDataSet.secondTideHour)
-        sea.loadTideChart(tideDataSet.tideNextHours);
-    },
-
-    /**
-     * Display status of current tide
-     * 
-     * @param string tideType : french description of current tide (rising/falling)
-     */
-    displayCurrentTide: function(tideType) {
-        let currentTideElement = document.querySelector(".currentTide-status");
-        currentTideElement.textContent = tideType;
-    },
-
-    /**
-     * Display the next tide : type (low/high) and time
-     * 
-     * @param string nextTideType translated in french
-     * @param string nextTideHour converted from unix in HH:mm
-     */
-    displayNextTide: function(nextTideType, nextTideHour) {
-
-        let nextTideTypeContainer = document.querySelector(".nextTide-type");
-        nextTideTypeContainer.textContent = nextTideType; 
-
-        let nextTideTimeContainer = document.querySelector(".nextTide-time");
-        nextTideTimeContainer.textContent = nextTideHour; 
-    },
-
-    /**
-     * Display the second next tide : type (low/high) and time
-     * 
-     * @param string secondTideType translated in french
-     * @param string secondTideHour onverted from unix in HH:mm
-     */
-    displaySecondTide: function(secondTideType,secondTideHour) {
-
-        let secondTideTypeContainer = document.querySelector(".secondTide-type");
-        secondTideTypeContainer.textContent = secondTideType; 
-
-        let secondTideTimeContainer = document.querySelector(".secondTide-time");
-        secondTideTimeContainer.textContent = secondTideHour; 
-
-    },
-
-
-    // ========================================================
-    // Tide Chart
-    // ========================================================
-
-    /**
-     * Display chart to represent tides for next hours
-     * 
-     */
-    loadTideChart: function(tideNextHours) {
-
-        var ctx = document.getElementById('myChart');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: sea.getChartLabels(tideNextHours),
-                datasets: [{
-                    label: null,
-                    data: sea.getTideHeights(tideNextHours),
-                    borderColor: 'rgba(63, 136, 197,1)',
-                    backgroundColor: 'rgba(63, 136, 197,1)',
-                    borderWidth: 2,
-                    pointRadius: 0,
-                    borderCapStyle : "round",
-                    fill: false,                    
-                }]
-            },
-            options: {
-                legend: {
-                    display: false,
-                },
-                title: {
-                    display:true,
-                    text:'Hauteur de marée à venir',
-                    position:'top',
-                    fontSize:16,
-                    fontColor: '#333',
-                    responsive: true,
-                }
-            }
-        });
-    },
-
-   
-    /**
-     * Treatment of the data to get only labels for the tide chart
-     * 
-     * @param array tideNextHours 
-     * @return array labels
-     */
-    getChartLabels: function(tideNextHours) {
-        
-        // init array 
-        let labels = [];
-
-        // chartData contains tide details for next 24 hours 
-        // for each index, get the hour number as a label for X axe
-        for(const index in tideNextHours){
-            let hour = app.getHour(tideNextHours[index].timestamp);
-            labels.push(hour+"h");
-        }
-        return labels;
-    },
-
-    /**
-     * Treatment of the data to get only values for the tide chart
-
-     * @param array tideNextHours 
-     * @return array heights
-     */
-    getTideHeights: function(tideNextHours) {
-
-        // let chartData = tide.getSampleChartData();
-        // init array 
-        let heights = [];
-        // chartData contains tide details for next 24 hours 
-        // for each index, get the hour number as a label for X axe
-        for(const index in tideNextHours){
-            let height = tideNextHours[index].height;
-            heights.push(height);
-        }
-        return heights;
-
-    },
-    
-
-
-    // ========================================================
-    // Tools
-    // ========================================================
-
-
-    /**
-     * Translate tide information in french
-     * 
-     * @param string tideType : data transmitted in english from API
-     */
-    translateTideType: function(tideType) {
-        if(tideType == "HIGH TIDE") {return tideType = "haute"           ;}
-        if(tideType == "LOW TIDE")  {return tideType = "basse"           ;}
-        if(tideType == "RISING")    {return tideType = "La mer monte"   ;}
-        if(tideType == "FALLING")   {return tideType = "La mer descend" ;}
-        
-        else {
-            return tideType = "NC";
-        }
-    },
-
-    /** 
-     * Get hh:mm format from unix timestamp
-     * 
-     */
-    getTideTime: function(unix) {
-
-        let date = new Date(unix*1000);
-        let hour = date.getHours();
-        let minute = date.getMinutes();
-
-        if (minute < 10) {
-            minute="0"+ minute;
-        }
-         
-        return hour + ":" + minute;
-    },
-
     /**
      * Get sample tide data for chart
      */
@@ -422,5 +426,19 @@ let sea = {
         };
         return chartData;
     },
+
+
+    /**
+     * Display all tide datas on webpage
+     * 
+     * @param object tideDataSet 
+     */
+    displayTideData: function(tideDataSet) {
+        sea.displayCurrentTide(tideDataSet.currentTide);
+        sea.displayNextTide(tideDataSet.nextTideType, tideDataSet.nextTideHour);
+        sea.displaySecondTide(tideDataSet.secondTideType,tideDataSet.secondTideHour)
+    },
+
+
 
 }

@@ -9,21 +9,6 @@ let app = {
         let latitude = 49.369682 ;
         let longitude = -0.871084;
 
-        // ------------------------------------------
-        // OLD DATA
-
-        // // load weather datas from API
-        // weather.loadCurrentWeather();
-        // weather.loadForecastWeather();
-
-        // load tide datas from API
-        // ! API Tides limited to 100 requests/month
-        // ! API default setting is inactive
-        // ! Set true to activate API :
-        let activateAPI = false;
-        sea.loadTides(activateAPI);
-        // ------------------------------------------
-
 
         // TODO --------------------------------------
         // NEW DATA

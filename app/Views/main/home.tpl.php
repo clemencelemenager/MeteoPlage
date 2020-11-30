@@ -125,17 +125,22 @@
                     <div class="sea__details sea-temperature">
                         <i class="fas fa-swimmer"></i>
                         <span>
-                            <!-- load temp from API-->
+                            <!-- load from API-->
                         </span>° 
                     </div>
                     <div class="sea__details sea-wave">
                         <i class="fas fa-water"></i>
-                        <span>-</span>m
+                        <span>
+                            <!-- load from API-->
+                        </span>
                     </div>
                     <div class="sea__details sea-visibility">
                     <i class="fas fa-eye"></i>
-                        <span>-</span>
+                        <span>
+                            <!-- load from API-->
+                        </span>
                     </div>
+                   
                 </div>
 
             </section>
@@ -203,10 +208,7 @@
                         </div>
                     </div>
 
-                    <!-- forecast tide evolution next 12hours (chart)--> 
-                    <div class="forecast__content--tideChart">
-                        <canvas id="myChart"></canvas>
-                    </div>
+                    
                     
                 </div>
 

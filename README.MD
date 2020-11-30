@@ -1,4 +1,4 @@
-# GoToBeach
+# MétéoPlage (BeachWeather)
 
 Display weather and tide at the beach (default location : Omaha Beach)
 
