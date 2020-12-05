@@ -369,6 +369,7 @@ let weather = {
      * @return string visibility description 
      */
     getVisibilityText: function(visibility) {
+
         if(visibility >= 10000) {
             return "Bonne visibilité";
         }

@@ -105,6 +105,12 @@ header {
     border-radius: 10px;
 }
 
+.bg--grey {
+    border: 2px solid grey;
+    background-color: grey;
+    border-radius: 10px;
+}
+
 /* --------------- ALERT MESSAGE -------------- */
 
 .alertMessage {
