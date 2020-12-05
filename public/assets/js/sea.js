@@ -31,7 +31,7 @@ let sea = {
             .then((response) => response.json())
             .then((data) => {
 
-                console.log(data);
+                // console.log(data);
 
                 // Save values -------------------------------------------------------------------------
 
@@ -111,15 +111,29 @@ let sea = {
          .then((response) => response.json())
          .then((data) => {
 
-            console.log(data);
+            // console.log(data);
             
+            // TODO
             // display current tide : status, type and hour 
-            let tideStatus = sea.getTideStatus(data.data[0].type);
-            let nextTideType = sea.translateTideType(data.data[0].type);
-            let nextTideHour = sea.getTideTimeFromDate(data.data[0].time);
+            // afficher l'heure de la prochaine marée : 1er résultat où l'heure est > à maintenant
+            let now = new Date();
+            now = sea.getTideTimeFromDate(now)
 
-            sea.displayCurrentTide(tideStatus);
-            sea.displayNextTide(nextTideType, nextTideHour);
+            const tides = data.data;
+            const nextTide;
+            let match = false;
+
+            // get next tide from now
+            while(!match) {
+                if(sea.getTideTimeFromDate(tides[i].time) > now) {
+                    nextTide = tides[i];
+                    match = true;
+                }
+            };
+        
+            // display next tide results
+            sea.displayCurrentTide(nextTide.type);
+            sea.displayNextTide(nextTide.type, sea.getTideTimeFromDate(nextTide.time));
 
             // // display second tide : type and hour
             // let secondTideType = sea.translateTideType(data.data[1].type);
