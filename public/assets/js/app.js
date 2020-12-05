@@ -15,7 +15,6 @@ let app = {
 
         // API Open Weather Map 
         // @see https://openweathermap.org/api/one-call-api
-
         weather.loadOpenWeatherMap(latitude,longitude);
 
         /// API StormGlass Weather
@@ -29,8 +28,9 @@ let app = {
         sea.loadStormGlassTide(latitude,longitude);
         // ------------------------------------------
 
-        // add event listener
-        app.seeForecast();
+
+        // // add event listener
+        // app.seeForecast();
 
     }, 
 
