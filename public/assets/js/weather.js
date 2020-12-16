@@ -111,7 +111,6 @@ let weather = {
      * @param string description 
      */
     displayCurrentDescription: function(description) {
-
         let descriptionElement = document.querySelector(".weather__description");
         descriptionElement.textContent = description;
     },
@@ -122,7 +121,6 @@ let weather = {
      * @param string icon 
      */
     displayCurrentIcon: function(icon) {
-
         let iconURL = "http://openweathermap.org/img/wn/"+icon+"@2x.png";
 
         let iconElement = document.createElement("img");
@@ -151,41 +149,7 @@ let weather = {
         let tempFeelsLikeContainer = document.querySelector(".weather__temperature--Felt span");
         tempFeelsLikeContainer.textContent = tempFeelsLike;
     },
-
-    /**
-     * Display current wind 
-     * 
-     * @param number windSpeed : speed in kmh
-     */
-    displayCurrentWind: function (windSpeed) {
-
-        let windContainer = document.querySelector(".wind-normal span");
-        windContainer.textContent = windSpeed+"km/h ";
-    },
-
-    /**
-     * Display current gust (max wind)
-     * 
-     * @param number gust : speed in kmh
-     */
-    displayCurrentGust: function (gust) {
-
-        let gustContainer = document.querySelector(".weather__content--wind");
-        let gustElement = document.createElement('div');
-        gustElement.classList.add('wind-max');
-        gustElement.textContent = "Rafales à "+gust+"km/h";
-        gustContainer.appendChild(gustElement);
-    },
-
-    /**
-     * Display current wind direction
-     * 
-     * @param string windDirection : cardinal direction
-     */
-    displayCurrentWindDirection: function(windDirection) {
-        let windDirContainer = document.querySelector('.weather__content--windDir span');
-        windDirContainer.textContent = windDirection;
-    },
+    
 
     /**
      * Display visibility description
@@ -198,141 +162,6 @@ let weather = {
 
     },
 
-
-
-
-
-    // ========================================================
-    // Forecast weather
-    // ========================================================
-
-    // TODO : change API
-    /**
-     * Display forecast weather
-     */
-    loadForecastWeather: function() {
-        weather.fetchForecastWeatherData().then( function(data) {
-            // console.log(data);
-            
-            // init object of forecast datas
-            let forecastData = {};
-
-            // Set values from API
-            for(i = 0; i < data.list.length; i++) {
-                let forecast = data.list[i];
-
-                // init new key in forecastData
-                forecastData[i] = [];
-
-                // set values
-                let querySelector   = "forecast"+i;
-                let time            = app.getHour(forecast.dt);
-                let icon            = forecast.weather[0].icon;
-                let temp            = Math.round(forecast.main.temp);
-                let windSpeed       = app.getKmhSpeed(forecast.wind.speed);
-                let windDir         = app.getCardinalDirection(forecast.wind.deg);
-
-                // insert values in array
-                forecastData[i]["querySelector"]    = querySelector;
-                forecastData[i]["time"]             = time;
-                forecastData[i]["icon"]             = icon;
-                forecastData[i]["temperature"]      = temp;
-                forecastData[i]["windSpeed"]        = windSpeed;
-                forecastData[i]["windDir"]          = windDir;
-
-                // display forecast
-                weather.displayForecast(forecastData[i]);
-            }
-
-        });
-    },
-
-    /**
-     * Get forecast weather data from API
-     * ! set your API key
-     */
-    fetchForecastWeatherData: function() {
-        // API 5 day weather forecast from OpenWeatherMap
-        // @see https://openweathermap.org/forecast5
-        let endPoint = 'https://api.openweathermap.org/data/2.5/forecast?lat=49.369682&lon=-0.871084&units=Metric&cnt=3&lang=fr&appid='+api.getAPIKeyForForecastWeather();
-
-        let fetchOptions = {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'no-cache'
-        };
-
-        let fetchRequest = fetch(endPoint,fetchOptions);
-        let fetchResponse = fetchRequest.then(function(response) {
-            return response.json();
-            })
-        return fetchResponse;
-
-    },
-
-    /**
-     * Display specific forecast
-     * 
-     * @param string indexForecast 
-     */
-    displayForecast: function(indexForecast) {
-        weather.displayForecastIcon(indexForecast["icon"], indexForecast["querySelector"]);
-        weather.displayForecastTime(indexForecast['time'], indexForecast["querySelector"]);
-        weather.displayForecastTemp(indexForecast['temperature'],indexForecast["querySelector"]);
-        weather.displayForecastWind(indexForecast['windSpeed'],indexForecast['windDir'],indexForecast["querySelector"]);
-    },
-
-    /**
-     * Display the correspondant hour of forecast 
-     * 
-     * @param number hour of the forecast
-     * @param string querySelector : id for forecast
-     */
-    displayForecastTime: function(hour, querySelector) {
-        let hourContainer = document.querySelector("."+querySelector+" .forecast__weather--time");
-        hourContainer.textContent = hour+"h";
-    },
-
-    /**
-     * Display the weather icon of forecast
-     * 
-     * @param string icon 
-     * @param string querySelector : id for forecast
-     */
-    displayForecastIcon: function(icon, querySelector) {
-
-        let iconURL = "http://openweathermap.org/img/wn/"+icon+"@2x.png";
-        let iconElement = document.createElement("img");
-        iconElement.setAttribute("src",iconURL);
-
-        let iconContainer = document.querySelector("."+querySelector+" .forecast__weather--icon");
-        iconContainer.appendChild(iconElement);
-
-    },
-
-    /**
-     * Display the temperature of forecast 
-     * 
-     * @param number temperature
-     * @param string querySelector : id for forecast
-     */
-    displayForecastTemp: function(temp, querySelector) {
-        let tempContainer = document.querySelector("."+querySelector+" .forecast__weather--temp");
-        tempContainer.textContent = temp+"°"; 
-    },
-
-    /**
-     * Display wind values of forecast
-     * 
-     * @param number windSpeed 
-     * @param number windDirection 
-     * @param string querySelector : id for forecast
-     */
-    displayForecastWind: function(windSpeed, windDirection, querySelector) {
-        let windContainer = document.querySelector("."+querySelector+" .forecast__weather--wind");
-        windContainer.textContent = windSpeed+"km/h "+windDirection; 
-
-    },
 
     // =============================================================
     // TOOLS    

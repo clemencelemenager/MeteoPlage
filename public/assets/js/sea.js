@@ -5,15 +5,35 @@ let sea = {
     // ========================================================
 
     loadStormGlassWeather: function(latitude, longitude) {
-            
+        
+        sea.fetchMarineWeatherData(latitude,longitude)
+            .then((data) => {
+                // Prerequisite : get the current hour as index for the array data.hours
+                let now     = new Date();
+                let index   = now.getHours();
+
+                // current data (live)
+                let seaDataSet  = {
+                    seaTemp: Math.round(data.hours[index].waterTemperature.sg),
+                    waveHeight: data.hours[index].waveHeight.sg,
+                    windSpeed: app.getKmhSpeed(data.hours[index].windSpeed.sg),
+                    gust: app.getKmhSpeed(data.hours[index].gust.sg),
+                    windDegree: data.hours[index].windDirection.sg,
+                };
+
+                sea.displayMarineWeatherData(seaDataSet);
+            });
+    },
+
+    fetchMarineWeatherData: function (latitude,longitude) {
         // API StormGlass Marine Weather
         // @see doc https://docs.stormglass.io/#/weather
         const params = [
-                        'gust','precipitation','windDirection','windSpeed', 
-                        'waterTemperature','waveHeight'
-                        ].join(',');
+            'gust','precipitation','windDirection','windSpeed', 
+            'waterTemperature','waveHeight'
+            ].join(',');
         const source = 'sg';
-        let endpoint = `https://api.stormglass.io/v2/weather/point?source=${source}&lat=${latitude}&lng=${longitude}&params=${params}`;
+        let endPoint = `https://api.stormglass.io/v2/weather/point?source=${source}&lat=${latitude}&lng=${longitude}&params=${params}`;
 
         // Set up configuration for HTTP request in fetch function
         let fetchOptions = {
@@ -21,47 +41,38 @@ let sea = {
             mode: 'cors',
             cache: 'no-cache',
             headers: {
-                // Get your key by signing up.
-                'Authorization': api.getAPIStormGlass()
+            // Get your key by signing up.
+            'Authorization': api.getAPIStormGlass()
             }
         };
-
-        // Lauch HTTP request, convert result in json and display data
-        fetch(endpoint,fetchOptions)
-            .then((response) => response.json())
-            .then((data) => {
-
-                // console.log(data);
-
-                // Save values -------------------------------------------------------------------------
-
-                // Prerequisite : get the current hour as index for the array data.hours
-                let now     = new Date();
-                let index   = now.getHours();
-
-                // current data (live)
-                let seaTemp     = Math.round(data.hours[index].waterTemperature.sg);
-                let waveHeight  = sea.getWaveDescription(data.hours[index].waveHeight.sg);
-                let windSpeed   = app.getKmhSpeed(data.hours[index].windSpeed.sg);
-                let gust        = app.getKmhSpeed(data.hours[index].gust.sg);
-                let windDegree  = data.hours[index].windDirection.sg;
-                let windDir     = app.getCardinalDirection(windDegree);
-
-                // Display in webpage -------------------------------------------------------------------------
-
-                // current data (live)
-                sea.displaySeaTemp(seaTemp);
-                sea.displayWaveHeight(waveHeight);
-                weather.displayCurrentWind(windSpeed);
-                // Control : display gust only if > to windSpeed
-                if(gust > windSpeed) {
-                    weather.displayCurrentGust(gust);
-                }
-                weather.displayCurrentWindDirection(windDir)
-
-            });
+        let fetchResponse = fetch(endPoint,fetchOptions).then(function(response) {
+            return response.json();
+            })
+        
+        return fetchResponse;
     },
 
+    // ========================================================
+    // Display Marine Weather data
+    // ========================================================
+
+    /**
+     * Display all marine weather data in webpage 
+     * Sea temperature, wave, wind
+     * 
+     * @param object data set
+     */
+    displayMarineWeatherData: function (seaDataSet) {
+        sea.displaySeaTemp(seaDataSet.seaTemp);
+        sea.displayWaveHeight(seaDataSet.waveHeight);
+        sea.displayCurrentWindDirection(seaDataSet.windDegree);
+        sea.displayCurrentWind(seaDataSet.windSpeed);
+
+        // Control : display gust only if > to windSpeed
+        if(seaDataSet.gust > seaDataSet.windSpeed) {
+            sea.displayCurrentGust(seaDataSet.gust);
+        }
+    },
 
     /**
      * Display current sea temperature in c°
@@ -80,73 +91,131 @@ let sea = {
      */
     displayWaveHeight: function(waveHeight) {
         let waveHeightContainer = document.querySelector(".sea-wave span");
-        waveHeightContainer.textContent = waveHeight;
+        waveHeightContainer.textContent = sea.getWaveDescription(waveHeight);
+    },
+
+    /**
+     * Display current wind 
+     * 
+     * @param number windSpeed : speed in kmh
+     */
+    displayCurrentWind: function (windSpeed) {
+
+        let windContainer = document.querySelector(".wind-normal span");
+        windContainer.textContent = windSpeed+"km/h ";
+    },
+
+    /**
+    * Display current wind direction
+    *
+    * @param integer windDegree
+    */
+    displayCurrentWindDirection: function(windDegree) {
+        let windDirContainer = document.querySelector('.weather__content--windDir span');
+        windDirContainer.textContent = app.getCardinalDirection(windDegree);
+    },
+
+    /**
+     * Display current gust (max wind)
+     * 
+     * @param number gust : speed in kmh
+     */
+    displayCurrentGust: function (gust) {
+        let gustContainer = document.querySelector(".weather__content--wind");
+        let gustElement = document.createElement('div');
+        gustElement.classList.add('wind-max');
+        gustElement.textContent = "Rafales à "+gust+"km/h";
+        gustContainer.appendChild(gustElement);
     },
 
 
     // ========================================================
-    // API StormGlass Tide
+    // API Tides
     // ========================================================
 
-    loadStormGlassTide: function(latitude, longitude) {
+    /**
+     * Display tides if API active
+     * 
+     * @param boolean activateAPI : load API (if true) or load sample data (if false)
+     * @param string latitude
+     * @param string longitude
+     */
+    loadTides: function(activateAPI, latitude, longitude) {
 
-		// API StormGlass Tide
-		// @see doc https://docs.stormglass.io/#/tide
+        // if activateAPI, load data from API
+        if(activateAPI == true) {
+            sea.fetchTidesData(latitude, longitude).then( function(data) {
+                
+                let tideDataSet = {
+                    currentTide: sea.getTideStatus(data.heights[0].state),
+                    nextTideType: sea.translateTideType(data.extremes[0].state),
+                    nextTideHour: sea.getTideTimeFromUnix(data.extremes[0].timestamp),
+                    secondTideType: sea.translateTideType(data.extremes[1].state),
+                    secondTideHour: sea.getTideTimeFromUnix(data.extremes[1].timestamp),
+                    tideNextHours: data.heights,
+                };
 
-		let endpoint = `https://api.stormglass.io/v2/tide/extremes/point?lat=${latitude}&lng=${longitude}`;
+                sea.displayTideData(tideDataSet);
+            });
+        }
+        else {
+            tideSampleDataSet  = {
+                currentTide: "La mer monte",
+                nextTideType: "haute",
+                nextTideHour: "22h04",
+                secondTideType: "basse",
+                secondTideHour: "05:34",
+                tideNextHours: sea.getSampleData(),
+            };
+            sea.displayTideData(tideSampleDataSet);
 
-		// Set up configuration for HTTP request in fetch function
-		let fetchOptions = {
-			method: 'GET',
-			mode: 'cors',
-			cache: 'no-cache',
-			headers: {
-				// Get your key by signing up.
-				'Authorization': api.getAPIStormGlass()
-			}
-		};
+            // display an alert message about sample data
+            let messageHTML = "Attention : les données de marée sont des exemples. Contactez l'administrateur pour activer les données réelles." 
+            app.alertMessage(messageHTML);
+        }
+    },
 
-		// Lauch HTTP request, convert result in json and display data
-		fetch(endpoint, fetchOptions)
-			.then((response) => response.json())
-			.then((data) => {
+    /**
+     * Get tides datas from API
+     * 
+     */
+    fetchTidesData: function(latitude, longitude) {
+        // API Tides
+        // @see https://rapidapi.com/apihood/api/tides/endpoints
+        let endPoint = `https://tides.p.rapidapi.com/tides?latitude=${latitude}&longitude=${longitude}&interval=60&duration=1440&radius=10`
 
-				console.log(data);
+        let fetchOptions = {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            "headers": {
+                "x-rapidapi-key": api.getTidesAPIKey(),
+                "x-rapidapi-host": "tides.p.rapidapi.com"
+            }
+        };
 
-				// TODO
-				// display current tide : status, type and hour 
-				// afficher l'heure de la prochaine marée : 1er résultat où l'heure est > à maintenant
-				const now = sea.getTideTimeFromDate(new Date())
+        let fetchResponse = fetch(endPoint,fetchOptions).then(function(response) {
+            return response.json();
+            })
+        
+        return fetchResponse;
+    },
 
-				const tideExtremes = data.data;
-				let nextTideExtremeIndex = 0;
-				let match = false;
-				let count = 0;
-				
-				// get next tide from now
-				while (!match) {
-					if (sea.getTideTimeFromDate(tideExtremes[count].time) > now) {
-						nextTideExtremeIndex = count;
-						match = true;
-					}
-					count = count +1;
-				};
 
-				// display next tide results
-				sea.displayCurrentTide(tideExtremes[nextTideExtremeIndex].type);
-				sea.displayNextTide(tideExtremes[nextTideExtremeIndex].type, tideExtremes[nextTideExtremeIndex].time);
+    // ========================================================
+    // Display tides data
+    // ========================================================
 
-				// display second tide : type and hour
-				const secondTideExtremeIndex = nextTideExtremeIndex + 1;
-				let secondTideType = tideExtremes[secondTideExtremeIndex].type;
-				let secondTideHour = tideExtremes[secondTideExtremeIndex].time;
-				sea.displaySecondTide(secondTideType, secondTideHour);
-
-				// TODO : afficher le mareagramme avec focus sur l'heure actuelle
-
-			});
-	},
-   
+    /**
+     * Display all tide datas on webpage
+     * 
+     * @param object tideDataSet 
+     */
+    displayTideData: function(tideDataSet) {
+        sea.displayCurrentTide(tideDataSet.currentTide);
+        sea.displayNextTide(tideDataSet.nextTideType, tideDataSet.nextTideHour);
+        sea.displaySecondTide(tideDataSet.secondTideType,tideDataSet.secondTideHour)
+    },
 
     /**
      * Display status of current tide
@@ -155,7 +224,7 @@ let sea = {
      */
     displayCurrentTide: function(tideType) {
         let currentTideElement = document.querySelector(".currentTide-status");
-        currentTideElement.textContent = sea.getTideStatus(tideType);
+        currentTideElement.textContent = tideType;
     },
 
     /**
@@ -167,10 +236,10 @@ let sea = {
     displayNextTide: function(nextTideType, nextTideHour) {
 
         let nextTideTypeContainer = document.querySelector(".nextTide-type");
-        nextTideTypeContainer.textContent = sea.translateTideType(nextTideType); 
+        nextTideTypeContainer.textContent = nextTideType; 
 
         let nextTideTimeContainer = document.querySelector(".nextTide-time");
-        nextTideTimeContainer.textContent = sea.getTideTimeFromDate(nextTideHour); 
+        nextTideTimeContainer.textContent = nextTideHour; 
     },
 
     /**
@@ -182,66 +251,17 @@ let sea = {
     displaySecondTide: function(secondTideType,secondTideHour) {
 
         let secondTideTypeContainer = document.querySelector(".secondTide-type");
-        secondTideTypeContainer.textContent = sea.translateTideType(secondTideType); 
+        secondTideTypeContainer.textContent = secondTideType; 
 
         let secondTideTimeContainer = document.querySelector(".secondTide-time");
-        secondTideTimeContainer.textContent = sea.getTideTimeFromDate(secondTideHour); 
+        secondTideTimeContainer.textContent = secondTideHour; 
 
     },
-
-
-    // ========================================================
-    // Tide Chart
-    // ========================================================
-
-    
-    /**
-     * Treatment of the data to get only labels for the tide chart
-     * 
-     * @param array tideNextHours 
-     * @return array labels
-     */
-    getChartLabels: function(tideNextHours) {
-        
-        // init array 
-        let labels = [];
-
-        // chartData contains tide details for next 24 hours 
-        // for each index, get the hour number as a label for X axe
-        for(const index in tideNextHours){
-            let hour = app.getHour(tideNextHours[index].timestamp);
-            labels.push(hour+"h");
-        }
-        return labels;
-    },
-
-    /**
-     * Treatment of the data to get only values for the tide chart
-
-     * @param array tideNextHours 
-     * @return array heights
-     */
-    getTideHeights: function(tideNextHours) {
-
-        // let chartData = tide.getSampleChartData();
-        // init array 
-        let heights = [];
-        // chartData contains tide details for next 24 hours 
-        // for each index, get the hour number as a label for X axe
-        for(const index in tideNextHours){
-            let height = tideNextHours[index].height;
-            heights.push(height);
-        }
-        return heights;
-
-    },
-    
 
 
     // ========================================================
     // Tools
     // ========================================================
-
 
     /**
      * Translate tide information in french
@@ -249,8 +269,8 @@ let sea = {
      * @param string tideType : data transmitted in english from API
      */
     translateTideType: function(tideType) {
-        if(tideType == "high")      {return tideType = "haute"           ;}
-        else if(tideType == "low")  {return tideType = "basse"           ;}
+        if(tideType == "HIGH TIDE")      {return tideType = "haute"           ;}
+        else if(tideType == "LOW TIDE")  {return tideType = "basse"           ;}
        
         else {
             return tideType = "NC";
@@ -263,8 +283,8 @@ let sea = {
      * @param string tideType : tide low or high
      */
     getTideStatus: function(tideType){
-        if(tideType == "high")      {return "La mer monte";}
-        else if(tideType == "low")  {return "La mer descend";}
+        if(tideType == "RISING")      {return "La mer monte";}
+        else if(tideType == "FALLING")  {return "La mer descend";}
        
         else {
             return tideType = "NC";
@@ -329,104 +349,12 @@ let sea = {
     },
 
 
-
-
-    // ========================================================
-    // API Tides
-    // TODO - a supprimer - transfert API en cours
-    // ========================================================
-
-
     /**
-     * Display tides if API active
-     * 
-     * @param boolean activateAPI : load API (if true) or load sample data (if false)
-     * 
+     * Get sample tide data 
      */
-    loadTides: function(activateAPI) {
-
-        // init variables
-        let currentTide     = "";
-        let nextTideType    = "";
-        let nextTideHour    = "";
-        let secondTideType  = "";
-        let secondTideHour  = "";
-        let tideNextHours   = {};
-
-        // if activateAPI, load data from API
-        if(activateAPI == true) {
-            sea.fetchTidesData().then( function(data) {
-                // console.log(data);
-    
-                // set values
-                currentTide     = sea.translateTideType(data.heights[0].state);
-                nextTideType    = sea.translateTideType(data.extremes[0].state);
-                nextTideHour    = sea.getTideTimeFromUnix(data.extremes[0].timestamp);
-                secondTideType  = sea.translateTideType(data.extremes[1].state);
-                secondTideHour  = sea.getTideTimeFromUnix(data.extremes[1].timestamp);
-                tideNextHours   = data.heights;
-
-                tideDataSet     = {currentTide, nextTideType, nextTideHour, secondTideType, secondTideHour, tideNextHours};
-                
-                // display data on webpage
-                sea.displayTideData(tideDataSet);
-            });
-        }
-
-        // else, load sample data
-        else {
-            currentTide     = "La mer monte";
-            nextTideType    = "haute";
-            nextTideHour    = "22h04";
-            secondTideType  = "basse";
-            secondTideHour  = "05:34";
-            tideNextHours   = sea.getSampleChartData();
-
-            tideDataSet     = {currentTide, nextTideType, nextTideHour, secondTideType, secondTideHour, tideNextHours};
-
-            // display data on webpage
-            sea.displayTideData(tideDataSet);
-
-            // display an alert message about sample data
-            let messageHTML = "Attention : les données de marée sont des exemples. Contactez l'administrateur pour activer les données réelles." 
-            app.alertMessage(messageHTML);
-        }
-    },
-
-    /**
-     * Get tides datas from API
-     * ! LIMIT 100 REQUESTS PER MONTH
-     * ! set your API Key
-     */
-    fetchTidesData: function() {
-        // API Tides
-        // @see https://rapidapi.com/apihood/api/tides/endpoints
-        let endPoint = 'https://tides.p.rapidapi.com/tides?latitude=49.369682&longitude=-0.871084&interval=60&duration=1440&radius=10'
-
-        let fetchOptions = {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'no-cache',
-            "headers": {
-                "x-rapidapi-key": api.getTidesAPIKey(),
-                "x-rapidapi-host": "tides.p.rapidapi.com"
-            }
-        };
-
-        let fetchResponse = fetch(endPoint,fetchOptions).then(function(response) {
-            return response.json();
-            })
+    getSampleData: function() {
         
-        return fetchResponse;
-    },
-
-
-    /**
-     * Get sample tide data for chart
-     */
-    getSampleChartData: function() {
-        
-        let chartData = {
+        let sampleData = {
             0: {timestamp: 1605462966, datetime: "2020-11-15T17:56:06+00:00", height: -1.0075273508763711, state: "RISING"},
             1: {timestamp: 1605466566, datetime: "2020-11-15T18:56:06+00:00", height: 1.3282136010455832, state: "RISING"},
             2: {timestamp: 1605470166, datetime: "2020-11-15T19:56:06+00:00", height: 2.7711124808243794, state: "RISING"},
@@ -440,21 +368,10 @@ let sea = {
             10: {timestamp: 1605498966, datetime: "2020-11-16T03:56:06+00:00", height: -3.861516255952961, state: "FALLING"},
             11: {timestamp: 1605502566, datetime: "2020-11-16T04:56:06+00:00", height: -3.5715966729537225, state: "RISING"},
         };
-        return chartData;
+        return sampleData;
     },
 
 
-    /**
-     * Display all tide datas on webpage
-     * 
-     * @param object tideDataSet 
-     */
-    displayTideData: function(tideDataSet) {
-        sea.displayCurrentTide(tideDataSet.currentTide);
-        sea.displayNextTide(tideDataSet.nextTideType, tideDataSet.nextTideHour);
-        sea.displaySecondTide(tideDataSet.secondTideType,tideDataSet.secondTideHour)
-    },
-
-
+   
 
 }
