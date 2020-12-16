@@ -16,13 +16,14 @@ composer install
 
 Here are the API used in project :
 
-- **Tides** : timetable for tides 
+- **Tides** : timetable for tides
 
 Free plan limited to 100 calls / month - [API doc]('https://rapidapi.com/apihood/api/tides/endpoints')
 
 > Change API key in endpoint url of following function :
 > ```js
-> tide.fetchTidesData()
+> sea.fetchTidesData()
+> sea.fetchMarineWeatherData()
 > ```
 
 - **Open Weather Map** : current and forecast weather 
@@ -31,8 +32,7 @@ Free plan limited to 1M calls / month - [API doc]("https://openweathermap.org/ap
 
 > Change API key in endpoint url of following functions :
 > ```js
-> weather.fetchCurrentWeatherData()
-> weather.fetchForecastWeatherData()
+> weather.loadOpenWeatherMap()
 > ```
 
 ### Activate API data for tides
@@ -45,4 +45,3 @@ To activate API, set *true* to activateAPI in app.init().
 
 - Framework CSS : [Bootstrap]("https://getbootstrap.com/")
 - Icon Library : [Font-awesome]("http://fontawesome.io") 
-- Javascript Library : [chart.js]("https://www.chartjs.org/") (for tides chart)

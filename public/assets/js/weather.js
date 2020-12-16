@@ -6,6 +6,42 @@ let weather = {
 
     loadOpenWeatherMap: function(latitude,longitude) {
         
+        weather.fetchWeatherData(latitude,longitude)
+            .then(function(data) {
+                // console.log(data);
+
+                // current weather (live)
+                let weatherLiveDataSet = {
+                    airTemp: Math.round(data.current.temp),
+                    airTempFeelsLike: Math.round(data.current.feels_like),
+                    weatherDescr: data.current.weather[0].description,
+                    weatherIcon: data.current.weather[0].icon,
+                    visibility: weather.getVisibilityText(data.current.visibility),
+                    humidityRate: data.current.humidity,
+                    UV: Math.round(data.current.uvi),
+                    nextHours: data.hourly,
+                }
+
+                weather.displayCurrentWeather(weatherLiveDataSet);
+
+                // let sunrise = app.getTime(data.current.sunrise);
+                // let sunset  = app.getTime(data.current.sunset);
+    
+                // let weatherTodayDataSet = {
+                //     airTemp: Math.round(data.daily[0].temp.day),
+                //     weatherDescr: data.daily[0].weather[0].description,
+                //     weatherIcon:weather.getWeatherIconUrl(data.daily[0].weather[0].icon),
+                // }
+
+                // let weatherTomorrowDataSet = {
+                //     airTemp: Math.round(data.daily[1].temp.day),
+                //     weatherDescr: data.daily[1].weather[0].description,
+                //     weatherIcon:weather.getWeatherIconUrl(data.daily[1].weather[0].icon),
+                // }
+            })
+    },
+
+    fetchWeatherData: function(latitude, longitude) {
         // API One Call from openweathermap
         // @see doc https://openweathermap.org/api/one-call-api
         let endPoint = 'https://api.openweathermap.org/data/2.5/onecall?lang=fr&lat='+latitude+'&lon='+longitude+'&units=metric&appid='+api.getAPIKeyForOpenWeatherMap();
@@ -18,91 +54,30 @@ let weather = {
         };
 
         // Lauch HTTP request, convert result in json and display data
-        fetch(endPoint,fetchOptions)
-            .then(function(response) {
-                return response.json();
+        let fetchResponse = fetch(endPoint,fetchOptions).then(function(response) {
+            return response.json();
             })
-            .then(function(data) {
-                // console.log(data);
-
-                // Save values -------------------------------------------------------------------------
-                
-                // STANDBY : wind values - these data may be collected from other API
-
-                // current weather (live)
-                let airTemp                 = Math.round(data.current.temp); 
-                let airTempFeelsLike        = Math.round(data.current.feels_like);
-                let cloudCoverRate          = data.current.clouds;
-                let humidityRate            = data.current.humidity;
-                let UV                      = Math.round(data.current.uvi);
-                let visibility              = weather.getVisibilityText(data.current.visibility);
-                let sunrise                 = app.getTime(data.current.sunrise);
-                let sunset                  = app.getTime(data.current.sunset);
-                let weatherDescr            = data.current.weather[0].description;
-                let weatherIcon             = data.current.weather[0].icon; 
-                // let windDegree              = data.current.wind_deg;                
-                // let windDir                 = app.getCardinalDirection(windDegree);
-                // let windSpeed               = app.getKmhSpeed(data.current.wind_speed); 
-
-                // weather next hours
-                let weatherNextHours        = data.hourly;   // TODO loop
-
-                // weather today 
-                let airTemp_Today           = Math.round(data.daily[0].temp.day);
-                let weatherDescr_Today      = data.daily[0].weather[0].description;
-                let weatherIcon_Today       = weather.getWeatherIconUrl(data.daily[0].weather[0].icon);
-                // let windDegree_Today        = data.daily[0].wind_deg;
-                // let windDir_Today           = app.getCardinalDirection(windDegree_Today);
-                // let windSpeed_Today         = app.getKmhSpeed(data.daily[0].wind_speed); 
-            
-                // weather tomorrow
-                let airTemp_Tomorrow        = Math.round(data.daily[1].temp.day);
-                let weatherDescr_Tomorrow   = data.daily[1].weather[0].description;
-                let weatherIcon_Tomorrow    = weather.getWeatherIconUrl(data.daily[1].weather[0].icon);
-                // let windDegree_Tomorrow     = data.daily[1].wind_deg;  
-                // let windDir_Tomorrow        = app.getCardinalDirection(windDegree_Tomorrow);
-                // let windSpeed_Tomorrow      = app.getKmhSpeed(data.daily[1].wind_speed);
-            
-                // weather after tomorrow
-                let airTemp_AfterTomorrow       = Math.round(data.daily[2].temp.day);
-                let weatherDescr_AfterTomorrow  = data.daily[2].weather[0].description;
-                let weatherIcon_AfterTomorrow   = weather.getWeatherIconUrl(data.daily[2].weather[0].icon);
-                // let windDegree_AfterTomorrow    = data.daily[2].wind_deg
-                // let windDir_AfterTomorrow       = app.getCardinalDirection(windDegree_AfterTomorrow);
-                // let windSpeed_AfterTomorrow     = app.getKmhSpeed(data.daily[2].wind_speed); 
         
-                
-                // Display in webpage -------------------------------------------------------------------------
-
-                // current weather
-                weather.displayCurrentDescription(weatherDescr); 
-                weather.displayCurrentIcon(weatherIcon);
-                weather.displayCurrentTemperature(airTemp);
-                weather.displayCurrentTempFeelsLike(airTempFeelsLike);
-                weather.displayVisibility(visibility);
-
-                // TODO humidity
-                // TODO cloud cover
-                // TODO uv
-                // TODO sunrise/sunset
-                
-                // weather next hours       // TODO
-                // weather today            // TODO
-                // weather tomorrow         // TODO
-                // weather after tomorrow   // TODO
-
-                // // Standby
-                // weather.displayCurrentWind(windSpeed);
-                // weather.displayCurrentWindDirection(windDir);
-            })
+        return fetchResponse;
     },
 
 
-
-
     // ========================================================
-    // Current weather
+    // Display current weather
     // ========================================================
+
+    /**
+     * Display all live weather data
+     * 
+     * @param object dataSet 
+     */
+    displayCurrentWeather: function(dataSet) {
+        weather.displayCurrentDescription(dataSet.weatherDescr); 
+        weather.displayCurrentIcon(dataSet.weatherIcon);
+        weather.displayCurrentTemperature(dataSet.airTemp);
+        weather.displayCurrentTempFeelsLike(dataSet.airTempFeelsLike);
+        weather.displayVisibility(dataSet.visibility);
+    },
 
 
     /**

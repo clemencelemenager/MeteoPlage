@@ -9,9 +9,6 @@ let app = {
         let latitude    = 49.369682;
         let longitude   = -0.871084;
 
-
-        // TODO --------------------------------------
-
         // API Open Weather Map 
         // @see https://openweathermap.org/api/one-call-api
         weather.loadOpenWeatherMap(latitude,longitude);
@@ -26,7 +23,6 @@ let app = {
         // ! API limited to 100 calls/month
         sea.loadTides(true, latitude,longitude);
         // ------------------------------------------
-
     }, 
 
    
