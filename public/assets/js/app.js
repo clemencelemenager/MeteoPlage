@@ -11,7 +11,6 @@ let app = {
 
 
         // TODO --------------------------------------
-        // NEW DATA
 
         // API Open Weather Map 
         // @see https://openweathermap.org/api/one-call-api
@@ -22,15 +21,11 @@ let app = {
         // ! API StormGlass limited to 50 calls/day
         sea.loadStormGlassWeather(latitude, longitude);
 
-        // API StormGlass Tide
-        // @see https://docs.stormglass.io/#/tide
-        // ! API StormGlass limited to 50 calls/day
-        sea.loadStormGlassTide(latitude,longitude);
+        // API  Tides
+        // @see https://rapidapi.com/apihood/api/tides/endpoints
+        // ! API limited to 100 calls/month
+        sea.loadTides(true, latitude,longitude);
         // ------------------------------------------
-
-
-        // // add event listener
-        // app.seeForecast();
 
     }, 
 
