@@ -100,7 +100,6 @@ let weather = {
         weather.displayVisibility(dataSet.visibility);
     },
 
-
     /**
      * Display current weather description
      * 
@@ -199,42 +198,6 @@ let weather = {
         }
     },
 
-    /**
-     * Average rain precipitation for next hour
-     * 
-     * @param array rainData : precipitation rain per minute for next hour
-     */
-    getRainForNextHour: function(rainData) {
-
-        // init variable
-        let precipitation = 0;
-
-        // add precipitations of each minute
-        for(let i=0; i < rainData.length; i++) {
-            precipitation += Number(rainData[i].precipitation);
-        }
-        // get average
-        let averagePrecipitation = Math.round(precipitation/rainData.length);
-
-        // console.log(averagePrecipitation);
-
-        // return total value with message
-        if(averagePrecipitation == 0){
-            return "Pas de pluie :)";
-        }
-
-        else if(averagePrecipitation > 0 && averagePrecipitation <= 3) {
-            return averagePrecipitation+"mm/heure, ça passe !";
-        }
-
-        else if(averagePrecipitation > 4 && averagePrecipitation <= 7) {
-            return averagePrecipitation+"mm/heure, oublie pas un bon imper!";
-        }
-        else if(averagePrecipitation >= 8) {
-            return averagePrecipitation+"mm/h, tu vas être trempé(e)!";
-
-        }
-    },
 
 }
 

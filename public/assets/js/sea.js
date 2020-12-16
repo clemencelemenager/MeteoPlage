@@ -7,6 +7,7 @@ let sea = {
     loadStormGlassWeather: function(activateAPI, latitude, longitude) {
         if(activateAPI == true) {
             sea.fetchMarineWeatherData(latitude,longitude)
+
             .then((data) => {
                 // Prerequisite : get the current hour as index for the array data.hours
                 let now     = new Date();
@@ -20,7 +21,6 @@ let sea = {
                     gust: app.getKmhSpeed(data.hours[index].gust.sg),
                     windDegree: data.hours[index].windDirection.sg,
                 };
-
                 sea.displayMarineWeatherData(marineWeatherDataSet);
             });
         }
@@ -159,6 +159,7 @@ let sea = {
      * @param boolean activateAPI : load API (if true) or load sample data (if false)
      * @param integer latitude
      * @param integer longitude
+
      */
     loadTides: function(activateAPI, latitude, longitude) {
 
