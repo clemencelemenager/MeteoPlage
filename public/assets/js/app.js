@@ -9,24 +9,22 @@ let app = {
         let latitude    = 49.369682;
         let longitude   = -0.871084;
 
-
-        // TODO --------------------------------------
-
         // API Open Weather Map 
         // @see https://openweathermap.org/api/one-call-api
-        weather.loadOpenWeatherMap(latitude,longitude);
+        weather.loadOpenWeatherMap(true, latitude,longitude);
+
 
         /// API StormGlass Weather
         // @see https://docs.stormglass.io/#/weather
         // ! API StormGlass limited to 50 calls/day
-        sea.loadStormGlassWeather(latitude, longitude);
+        sea.loadStormGlassWeather(true, latitude, longitude);
+
 
         // API  Tides
         // @see https://rapidapi.com/apihood/api/tides/endpoints
         // ! API limited to 100 calls/month
         sea.loadTides(true, latitude,longitude);
         // ------------------------------------------
-
     }, 
 
    

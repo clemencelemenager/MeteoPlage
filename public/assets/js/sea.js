@@ -4,30 +4,50 @@ let sea = {
     // API StormGlass Weather
     // ========================================================
 
-    loadStormGlassWeather: function(latitude, longitude) {
-        
-        sea.fetchMarineWeatherData(latitude,longitude)
+    loadStormGlassWeather: function(activateAPI, latitude, longitude) {
+        if(activateAPI == true) {
+            sea.fetchMarineWeatherData(latitude,longitude)
+
             .then((data) => {
                 // Prerequisite : get the current hour as index for the array data.hours
                 let now     = new Date();
                 let index   = now.getHours();
 
                 // current data (live)
-                let seaDataSet  = {
+                let marineWeatherDataSet  = {
                     seaTemp: Math.round(data.hours[index].waterTemperature.sg),
                     waveHeight: data.hours[index].waveHeight.sg,
                     windSpeed: app.getKmhSpeed(data.hours[index].windSpeed.sg),
                     gust: app.getKmhSpeed(data.hours[index].gust.sg),
                     windDegree: data.hours[index].windDirection.sg,
                 };
-
-                sea.displayMarineWeatherData(seaDataSet);
+                sea.displayMarineWeatherData(marineWeatherDataSet);
             });
+        }
+        else {
+            let marineWeatherSampleDataSet = {
+                seaTemp: 15,
+                waveHeight: 0,
+                windSpeed: 5,
+                gust: 10,
+                windDegree: 150,
+            };
+            sea.displayMarineWeatherData(marineWeatherSampleDataSet);
+
+            // display an alert message about sample data
+            let messageHTML = "Attention : les données sont des exemples. Contactez l'administrateur pour activer les données réelles." 
+            app.alertMessage(messageHTML);
+        }
     },
 
+    /**
+     * API StormGlass Marine Weather
+     * @see doc https://docs.stormglass.io/#/weather
+     * 
+     * @param {integer} latitude 
+     * @param {integer} longitude 
+     */
     fetchMarineWeatherData: function (latitude,longitude) {
-        // API StormGlass Marine Weather
-        // @see doc https://docs.stormglass.io/#/weather
         const params = [
             'gust','precipitation','windDirection','windSpeed', 
             'waterTemperature','waveHeight'
@@ -137,8 +157,9 @@ let sea = {
      * Display tides if API active
      * 
      * @param boolean activateAPI : load API (if true) or load sample data (if false)
-     * @param string latitude
-     * @param string longitude
+     * @param integer latitude
+     * @param integer longitude
+
      */
     loadTides: function(activateAPI, latitude, longitude) {
 
@@ -170,7 +191,7 @@ let sea = {
             sea.displayTideData(tideSampleDataSet);
 
             // display an alert message about sample data
-            let messageHTML = "Attention : les données de marée sont des exemples. Contactez l'administrateur pour activer les données réelles." 
+            let messageHTML = "Attention : les données sont des exemples. Contactez l'administrateur pour activer les données réelles." 
             app.alertMessage(messageHTML);
         }
     },
