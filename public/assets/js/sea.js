@@ -88,63 +88,65 @@ let sea = {
     // API StormGlass Tide
     // ========================================================
 
-    loadStormGlassTide: function(latitude, longitude) { 
+    loadStormGlassTide: function(latitude, longitude) {
 
-        // API StormGlass Tide
-        // @see doc https://docs.stormglass.io/#/tide
-        
-        let endpoint = `https://api.stormglass.io/v2/tide/extremes/point?lat=${latitude}&lng=${longitude}`;
+		// API StormGlass Tide
+		// @see doc https://docs.stormglass.io/#/tide
 
-        // Set up configuration for HTTP request in fetch function
-        let fetchOptions = {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        headers: {
-            // Get your key by signing up.
-            'Authorization': api.getAPIStormGlass()
-        }
-        };
+		let endpoint = `https://api.stormglass.io/v2/tide/extremes/point?lat=${latitude}&lng=${longitude}`;
 
-         // Lauch HTTP request, convert result in json and display data
-         fetch(endpoint,fetchOptions)
-         .then((response) => response.json())
-         .then((data) => {
+		// Set up configuration for HTTP request in fetch function
+		let fetchOptions = {
+			method: 'GET',
+			mode: 'cors',
+			cache: 'no-cache',
+			headers: {
+				// Get your key by signing up.
+				'Authorization': api.getAPIStormGlass()
+			}
+		};
 
-            // console.log(data);
-            
-            // TODO
-            // display current tide : status, type and hour 
-            // afficher l'heure de la prochaine marée : 1er résultat où l'heure est > à maintenant
-            let now = new Date();
-            now = sea.getTideTimeFromDate(now)
+		// Lauch HTTP request, convert result in json and display data
+		fetch(endpoint, fetchOptions)
+			.then((response) => response.json())
+			.then((data) => {
 
-            const tides = data.data;
-            const nextTide;
-            let match = false;
+				// console.log(data);
 
-            // get next tide from now
-            while(!match) {
-                if(sea.getTideTimeFromDate(tides[i].time) > now) {
-                    nextTide = tides[i];
-                    match = true;
-                }
-            };
-        
-            // display next tide results
-            sea.displayCurrentTide(nextTide.type);
-            sea.displayNextTide(nextTide.type, sea.getTideTimeFromDate(nextTide.time));
+				// TODO
+				// display current tide : status, type and hour 
+				// afficher l'heure de la prochaine marée : 1er résultat où l'heure est > à maintenant
+				const now = sea.getTideTimeFromDate(new Date())
 
-            // // display second tide : type and hour
-            // let secondTideType = sea.translateTideType(data.data[1].type);
-            // let secondTideHour = sea.translateTideType(data.data[1].time);
-            // sea.displaySecondTide(secondTideType, secondTideHour);
+				const tideExtremes = data.data;
+				const nextTideExtremeIndex = 0;
+				let match = false;
+				let count = 0;
+				
+				// get next tide from now
+				while (!match) {
+					if (sea.getTideTimeFromDate(tideExtremes[count].time) > now) {
+						nextTideExtremeIndex = count;
+						match = true;
+					}
+					count = count +1;
+				};
 
-            // TODO : afficher le mareagramme avec focus sur l'heure actuelle
+				// display next tide results
+				sea.displayCurrentTide(sea.translateTideType(tideExtremes[nextTideExtremeIndex].type));
+				sea.displayNextTide(tideExtremes[nextTideExtremeIndex].type, sea.getTideTimeFromDate(tideExtremes[nextTideExtremeIndex].time));
 
-        });
-    },
-            
+				// // display second tide : type and hour
+				const secondTideExtremeIndex = nextTideExtremeIndex + 1;
+				let secondTideType = sea.translateTideType(tideExtremes[secondTideExtremeIndex].type);
+				let secondTideHour = sea.getTideTimeFromDate(tideExtremes[secondTideExtremeIndex].time);
+				// sea.displaySecondTide(secondTideType, secondTideHour);
+
+				// TODO : afficher le mareagramme avec focus sur l'heure actuelle
+
+			});
+	},
+   
 
     /**
      * Display status of current tide
