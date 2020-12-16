@@ -28,10 +28,6 @@ let app = {
         sea.loadStormGlassTide(latitude,longitude);
         // ------------------------------------------
 
-
-        // // add event listener
-        // app.seeForecast();
-
     }, 
 
    

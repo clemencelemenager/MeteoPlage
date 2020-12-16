@@ -40,7 +40,6 @@ let weather = {
                 let sunset                  = app.getTime(data.current.sunset);
                 let weatherDescr            = data.current.weather[0].description;
                 let weatherIcon             = data.current.weather[0].icon; 
-                let rainNextHour            = weather.getRainForNextHour(data.minutely);
                 // let windDegree              = data.current.wind_deg;                
                 // let windDir                 = app.getCardinalDirection(windDegree);
                 // let windSpeed               = app.getKmhSpeed(data.current.wind_speed); 
@@ -80,7 +79,6 @@ let weather = {
                 weather.displayCurrentIcon(weatherIcon);
                 weather.displayCurrentTemperature(airTemp);
                 weather.displayCurrentTempFeelsLike(airTempFeelsLike);
-                weather.displayRainForNextHour(rainNextHour);
                 weather.displayVisibility(visibility);
 
                 // TODO humidity
@@ -187,17 +185,6 @@ let weather = {
     displayCurrentWindDirection: function(windDirection) {
         let windDirContainer = document.querySelector('.weather__content--windDir span');
         windDirContainer.textContent = windDirection;
-    },
-
-    /**
-     * Display total rain precipitations for next hour
-     * 
-     * @params mixed 
-     */
-    displayRainForNextHour: function(rain) {
-        let rainContainer = document.querySelector(".weather__content--rain span");
-        rainContainer.textContent = rain;
-
     },
 
     /**

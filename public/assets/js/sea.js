@@ -111,7 +111,7 @@ let sea = {
 			.then((response) => response.json())
 			.then((data) => {
 
-				// console.log(data);
+				console.log(data);
 
 				// TODO
 				// display current tide : status, type and hour 
@@ -119,7 +119,7 @@ let sea = {
 				const now = sea.getTideTimeFromDate(new Date())
 
 				const tideExtremes = data.data;
-				const nextTideExtremeIndex = 0;
+				let nextTideExtremeIndex = 0;
 				let match = false;
 				let count = 0;
 				
@@ -133,14 +133,14 @@ let sea = {
 				};
 
 				// display next tide results
-				sea.displayCurrentTide(sea.translateTideType(tideExtremes[nextTideExtremeIndex].type));
-				sea.displayNextTide(tideExtremes[nextTideExtremeIndex].type, sea.getTideTimeFromDate(tideExtremes[nextTideExtremeIndex].time));
+				sea.displayCurrentTide(tideExtremes[nextTideExtremeIndex].type);
+				sea.displayNextTide(tideExtremes[nextTideExtremeIndex].type, tideExtremes[nextTideExtremeIndex].time);
 
-				// // display second tide : type and hour
+				// display second tide : type and hour
 				const secondTideExtremeIndex = nextTideExtremeIndex + 1;
-				let secondTideType = sea.translateTideType(tideExtremes[secondTideExtremeIndex].type);
-				let secondTideHour = sea.getTideTimeFromDate(tideExtremes[secondTideExtremeIndex].time);
-				// sea.displaySecondTide(secondTideType, secondTideHour);
+				let secondTideType = tideExtremes[secondTideExtremeIndex].type;
+				let secondTideHour = tideExtremes[secondTideExtremeIndex].time;
+				sea.displaySecondTide(secondTideType, secondTideHour);
 
 				// TODO : afficher le mareagramme avec focus sur l'heure actuelle
 
@@ -155,7 +155,7 @@ let sea = {
      */
     displayCurrentTide: function(tideType) {
         let currentTideElement = document.querySelector(".currentTide-status");
-        currentTideElement.textContent = tideType;
+        currentTideElement.textContent = sea.getTideStatus(tideType);
     },
 
     /**
@@ -167,10 +167,10 @@ let sea = {
     displayNextTide: function(nextTideType, nextTideHour) {
 
         let nextTideTypeContainer = document.querySelector(".nextTide-type");
-        nextTideTypeContainer.textContent = nextTideType; 
+        nextTideTypeContainer.textContent = sea.translateTideType(nextTideType); 
 
         let nextTideTimeContainer = document.querySelector(".nextTide-time");
-        nextTideTimeContainer.textContent = nextTideHour; 
+        nextTideTimeContainer.textContent = sea.getTideTimeFromDate(nextTideHour); 
     },
 
     /**
@@ -182,10 +182,10 @@ let sea = {
     displaySecondTide: function(secondTideType,secondTideHour) {
 
         let secondTideTypeContainer = document.querySelector(".secondTide-type");
-        secondTideTypeContainer.textContent = secondTideType; 
+        secondTideTypeContainer.textContent = sea.translateTideType(secondTideType); 
 
         let secondTideTimeContainer = document.querySelector(".secondTide-time");
-        secondTideTimeContainer.textContent = secondTideHour; 
+        secondTideTimeContainer.textContent = sea.getTideTimeFromDate(secondTideHour); 
 
     },
 
