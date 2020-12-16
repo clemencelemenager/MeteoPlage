@@ -4,13 +4,11 @@ let weather = {
     // API Open Weather Map
     // ========================================================
 
-    loadOpenWeatherMap: function(latitude,longitude) {
-        
-        weather.fetchWeatherData(latitude,longitude)
+    loadOpenWeatherMap: function(activateAPI, latitude,longitude) {
+        if(activateAPI == true) {
+            weather.fetchWeatherData(latitude,longitude)
             .then(function(data) {
-                // console.log(data);
 
-                // current weather (live)
                 let weatherLiveDataSet = {
                     airTemp: Math.round(data.current.temp),
                     airTempFeelsLike: Math.round(data.current.feels_like),
@@ -38,12 +36,35 @@ let weather = {
                 //     weatherDescr: data.daily[1].weather[0].description,
                 //     weatherIcon:weather.getWeatherIconUrl(data.daily[1].weather[0].icon),
                 // }
-            })
+            });
+        }
+        else {
+            let weatherLiveSampleDataSet = {
+                airTemp: 20,
+                airTempFeelsLike: 18,
+                weatherDescr: "Nuageux",
+                weatherIcon: "02n",
+                visibility: weather.getVisibilityText(10000),
+                humidityRate: 80,
+                UV: Math.round(5),
+                nextHours: [], 
+            };
+            weather.displayCurrentWeather(weatherLiveSampleDataSet);
+            // display an alert message about sample data
+            let messageHTML = "Attention : les données sont des exemples. Contactez l'administrateur pour activer les données réelles." 
+            app.alertMessage(messageHTML);
+        }
+        
     },
 
+    /**
+     * API One Call from openweathermap
+     * 
+     * @see doc https://openweathermap.org/api/one-call-api
+     * @param {integer} latitude 
+     * @param {integer} longitude 
+     */
     fetchWeatherData: function(latitude, longitude) {
-        // API One Call from openweathermap
-        // @see doc https://openweathermap.org/api/one-call-api
         let endPoint = 'https://api.openweathermap.org/data/2.5/onecall?lang=fr&lat='+latitude+'&lon='+longitude+'&units=metric&appid='+api.getAPIKeyForOpenWeatherMap();
 
         // Set up configuration for HTTP request in fetch function
