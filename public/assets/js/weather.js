@@ -152,7 +152,7 @@ let weather = {
      * @param string visibility text
      */
     displayVisibility: function (visibility) {
-        let visibilityContainer = document.querySelector(".sea-visibility span");
+        let visibilityContainer = document.querySelector(".marineWeather--visibility span");
         visibilityContainer.textContent = visibility;
 
     },

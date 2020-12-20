@@ -100,7 +100,7 @@ let sea = {
      * @param integer seaTemperature 
      */
     displaySeaTemp: function(seaTemperature) {
-        let seaTempContainer = document.querySelector(".sea-temperature span");
+        let seaTempContainer = document.querySelector(".marineWeather--seaTemperature span");
         seaTempContainer.textContent = seaTemperature;
     },
 
@@ -110,7 +110,7 @@ let sea = {
      * @param integer waveHeight in meters
      */
     displayWaveHeight: function(waveHeight) {
-        let waveHeightContainer = document.querySelector(".sea-wave span");
+        let waveHeightContainer = document.querySelector(".marineWeather--wave span");
         waveHeightContainer.textContent = sea.getWaveDescription(waveHeight);
     },
 
