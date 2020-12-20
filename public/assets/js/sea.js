@@ -144,6 +144,7 @@ let sea = {
         let gustContainer = document.querySelector(".weather__content--wind");
         let gustElement = document.createElement('div');
         gustElement.classList.add('wind-max');
+        gustElement.classList.add('data--additionnal');
         gustElement.textContent = "Rafales à "+gust+"km/h";
         gustContainer.appendChild(gustElement);
     },
