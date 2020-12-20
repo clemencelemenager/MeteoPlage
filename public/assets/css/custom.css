@@ -75,7 +75,7 @@ header {
 }
 
 .weather,
-.tide {
+.sea {
   width: 100%;
   margin: auto;
   display: flex;
@@ -84,7 +84,7 @@ header {
 }
 @media (min-width: 768px) {
   .weather,
-.tide {
+.sea {
     width: 50%;
   }
 }
@@ -131,6 +131,9 @@ header {
 .bloc__content#weather__wind.weather__wind--speed {
   flex-direction: column;
 }
+.bloc__content#sea-tide {
+  width: 97%;
+}
 .bloc__content ~ div {
   display: flex;
   align-items: center;
@@ -150,6 +153,12 @@ header {
   border: 2px solid #44BBA4;
   background-color: #44BBA4;
 }
+.bloc__content.bloc__content--tide {
+  border: 2px solid #3F88C5;
+  background-color: #3F88C5;
+  color: #F6F7EB;
+  padding: 0.5rem;
+}
 .bloc__content.bloc__content--warning {
   border: 2px solid #F3CA40;
   background-color: #F3CA40;
@@ -159,70 +168,7 @@ header {
   background-color: grey;
 }
 
-/* --------------- WEATHER ELEMENTS -------------- */
-.weather__temperature--felt {
-  font-size: 1rem;
-  padding-top: 0.8em;
-}
-
-.weather__description--text {
-  padding: 0.5em;
-  text-align: center;
-  text-transform: capitalize;
-}
-
-.wind--speed-gust {
-  font-size: 1rem;
-  padding-top: 0.4em;
-}
-
 /* --------------- SEA ELEMENTS -------------- */
-.sea__container {
-  display: flex;
-  width: 97%;
-  border-radius: 10px;
-  margin: 0.5em auto;
-  align-items: flex-start;
-}
-
-#sc1 {
-  flex-direction: column;
-  justify-content: center;
-  border: 2px solid #3F88C5;
-  background-color: #3F88C5;
-  color: #fff;
-}
-
-#sc2 {
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-top: 0.5em;
-}
-
-.tide__currentTide {
-  font-size: 1.1em;
-  padding-top: 0.4em;
-  text-align: left;
-  padding-left: 0.5em;
-}
-
-.currentTide-status {
-  font-weight: bold;
-}
-
-.tide__nextTide--title {
-  font-weight: bold;
-  margin-top: 0.5em;
-  margin-bottom: 0;
-  padding-left: 0.5em;
-}
-
-.tide__secondTide--title {
-  margin-top: 0.2em;
-  padding-left: 0.5em;
-}
-
 .sea__details {
   border: 2px solid #44BBA4;
   background-color: #44BBA4;

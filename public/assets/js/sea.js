@@ -245,7 +245,7 @@ let sea = {
      * @param string tideType : french description of current tide (rising/falling)
      */
     displayCurrentTide: function(tideType) {
-        let currentTideElement = document.querySelector(".currentTide-status");
+        let currentTideElement = document.querySelector(".tide--live-movement");
         currentTideElement.textContent = tideType;
     },
 
@@ -257,10 +257,10 @@ let sea = {
      */
     displayNextTide: function(nextTideType, nextTideHour) {
 
-        let nextTideTypeContainer = document.querySelector(".nextTide-type");
+        let nextTideTypeContainer = document.querySelector(".tide--live-type");
         nextTideTypeContainer.textContent = nextTideType; 
 
-        let nextTideTimeContainer = document.querySelector(".nextTide-time");
+        let nextTideTimeContainer = document.querySelector(".tide--live-time");
         nextTideTimeContainer.textContent = nextTideHour; 
     },
 
@@ -272,10 +272,10 @@ let sea = {
      */
     displaySecondTide: function(secondTideType,secondTideHour) {
 
-        let secondTideTypeContainer = document.querySelector(".secondTide-type");
+        let secondTideTypeContainer = document.querySelector(".tide--next-type");
         secondTideTypeContainer.textContent = secondTideType; 
 
-        let secondTideTimeContainer = document.querySelector(".secondTide-time");
+        let secondTideTimeContainer = document.querySelector(".tide--next-time");
         secondTideTimeContainer.textContent = secondTideHour; 
 
     },

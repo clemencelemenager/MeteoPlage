@@ -75,37 +75,37 @@
             </section>
 
             <!-- section current Tide -->
-            <section class="tide">
+            <section class="sea">
 
                 <!-- current tide's timetable -->
-                <div class ="sea__container" id="sc1">
+                <div class ="bloc__content bloc__content--tide" id="sea-tide">
 
-                    <div class="tide__currentTide">
+                    <div class="sea__tide--live">
                         <!-- load from API -->
-                        <span class="currentTide-status">
+                        <span class="tide--live-movement">
                             <!-- load from API-->
                         </span>,
                          elle sera 
-                        <span class="nextTide-type">
+                        <span class="tide--live-type">
                             <!-- load from API-->
                         </span>
                          à 
-                        <span class="nextTide-time">
+                        <span class="tide--live-time">
                             <!-- load from API-->
                         </span>
                     </div>
 
-                    <div class="tide__nextTides">
-                        <p class="tide__secondTide--title">
+                    <div class="sea__tide--next">
+                        <div class="tide--next-title">
                             Prochaine marée 
-                            <span class="secondTide-type">
+                            <span class="tide--next-type">
                                 <!-- load from API-->
                             </span>
                             à 
-                            <span class="secondTide-time">
+                            <span class="tide--next-time">
                                 <!-- load from API-->
                             </span>
-                        </p>
+                        </div>
                     </div>
 
                 </div>
