@@ -142,57 +142,7 @@
 
         </div>
 
-        <div class="forecastContent-container">
-
-            <!-- section forecast next hours -->
-            <!-- <section class="forecast">
-
-                <div class="forecast__title">
-                    <p>Prévisons des prochaines heures </p>
-                    <i class="fas fa-caret-down"></i>
-                </div>
-
-                <div class="forecast__content nodisplay">
-
-                    <div class="forecast__content--weather">
-                        <div class="forecast__weather--nextHours">
-                            <div class="forecast--nextHours forecast0">
-                                <div class ="forecast__weather--time">
-                                </div>    
-                                <div class ="forecast__weather--icon">
-                                </div>
-                                <div class ="forecast__weather--temp">
-                                </div>
-                                <div class ="forecast__weather--wind">
-                                </div>
-                            </div>
-                            <div class="forecast--nextHours forecast1">
-                                <div class ="forecast__weather--time">
-                                </div>    
-                                <div class ="forecast__weather--icon">
-                                </div>
-                                <div class ="forecast__weather--temp">
-                                </div>
-                                <div class ="forecast__weather--wind">
-                                </div>
-                            </div>  
-                            <div class="forecast--nextHours forecast2">
-                                <div class ="forecast__weather--time">
-                                </div>    
-                                <div class ="forecast__weather--icon">
-                                </div>
-                                <div class ="forecast__weather--temp">
-                                </div>
-                                <div class ="forecast__weather--wind">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> -->
-            
-        </div>
-
+    
        
        
 

@@ -11,19 +11,19 @@ let app = {
 
         // API Open Weather Map 
         // @see https://openweathermap.org/api/one-call-api
-        weather.loadOpenWeatherMap(true, latitude,longitude);
+        weather.loadOpenWeatherMap(false, latitude,longitude);
 
 
         /// API StormGlass Weather
         // @see https://docs.stormglass.io/#/weather
         // ! API StormGlass limited to 50 calls/day
-        sea.loadStormGlassWeather(true, latitude, longitude);
+        sea.loadStormGlassWeather(false, latitude, longitude);
 
 
         // API  Tides
         // @see https://rapidapi.com/apihood/api/tides/endpoints
         // ! API limited to 100 calls/month
-        sea.loadTides(true, latitude,longitude);
+        sea.loadTides(false, latitude,longitude);
         // ------------------------------------------
     }, 
 
