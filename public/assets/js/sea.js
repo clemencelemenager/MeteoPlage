@@ -121,7 +121,7 @@ let sea = {
      */
     displayCurrentWind: function (windSpeed) {
 
-        let windContainer = document.querySelector(".wind-normal span");
+        let windContainer = document.querySelector(".wind--speed-normal span");
         windContainer.textContent = windSpeed+"km/h ";
     },
 
@@ -131,7 +131,7 @@ let sea = {
     * @param integer windDegree
     */
     displayCurrentWindDirection: function(windDegree) {
-        let windDirContainer = document.querySelector('.weather__content--windDir span');
+        let windDirContainer = document.querySelector('.weather__wind--direction span');
         windDirContainer.textContent = app.getCardinalDirection(windDegree);
     },
 
@@ -141,9 +141,9 @@ let sea = {
      * @param number gust : speed in kmh
      */
     displayCurrentGust: function (gust) {
-        let gustContainer = document.querySelector(".weather__content--wind");
+        let gustContainer = document.querySelector(".weather__wind--speed");
         let gustElement = document.createElement('div');
-        gustElement.classList.add('wind-max');
+        gustElement.classList.add('wind--speed-gust');
         gustElement.classList.add('data--additionnal');
         gustElement.textContent = "Rafales à "+gust+"km/h";
         gustContainer.appendChild(gustElement);

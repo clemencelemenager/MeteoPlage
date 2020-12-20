@@ -89,57 +89,11 @@ header {
   }
 }
 
-/* --------------- BLOC ELEMENTS -------------- */
-.nodisplay {
-  display: none;
-}
-
-.bloc__content {
-  display: flex;
-  flex-direction: column;
-  width: 47%;
-  justify-content: center;
-  border-radius: 10px;
-  margin-top: 0.5rem;
-  font-size: 1rem;
-}
-.bloc__content#weather-3 {
-  flex-direction: row;
-  width: 97%;
-  justify-content: space-evenly;
-}
-.bloc__content > div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.bloc__content .data--additionnal {
-  padding: 0.5rem;
-}
-.bloc__content .data--important {
-  font-size: 2rem;
-}
-.bloc__content .dataWithLabel {
-  padding-left: 1rem;
-}
-.bloc__content.bloc__content--primary {
-  border: 2px solid #44BBA4;
-  background-color: #44BBA4;
-}
-.bloc__content.bloc__content--warning {
-  border: 2px solid #F3CA40;
-  background-color: #F3CA40;
-}
-.bloc__content.bloc__content--off {
-  border: 2px solid grey;
-  background-color: grey;
-}
-
 /* --------------- ALERT MESSAGE -------------- */
 .alertMessage {
   background-color: #E94F3780;
   font-size: 1rem;
-  padding: 0 0.5rem;
+  padding: 0 1rem;
   margin: 1rem auto 0 auto;
   border-radius: 10px;
   text-align: center;
@@ -154,59 +108,72 @@ header {
   text-align: right;
 }
 
-/* --------------- WEATHER ELEMENTS -------------- */
-#wc4 {
-  width: 97%;
-  margin-top: 1em;
+/* --------------- BLOC ELEMENTS -------------- */
+.nodisplay {
+  display: none;
+}
+
+.bloc__content {
+  display: flex;
+  flex-direction: column;
+  width: 47%;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+.bloc__content#weather__wind {
   flex-direction: row;
-  justify-content: space-around;
+  width: 97%;
+  justify-content: space-evenly;
+}
+.bloc__content#weather__wind.weather__wind--speed {
+  flex-direction: column;
+}
+.bloc__content ~ div {
+  display: flex;
   align-items: center;
+  justify-content: center;
+}
+.bloc__content .data--additionnal {
+  font-size: 1.1rem;
+  padding: 0.5rem;
+}
+.bloc__content .data--important {
+  font-size: 2rem;
+}
+.bloc__content .dataWithLabel {
+  padding-left: 0.25rem;
+}
+.bloc__content.bloc__content--primary {
   border: 2px solid #44BBA4;
   background-color: #44BBA4;
 }
+.bloc__content.bloc__content--warning {
+  border: 2px solid #F3CA40;
+  background-color: #F3CA40;
+}
+.bloc__content.bloc__content--off {
+  border: 2px solid grey;
+  background-color: grey;
+}
 
-.weather__temperature--Felt {
+/* --------------- WEATHER ELEMENTS -------------- */
+.weather__temperature--felt {
   font-size: 1rem;
   padding-top: 0.8em;
 }
 
-.weather__description {
+.weather__description--text {
   padding: 0.5em;
   text-align: center;
   text-transform: capitalize;
 }
 
-.weather__content--rain {
-  display: flex;
-  padding: 0.5em;
-  font-size: 1.3rem;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.weather__content--rain span {
-  margin-left: 0.3em;
-}
-
-.weather__content--wind {
-  justify-content: center;
-  flex-direction: column;
-  width: 50%;
-  font-size: 1.3em;
-}
-
-.weather__content--wind span {
-  padding-left: 0.2em;
-}
-
-.wind-max {
+.wind--speed-gust {
   font-size: 1rem;
   padding-top: 0.4em;
-}
-
-.weather__content--windDir span {
-  margin-left: 0.4em;
 }
 
 /* --------------- SEA ELEMENTS -------------- */
@@ -325,14 +292,6 @@ footer .links a:hover {
     flex-direction: column;
     justify-content: flex-start;
     /* align-items: flex-start; */
-  }
-
-  .weather__forecast--nextHours {
-    justify-content: center;
-  }
-
-  .forecast__content {
-    width: 50%;
   }
 }
 /* DEVICE PC => lg in bootstrap */

@@ -24,27 +24,27 @@
         <div class="flexContainer">
 
             <!-- section current Weather -->
-            <section class="weather left-0 text-center">
+            <section class="weather">
                     
                 <!-- weather description -->
-                <div class="bloc__content bloc__content--primary" id="weather-1">
-                    <div class="weather__picture">
+                <div class="bloc__content bloc__content--primary" id="weather__description">
+                    <div class="weather__description--picture">
                             <!-- load icon from API -->
                     </div>
-                    <div class="weather__description">
+                    <div class="weather__description--text">
                         <!-- load description from API -->
                     </div>
                 </div>
             
                 <!-- temperature -->
-                <div class="bloc__content bloc__content--primary" id="weather-2">
-                    <div class="data--important weather__temperature--Air">
+                <div class="bloc__content bloc__content--primary" id="weather__temperature">
+                    <div class="weather__temperature--air data--important">
                         <i class="fas fa-thermometer-half"></i>
                         <span>
                             <!-- load temp from API-->
                         </span>° 
                     </div>
-                    <div class="data--additionnal weather__temperature--Felt">
+                    <div class="weather__temperature--felt data--additionnal">
                         Ressenti : 
                         <span class="dataWithLabel">
                             <!-- load temp from API-->
@@ -53,18 +53,18 @@
                 </div>
 
                 <!-- wind -->
-                <div class="bloc__content bloc__content--primary" id="weather-3">
-                    <div class="weather__content--wind">
-                        <div class="data--important wind-normal">
+                <div class="bloc__content bloc__content--primary" id="weather__wind">
+                    <div class="weather__wind--speed">
+                        <div class="wind--speed-normal data--important">
                             <i class="fas fa-wind"></i>
                             <span>
                                 <!-- load from API -->
                             </span>
                         </div>
-                        <!-- <div class="data--additionnal wind-max">
+                        <!-- <div class="data--additionnal wind--speed-gust">
                         </div> -->
                     </div>
-                    <div class="weather__content--windDir">
+                    <div class="weather__wind--direction">
                         <i class="fas fa-location-arrow"></i>  
                         <span>
                             <!-- load from API -->
@@ -75,7 +75,7 @@
             </section>
 
             <!-- section current Tide -->
-            <section class="tide left-0 text-center">
+            <section class="tide">
 
                 <!-- current tide's timetable -->
                 <div class ="sea__container" id="sc1">

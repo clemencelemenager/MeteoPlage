@@ -45,7 +45,7 @@ header {
 .nav-link,
 .navbar-light .navbar-nav .active>.nav-link {
     color: vars.$color-light;
-    font-size: vars.$fontSize-content;
+    font-size: vars.$fontSize-normal;
     text-transform: uppercase;
     transition: 400ms;
 }
@@ -89,6 +89,28 @@ header {
     }
 }
 
+/* --------------- ALERT MESSAGE -------------- */
+
+.alertMessage {
+    background-color: vars.$color-alert;
+    font-size: vars.$fontSize-normal;
+    padding: 0 vars.$gutter;
+    margin: vars.$gutter auto 0 auto;
+    border-radius: vars.$radius;
+    text-align: center;
+    
+    &>p {
+        margin-bottom: 0;
+    }
+
+    & .alertMessage--close {
+        color: vars.$color-dark;
+        text-decoration: underline;
+        display: block;
+        text-align: right;
+    }
+}
+
 /* --------------- BLOC ELEMENTS -------------- */
 
 .nodisplay {
@@ -100,23 +122,28 @@ header {
     flex-direction: column;
     width:47%;
     justify-content: center;
+    text-align: center;
     border-radius: vars.$radius;
-    margin-top: vars.$gutter /2;
+    margin-top: vars.$gutter;
     font-size: vars.$fontSize-content;
 
-    &#weather-3 {
+    &#weather__wind {
         flex-direction: row;
         width: 97%;
         justify-content: space-evenly;
+        &.weather__wind--speed {
+            flex-direction: column;
+        }
     }
 
-    &>div {
+    &~div {
         display:flex;
         align-items: center;
         justify-content: center;
     }
 
     & .data--additionnal {
+        font-size: vars.$fontSize-content;
         padding: vars.$gutter /2;
     }
 
@@ -125,7 +152,7 @@ header {
     }
 
     & .dataWithLabel {
-        padding-left: vars.$gutter;
+        padding-left: vars.$gutter/4;
     }
 
     &.bloc__content--primary {
@@ -144,95 +171,30 @@ header {
     }
 }
 
-
-
-/* --------------- ALERT MESSAGE -------------- */
-
-.alertMessage {
-    background-color: vars.$color-alert;
-    font-size: vars.$fontSize-content;
-    padding: 0 vars.$gutter/2;
-    margin: vars.$gutter auto 0 auto;
-    border-radius: vars.$radius;
-    text-align: center;
-    
-    &>p {
-        margin-bottom: 0;
-    }
-
-    & .alertMessage--close {
-        color: vars.$color-dark;
-        text-decoration: underline;
-        display: block;
-        text-align: right;
-    }
-}
-
-
 /* --------------- WEATHER ELEMENTS -------------- */
 
 
-
-#wc4 {
-    width: 97%;
-    margin-top: 1em;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    border: 2px solid #44BBA4;
-    background-color: #44BBA4;
-}
-
-.weather__temperature--Felt {
+.weather__temperature--felt {
     font-size: 1rem;
     padding-top:0.8em;
 }
 
-.weather__description {
+.weather__description--text {
     padding: 0.5em;
     text-align:center;
     text-transform: capitalize;
 }
 
-.weather__content--rain {
-    display: flex;
-    padding: 0.5em;
-    font-size: 1.3rem;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.weather__content--rain span {
-    margin-left:0.3em;
-}
-
-.weather__content--wind {
-    justify-content: center;
-    flex-direction: column;
-    width:50%;
-    font-size: 1.3em;
-}
-
-.weather__content--wind span {
-    padding-left:0.2em;
-}
-
-.wind-max {
-    font-size:1rem;
-    padding-top:0.4em;
-}
-
-// .weather__content--windDir {
-    // padding:1em;
-    // height: 100%;
-    // font-size:1.2em;
-//     align-items: center;
-//     display: flex;
+// .weather__wind--speed {
+//     justify-content: center;
+//     flex-direction: column;
+//     width:50%;
+//     font-size: 1.3em;
 // }
 
-.weather__content--windDir span {
-    margin-left:0.4em;
+.wind--speed-gust {
+    font-size:1rem;
+    padding-top:0.4em;
 }
 
 /* --------------- SEA ELEMENTS -------------- */
@@ -360,14 +322,7 @@ footer .links a:hover {
         /* align-items: flex-start; */
     }
 
-    .weather__forecast--nextHours {
-        justify-content: center;
-    }
-
-    .forecast__content {
-        width:50%;
-    }
-
+    
 
 }
 
