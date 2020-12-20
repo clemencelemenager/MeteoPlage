@@ -28,9 +28,9 @@ header {
 }
 
 .navbar,
-.navbar-light,
-.navbar-brand,
-.navbar-toggler {
+.navbar-light .navbar-brand,
+.navbar-light .navbar-toggler {
+    color: vars.$color-light;
     font-weight: 800;
     background-color: vars.$color-dark;
     font-size: 18px;
@@ -61,7 +61,6 @@ header {
 }
 
 .synthesis {
-    margin: vars.$gutter/2 0;
     text-align:center;
 }
 
@@ -69,7 +68,6 @@ header {
     display:flex;
     flex-direction: column;
     margin: auto;
-    padding:vars.$gutter/2 0;
 
     @media (min-width:vars.$breakpoint-tablet) {
         flex-direction: row;
@@ -94,7 +92,7 @@ header {
 .alertMessage {
     background-color: vars.$color-alert;
     font-size: vars.$fontSize-normal;
-    padding: 0 vars.$gutter;
+    padding: vars.$gutter;
     margin: vars.$gutter auto 0 auto;
     border-radius: vars.$radius;
     text-align: center;
@@ -137,8 +135,7 @@ header {
         }
     }
 
-    &#sea-tide,
-    &.marineWeather--visibility {
+    &#sea-tide {
         width: 97%;
     }
 
@@ -150,6 +147,11 @@ header {
         &.marineWeather {
             flex-direction: row;
             height: inherit;
+            width: auto;
+            padding: vars.$gutter;
+            &.marineWeather--visibility {
+                width: 97%;
+            }
         }
     }
 

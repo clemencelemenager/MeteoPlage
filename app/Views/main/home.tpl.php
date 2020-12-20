@@ -111,18 +111,20 @@
                 </div>
 
                 <!-- sea informations -->
+                <div class="bloc__content bloc__content--primary marineWeather marineWeather--wave data--important">
+                    <i class="fas fa-water"></i>
+                    <span>
+                        <!-- load from API-->
+                    </span>
+                </div>
+
                 <div class="bloc__content bloc__content--primary marineWeather marineWeather--seaTemperature data--important">
                     <i class="fas fa-swimmer"></i>
                     <span>
                         <!-- load from API-->
                     </span>° 
                 </div>
-                <div class="bloc__content bloc__content--primary marineWeather marineWeather--wave">
-                    <i class="fas fa-water"></i>
-                    <span>
-                        <!-- load from API-->
-                    </span>
-                </div>
+                
                 <div class="bloc__content bloc__content--primary marineWeather marineWeather--visibility">
                     <i class="fas fa-eye"></i>
                         <span>
