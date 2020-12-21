@@ -100,7 +100,7 @@ let sea = {
      * @param integer seaTemperature 
      */
     displaySeaTemp: function(seaTemperature) {
-        let seaTempContainer = document.querySelector(".sea-temperature span");
+        let seaTempContainer = document.querySelector(".marineWeather--seaTemperature span");
         seaTempContainer.textContent = seaTemperature;
     },
 
@@ -110,7 +110,7 @@ let sea = {
      * @param integer waveHeight in meters
      */
     displayWaveHeight: function(waveHeight) {
-        let waveHeightContainer = document.querySelector(".sea-wave span");
+        let waveHeightContainer = document.querySelector(".marineWeather--wave span");
         waveHeightContainer.textContent = sea.getWaveDescription(waveHeight);
     },
 
@@ -121,7 +121,7 @@ let sea = {
      */
     displayCurrentWind: function (windSpeed) {
 
-        let windContainer = document.querySelector(".wind-normal span");
+        let windContainer = document.querySelector(".wind--speed-normal span");
         windContainer.textContent = windSpeed+"km/h ";
     },
 
@@ -131,7 +131,7 @@ let sea = {
     * @param integer windDegree
     */
     displayCurrentWindDirection: function(windDegree) {
-        let windDirContainer = document.querySelector('.weather__content--windDir span');
+        let windDirContainer = document.querySelector('.weather__wind--direction span');
         windDirContainer.textContent = app.getCardinalDirection(windDegree);
     },
 
@@ -141,9 +141,10 @@ let sea = {
      * @param number gust : speed in kmh
      */
     displayCurrentGust: function (gust) {
-        let gustContainer = document.querySelector(".weather__content--wind");
+        let gustContainer = document.querySelector(".weather__wind--speed");
         let gustElement = document.createElement('div');
-        gustElement.classList.add('wind-max');
+        gustElement.classList.add('wind--speed-gust');
+        gustElement.classList.add('data--additionnal');
         gustElement.textContent = "Rafales à "+gust+"km/h";
         gustContainer.appendChild(gustElement);
     },
@@ -244,7 +245,7 @@ let sea = {
      * @param string tideType : french description of current tide (rising/falling)
      */
     displayCurrentTide: function(tideType) {
-        let currentTideElement = document.querySelector(".currentTide-status");
+        let currentTideElement = document.querySelector(".tide--live-movement");
         currentTideElement.textContent = tideType;
     },
 
@@ -256,10 +257,10 @@ let sea = {
      */
     displayNextTide: function(nextTideType, nextTideHour) {
 
-        let nextTideTypeContainer = document.querySelector(".nextTide-type");
+        let nextTideTypeContainer = document.querySelector(".tide--live-type");
         nextTideTypeContainer.textContent = nextTideType; 
 
-        let nextTideTimeContainer = document.querySelector(".nextTide-time");
+        let nextTideTimeContainer = document.querySelector(".tide--live-time");
         nextTideTimeContainer.textContent = nextTideHour; 
     },
 
@@ -271,10 +272,10 @@ let sea = {
      */
     displaySecondTide: function(secondTideType,secondTideHour) {
 
-        let secondTideTypeContainer = document.querySelector(".secondTide-type");
+        let secondTideTypeContainer = document.querySelector(".tide--next-type");
         secondTideTypeContainer.textContent = secondTideType; 
 
-        let secondTideTimeContainer = document.querySelector(".secondTide-time");
+        let secondTideTimeContainer = document.querySelector(".tide--next-time");
         secondTideTimeContainer.textContent = secondTideHour; 
 
     },
