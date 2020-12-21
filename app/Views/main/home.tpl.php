@@ -7,10 +7,10 @@
         <!-- section Intro -->
         <section class="synthesis">
             <div class="title">
-                <h1>Omaha Beach</h1>
-                <p class="mb-2">
-                Météo & marée à Omaha Beach (14)
-                </p>
+                <h1>
+                    <i class="fas fa-map-marker-alt"></i>
+                    Omaha Beach
+                </h1>
             </div>
             <!-- <div class="marquee">
                 Le moment idéal pour se baigner ! 
@@ -21,178 +21,124 @@
             <!-- app.alertMessage() -->
         </div>
 
-        <div class="currentContent-container">
+        <div class="flexContainer">
 
             <!-- section current Weather -->
-            <section class="weather left-0 text-center">
-
-                <div class ="weather__container">
+            <section class="weather">
                     
-                    <!-- weather description -->
-                    <div class="weather__content" id="wc1">
-                        <div class="weather__picture">
-                                <!-- load icon from API -->
-                        </div>
-                        <div class="weather__description">
-                            <!-- load description from API -->
-                        </div>
+                <!-- weather description -->
+                <div class="bloc__content bloc__content--primary" id="weather__description">
+                    <div class="weather__description--picture">
+                            <!-- load icon from API -->
                     </div>
-                
-                    <!-- temperature -->
-                    <div class="weather__content weather__temperature" id="wc2">
-                            <div class="weather__temperature--Air">
-                                <i class="fas fa-thermometer-half"></i>
-                                <span>
-                                    <!-- load temp from API-->
-                                </span>° 
-                            </div>
-                            <div class="weather__temperature--Felt">
-                                Ressenti 
-                                <span>
-                                    <!-- load temp from API-->
-                                </span>°
-                            </div>
+                    <div class="weather__description--text">
+                        <!-- load description from API -->
                     </div>
+                </div>
+            
+                <!-- temperature -->
+                <div class="bloc__content bloc__content--primary" id="weather__temperature">
+                    <div class="weather__temperature--air data--important">
+                        <i class="fas fa-thermometer-half"></i>
+                        <span>
+                            <!-- load temp from API-->
+                        </span>° 
+                    </div>
+                    <div class="weather__temperature--felt data--additionnal">
+                        Ressenti : 
+                        <span class="dataWithLabel">
+                            <!-- load temp from API-->
+                        </span>°
+                    </div>
+                </div>
 
-                    <!-- wind -->
-                    <div class="weather__content" id="wc4">
-                        <div class="weather__content--wind">
-                            <div class="wind-normal">
-                                <i class="fas fa-wind"></i>
-                                <span>
-                                    <!-- load from API -->
-                                </span>
-                            </div>
-                            <!-- <div class="wind-max">
-                            </div> -->
-                        </div>
-                        <div class="weather__content--windDir">
-                            <i class="fas fa-location-arrow"></i>  
+                <!-- wind -->
+                <div class="bloc__content bloc__content--primary" id="weather__wind">
+                    <div class="weather__wind--speed">
+                        <div class="wind--speed-normal data--important">
+                            <i class="fas fa-wind"></i>
                             <span>
                                 <!-- load from API -->
                             </span>
                         </div>
+                        <!-- <div class="data--additionnal wind--speed-gust">
+                        </div> -->
                     </div>
-
+                    <div class="weather__wind--direction">
+                        <i class="fas fa-location-arrow"></i>  
+                        <span>
+                            <!-- load from API -->
+                        </span>
+                    </div>
                 </div>
 
             </section>
 
             <!-- section current Tide -->
-            <section class="tide left-0 text-center">
+            <section class="sea">
 
                 <!-- current tide's timetable -->
-                <div class ="sea__container" id="sc1">
+                <div class ="bloc__content bloc__content--tide" id="sea-tide">
 
-                    <div class="tide__currentTide">
+                    <div class="sea__tide--live">
                         <!-- load from API -->
-                        <span class="currentTide-status">
+                        <span class="tide--live-movement">
                             <!-- load from API-->
                         </span>,
                          elle sera 
-                        <span class="nextTide-type">
+                        <span class="tide--live-type">
                             <!-- load from API-->
                         </span>
                          à 
-                        <span class="nextTide-time">
+                        <span class="tide--live-time">
                             <!-- load from API-->
                         </span>
                     </div>
 
-                    <div class="tide__nextTides">
-                        <p class="tide__secondTide--title">
+                    <div class="sea__tide--next">
+                        <div class="tide--next-title">
                             Prochaine marée 
-                            <span class="secondTide-type">
+                            <span class="tide--next-type">
                                 <!-- load from API-->
                             </span>
                             à 
-                            <span class="secondTide-time">
+                            <span class="tide--next-time">
                                 <!-- load from API-->
                             </span>
-                        </p>
+                        </div>
                     </div>
 
                 </div>
 
                 <!-- sea informations -->
-                <div class ="sea__container" id="sc2">
-                    <div class="sea__details sea-temperature">
-                        <i class="fas fa-swimmer"></i>
-                        <span>
-                            <!-- load from API-->
-                        </span>° 
-                    </div>
-                    <div class="sea__details sea-wave">
-                        <i class="fas fa-water"></i>
-                        <span>
-                            <!-- load from API-->
-                        </span>
-                    </div>
-                    <div class="sea__details sea-visibility">
+                <div class="bloc__content bloc__content--primary marineWeather marineWeather--wave data--important">
+                    <i class="fas fa-water"></i>
+                    <span>
+                        <!-- load from API-->
+                    </span>
+                </div>
+
+                <div class="bloc__content bloc__content--primary marineWeather marineWeather--seaTemperature data--important">
+                    <i class="fas fa-swimmer"></i>
+                    <span>
+                        <!-- load from API-->
+                    </span>° 
+                </div>
+                
+                <div class="bloc__content bloc__content--primary marineWeather marineWeather--visibility data--important">
                     <i class="fas fa-eye"></i>
                         <span>
                             <!-- load from API-->
                         </span>
-                    </div>
-                   
                 </div>
+                   
 
             </section>
 
 
         </div>
 
-        <div class="forecastContent-container">
-
-            <!-- section forecast next hours -->
-            <!-- <section class="forecast">
-
-                <div class="forecast__title">
-                    <p>Prévisons des prochaines heures </p>
-                    <i class="fas fa-caret-down"></i>
-                </div>
-
-                <div class="forecast__content nodisplay">
-
-                    <div class="forecast__content--weather">
-                        <div class="forecast__weather--nextHours">
-                            <div class="forecast--nextHours forecast0">
-                                <div class ="forecast__weather--time">
-                                </div>    
-                                <div class ="forecast__weather--icon">
-                                </div>
-                                <div class ="forecast__weather--temp">
-                                </div>
-                                <div class ="forecast__weather--wind">
-                                </div>
-                            </div>
-                            <div class="forecast--nextHours forecast1">
-                                <div class ="forecast__weather--time">
-                                </div>    
-                                <div class ="forecast__weather--icon">
-                                </div>
-                                <div class ="forecast__weather--temp">
-                                </div>
-                                <div class ="forecast__weather--wind">
-                                </div>
-                            </div>  
-                            <div class="forecast--nextHours forecast2">
-                                <div class ="forecast__weather--time">
-                                </div>    
-                                <div class ="forecast__weather--icon">
-                                </div>
-                                <div class ="forecast__weather--temp">
-                                </div>
-                                <div class ="forecast__weather--wind">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> -->
-            
-        </div>
-
+    
        
        
 

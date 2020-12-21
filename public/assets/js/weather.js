@@ -106,7 +106,7 @@ let weather = {
      * @param string description 
      */
     displayCurrentDescription: function(description) {
-        let descriptionElement = document.querySelector(".weather__description");
+        let descriptionElement = document.querySelector(".weather__description--text");
         descriptionElement.textContent = description;
     },
 
@@ -121,7 +121,7 @@ let weather = {
         let iconElement = document.createElement("img");
         iconElement.setAttribute("src",iconURL);
 
-        let iconContainer = document.querySelector(".weather__picture");
+        let iconContainer = document.querySelector(".weather__description--picture");
         iconContainer.appendChild(iconElement);
     },
     
@@ -131,7 +131,7 @@ let weather = {
      * @param number temperature 
      */
     displayCurrentTemperature: function(temperature) {
-        let temperatureContainer = document.querySelector(".weather__temperature--Air span");
+        let temperatureContainer = document.querySelector(".weather__temperature--air span");
         temperatureContainer.textContent = temperature;
     },
 
@@ -141,7 +141,7 @@ let weather = {
      * @param number temperature feels like
      */
     displayCurrentTempFeelsLike: function(tempFeelsLike) {
-        let tempFeelsLikeContainer = document.querySelector(".weather__temperature--Felt span");
+        let tempFeelsLikeContainer = document.querySelector(".weather__temperature--felt span");
         tempFeelsLikeContainer.textContent = tempFeelsLike;
     },
     
@@ -152,7 +152,7 @@ let weather = {
      * @param string visibility text
      */
     displayVisibility: function (visibility) {
-        let visibilityContainer = document.querySelector(".sea-visibility span");
+        let visibilityContainer = document.querySelector(".marineWeather--visibility span");
         visibilityContainer.textContent = visibility;
 
     },

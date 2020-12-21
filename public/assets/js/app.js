@@ -19,7 +19,6 @@ let app = {
         // ! API StormGlass limited to 50 calls/day
         sea.loadStormGlassWeather(true, latitude, longitude);
 
-
         // API  Tides
         // @see https://rapidapi.com/apihood/api/tides/endpoints
         // ! API limited to 100 calls/month

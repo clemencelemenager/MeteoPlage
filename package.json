@@ -1,5 +1,27 @@
 {
   "dependencies": {
     "chart.js": "^2.9.4"
-  }
+  },
+  "name": "omahabeach",
+  "description": "Display weather and tide at the beach (default location : Omaha Beach)",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch ./public/assets/css/custom.scss:./public/assets/css/custom.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clemencelemenager/MeteoPlage.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clemencelemenager/MeteoPlage/issues"
+  },
+  "homepage": "https://github.com/clemencelemenager/MeteoPlage#readme"
 }

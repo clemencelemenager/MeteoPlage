@@ -1,0 +1,259 @@
+@use './vars';
+
+body {
+    font-family: vars.$font-primary;
+    font-size: 16px;
+}
+
+h1 {
+    padding-top: vars.$gutter;
+    font-size: vars.$fontSize-title;
+    font-weight: bold;
+}
+
+i {
+    margin-right: vars.$gutter / 2;
+}
+
+/* --------------- NAVBAR -------------- */
+
+header {
+    color: vars.$color-light;
+    text-align: center;
+    padding-bottom: vars.$gutter / 3;
+
+    @media (min-width:vars.$breakpoint-tablet) {
+        padding-bottom: 0;
+    }
+}
+
+.navbar,
+.navbar-light .navbar-brand,
+.navbar-light .navbar-toggler,
+.navbar-light .navbar-nav .nav-link {
+    color: vars.$color-light;
+    font-weight: 800;
+    background-color: vars.$color-dark;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-nav .nav-item.active {
+    color: vars.$color-warning;
+}
+
+.navbar-toggler,
+.nav-link,
+.navbar-light .navbar-nav .active>.nav-link {
+    color: vars.$color-warning;
+    font-size: vars.$fontSize-normal;
+    text-transform: uppercase;
+    transition: 400ms;
+}
+
+/* --------------- MAIN ELEMENTS -------------- */
+
+.marquee {
+    border-radius: vars.$radius;
+    color: vars.$color-dark;
+    background-color: vars.$color-warning;
+    padding: vars.$gutter/2;
+    margin: vars.$gutter/2 0;
+}
+
+.synthesis {
+    text-align:center;
+}
+
+.flexContainer{
+    display:flex;
+    flex-direction: column;
+    margin: auto;
+
+    @media (min-width:vars.$breakpoint-tablet) {
+        flex-direction: row;
+    }
+}
+
+.weather,
+.sea {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    @media (min-width:vars.$breakpoint-tablet) {
+        width: 50%;
+    }
+}
+
+/* --------------- ALERT MESSAGE -------------- */
+
+.alertMessage {
+    background-color: vars.$color-alert;
+    font-size: vars.$fontSize-normal;
+    padding: vars.$gutter;
+    margin: vars.$gutter auto 0 auto;
+    border-radius: vars.$radius;
+    text-align: center;
+    
+    &>p {
+        margin-bottom: 0;
+    }
+
+    & .alertMessage--close {
+        color: vars.$color-dark;
+        text-decoration: underline;
+        display: block;
+        text-align: right;
+    }
+}
+
+/* --------------- BLOC ELEMENTS -------------- */
+
+.nodisplay {
+    display:none;
+}
+
+.bloc__content {
+    display: flex;
+    flex-direction: column;
+    width:47%;
+    justify-content: center;
+    text-align: center;
+    border-radius: vars.$radius;
+    margin-top: vars.$gutter;
+    padding: vars.$gutter/2 0;
+    font-size: vars.$fontSize-content;
+
+    &#weather__wind {
+        flex-direction: row;
+        width: 97%;
+        justify-content: space-evenly;
+        &.weather__wind--speed {
+            flex-direction: column;
+        }
+    }
+
+    &#sea-tide {
+        width: 97%;
+    }
+
+    &~div {
+        display:flex;
+        align-items: center;
+        justify-content: center;
+
+        &.marineWeather {
+            flex-direction: row;
+            height: inherit;
+            padding: vars.$gutter;
+            &.marineWeather--visibility {
+                width: 97%;
+            }
+        }
+    }
+
+    &.bloc__content--primary {
+        border: 2px solid vars.$color-primary;
+        background-color: vars.$color-primary;
+    }
+
+    &.bloc__content--tide {
+        border: 2px solid vars.$color-alternative;
+        background-color: vars.$color-alternative;
+        color: vars.$color-light;
+        padding: vars.$gutter /2;
+    }
+    
+    &.bloc__content--warning {
+        border: 2px solid vars.$color-warning;
+        background-color: vars.$color-warning;
+    }
+    
+    &.bloc__content--off {
+        border: 2px solid grey;
+        background-color: grey;
+    }
+}
+
+/* --------------- DATA ELEMENTS -------------- */
+
+.data--important {
+    font-size: vars.$fontSize-data;
+    padding-top: 0.3rem;
+}
+
+.data--additionnal {
+    font-size: vars.$fontSize-content;
+    padding: vars.$gutter /2;
+}
+
+.dataWithLabel {
+    padding-left: vars.$gutter/4;
+}
+
+
+
+/* --------------- FOOTER -------------- */
+
+
+.page-link {
+    text-transform: uppercase;
+    color: inherit;
+    font-size: 0.8em;
+}
+
+.page-link:hover {
+    background-color: #dee2e6;
+    color: inherit;
+}
+
+footer {
+    color: #888;
+    font-size:0.9em;
+    margin: 3em 0 1em 0;
+}
+
+footer .links a {
+    color: inherit;
+}
+
+footer .links a:hover {
+    color: grey;
+    text-decoration: none;
+}
+
+
+/* DEVICE TABLET => md in bootstrap */
+@media (min-width:vars.$breakpoint-tablet) {
+
+    h1 {
+        font-size: 36px;
+    }
+
+    
+    .weather, 
+    .tide {
+        width: 50%;
+        margin: auto;
+    }
+
+    .weather__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        /* align-items: flex-start; */
+    }
+
+    
+
+}
+
+/* DEVICE PC => lg in bootstrap */
+@media screen and (min-width:992px) {
+
+    header h1 {
+        font-size: 2em;
+    }
+
+}
