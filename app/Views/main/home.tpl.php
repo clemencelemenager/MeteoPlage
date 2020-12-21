@@ -125,7 +125,7 @@
                     </span>° 
                 </div>
                 
-                <div class="bloc__content bloc__content--primary marineWeather marineWeather--visibility">
+                <div class="bloc__content bloc__content--primary marineWeather marineWeather--visibility data--important">
                     <i class="fas fa-eye"></i>
                         <span>
                             <!-- load from API-->

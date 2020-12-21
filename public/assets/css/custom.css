@@ -27,11 +27,11 @@ header {
 
 .navbar,
 .navbar-light .navbar-brand,
-.navbar-light .navbar-toggler {
+.navbar-light .navbar-toggler,
+.navbar-light .navbar-nav .nav-link {
   color: #F6F7EB;
   font-weight: 800;
   background-color: #393E41;
-  font-size: 18px;
 }
 
 .navbar-light .navbar-nav .nav-link:hover,
@@ -42,7 +42,7 @@ header {
 .navbar-toggler,
 .nav-link,
 .navbar-light .navbar-nav .active > .nav-link {
-  color: #F6F7EB;
+  color: #F3CA40;
   font-size: 1rem;
   text-transform: uppercase;
   transition: 400ms;
@@ -75,7 +75,6 @@ header {
 .weather,
 .sea {
   width: 100%;
-  margin: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -141,7 +140,6 @@ header {
 .bloc__content ~ div.marineWeather {
   flex-direction: row;
   height: inherit;
-  width: auto;
   padding: 1rem;
 }
 .bloc__content ~ div.marineWeather.marineWeather--visibility {
