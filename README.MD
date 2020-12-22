@@ -1,12 +1,10 @@
-# MétéoPlage (BeachWeather)
+# MétéoPlage
 
 Display weather and tide at the beach (default location : Omaha Beach)
 
 ## Getting started
 
 ### Install Composer on the project's root folder
-
-Composants specified in composer.json will be deployed 
 
 ```shell
 composer install
@@ -35,9 +33,9 @@ Free plan limited to 1M calls / month - [API doc]("https://openweathermap.org/ap
 > weather.loadOpenWeatherMap()
 > ```
 
-### Activate API data for tides
+### Activate APIs 
 
-Give the limited calls for Tides API in free plan, the request to API is not activated by default. When not activated, it loads some sample data for the display.
+Given the limited calls for API in free plan, the request to API can be desactivated for tests When not activated, it loads some sample data for the display.
 
 To activate API, set *true* to activateAPI in app.init().
 
