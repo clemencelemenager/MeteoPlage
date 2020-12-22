@@ -5,7 +5,7 @@ let app = {
      */ 
     init: function() {
 
-        // Set latitud & longitud for Omaha Beach
+        // Set latitud & longitud - default : Omaha Beach(14, France)
         let latitude    = 49.369682;
         let longitude   = -0.871084;
 
@@ -13,8 +13,7 @@ let app = {
         // @see https://openweathermap.org/api/one-call-api
         weather.loadOpenWeatherMap(true, latitude,longitude);
 
-
-        /// API StormGlass Weather
+        // API StormGlass Weather
         // @see https://docs.stormglass.io/#/weather
         // ! API StormGlass limited to 50 calls/day
         sea.loadStormGlassWeather(true, latitude, longitude);
@@ -142,24 +141,7 @@ let app = {
 
     },
 
-    /**
-    * Add event listener on "see forecast" 
-    */
-    seeForecast: function() {
-        let seeForecastElement = document.querySelector(".forecast__title");
-        seeForecastElement.addEventListener('click', app.handleExpandForecast);
-    },
-
-    /**
-     * Expand forecast content (on/off)
-     * Display weather and tide for next hours
-     */
-    handleExpandForecast: function() {
-        let forecastElement = document.querySelector(".forecast__content");
-        forecastElement.classList.toggle('nodisplay');
-
-    },
-
+   
     /**
      * Display an alert message in webpage
      * 

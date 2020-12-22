@@ -85,7 +85,7 @@
                         <span class="tide--live-movement">
                             <!-- load from API-->
                         </span>,
-                         elle sera 
+                         marée 
                         <span class="tide--live-type">
                             <!-- load from API-->
                         </span>
