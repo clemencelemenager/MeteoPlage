@@ -9,6 +9,13 @@ let sea = {
             sea.fetchMarineWeatherData(latitude,longitude)
 
             .then((data) => {
+                // console.log(data);
+        
+                // Warning console about remaining API calls (max 50/day)
+                if (data.meta.requestCount >= 40){
+                    console.warn("Nb d'appels API StormGlass restants aujourd'hui: ",data.meta.dailyQuota - data.meta.requestCount)
+                };
+
                 // Prerequisite : get the current hour as index for the array data.hours
                 let now     = new Date();
                 let index   = now.getHours();
@@ -22,21 +29,14 @@ let sea = {
                     windDegree: data.hours[index].windDirection.sg,
                 };
                 sea.displayMarineWeatherData(marineWeatherDataSet);
+            })
+            .catch(error => {
+                // console.log(error);
+                sea.loadSampleDataForMarineWeather();
             });
         }
         else {
-            let marineWeatherSampleDataSet = {
-                seaTemp: 15,
-                waveHeight: 0,
-                windSpeed: 5,
-                gust: 10,
-                windDegree: 150,
-            };
-            sea.displayMarineWeatherData(marineWeatherSampleDataSet);
-
-            // display an alert message about sample data
-            let messageHTML = "Attention : les données sont des exemples. Contactez l'administrateur pour activer les données réelles." 
-            app.alertMessage(messageHTML);
+            sea.loadSampleDataForMarineWeather();
         }
     },
 
@@ -70,6 +70,26 @@ let sea = {
             })
         
         return fetchResponse;
+    },
+
+    /** 
+     * Load sample data instead of StormGlass API data
+     * 
+     * (API desactivated for tests or error from API)
+     */
+    loadSampleDataForMarineWeather: function() {
+        let marineWeatherSampleDataSet = {
+            seaTemp: 15,
+            waveHeight: 0,
+            windSpeed: 5,
+            gust: 10,
+            windDegree: 150,
+        };
+        sea.displayMarineWeatherData(marineWeatherSampleDataSet);
+
+        // display an alert message about sample data
+        let messageHTML = "Attention : les données sont des exemples. Contactez l'administrateur pour activer les données réelles." 
+        app.alertMessage(messageHTML);
     },
 
     // ========================================================
@@ -167,6 +187,7 @@ let sea = {
         // if activateAPI, load data from API
         if(activateAPI == true) {
             sea.fetchTidesData(latitude, longitude).then( function(data) {
+                // console.log(data);
                 
                 let tideDataSet = {
                     currentTide: sea.getTideStatus(data.heights[0].state),
@@ -178,22 +199,14 @@ let sea = {
                 };
 
                 sea.displayTideData(tideDataSet);
+            })
+            .catch(error => {
+                // console.log(error);
+                sea.loadSampleDataForTides();
             });
         }
         else {
-            tideSampleDataSet  = {
-                currentTide: "La mer monte",
-                nextTideType: "haute",
-                nextTideHour: "22h04",
-                secondTideType: "basse",
-                secondTideHour: "05:34",
-                tideNextHours: sea.getSampleData(),
-            };
-            sea.displayTideData(tideSampleDataSet);
-
-            // display an alert message about sample data
-            let messageHTML = "Attention : les données sont des exemples. Contactez l'administrateur pour activer les données réelles." 
-            app.alertMessage(messageHTML);
+            sea.loadSampleDataForTides();
         }
     },
 
@@ -221,6 +234,27 @@ let sea = {
             })
         
         return fetchResponse;
+    },
+
+    /** 
+     * Load sample data instead of Tides API data
+     * 
+     * (API desactivated for tests or error from API)
+     */
+    loadSampleDataForTides: function() {
+        tideSampleDataSet  = {
+            currentTide: "La mer monte",
+            nextTideType: "haute",
+            nextTideHour: "22h04",
+            secondTideType: "basse",
+            secondTideHour: "05:34",
+            tideNextHours: sea.getSampleTides(),
+        };
+        sea.displayTideData(tideSampleDataSet);
+
+        // display an alert message about sample data
+        let messageHTML = "Attention : les données sont des exemples. Contactez l'administrateur pour activer les données réelles." 
+        app.alertMessage(messageHTML);
     },
 
 
@@ -374,9 +408,9 @@ let sea = {
     /**
      * Get sample tide data 
      */
-    getSampleData: function() {
+    getSampleTides: function() {
         
-        let sampleData = {
+        return {
             0: {timestamp: 1605462966, datetime: "2020-11-15T17:56:06+00:00", height: -1.0075273508763711, state: "RISING"},
             1: {timestamp: 1605466566, datetime: "2020-11-15T18:56:06+00:00", height: 1.3282136010455832, state: "RISING"},
             2: {timestamp: 1605470166, datetime: "2020-11-15T19:56:06+00:00", height: 2.7711124808243794, state: "RISING"},
@@ -389,8 +423,7 @@ let sea = {
             9: {timestamp: 1605495366, datetime: "2020-11-16T02:56:06+00:00", height: -3.0744115196055657, state: "FALLING"},
             10: {timestamp: 1605498966, datetime: "2020-11-16T03:56:06+00:00", height: -3.861516255952961, state: "FALLING"},
             11: {timestamp: 1605502566, datetime: "2020-11-16T04:56:06+00:00", height: -3.5715966729537225, state: "RISING"},
-        };
-        return sampleData;
+        };;
     },
 
 

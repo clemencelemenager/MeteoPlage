@@ -8,6 +8,7 @@ let weather = {
         if(activateAPI == true) {
             weather.fetchWeatherData(latitude,longitude)
             .then(function(data) {
+                // console.log(data);
 
                 let weatherLiveDataSet = {
                     airTemp: Math.round(data.current.temp),
@@ -36,25 +37,15 @@ let weather = {
                 //     weatherDescr: data.daily[1].weather[0].description,
                 //     weatherIcon:weather.getWeatherIconUrl(data.daily[1].weather[0].icon),
                 // }
+            })
+            .catch(error => {
+                // console.log(error);
+                weather.loadSampleDataForWeather();
             });
         }
         else {
-            let weatherLiveSampleDataSet = {
-                airTemp: 20,
-                airTempFeelsLike: 18,
-                weatherDescr: "Nuageux",
-                weatherIcon: "02n",
-                visibility: weather.getVisibilityText(10000),
-                humidityRate: 80,
-                UV: Math.round(5),
-                nextHours: [], 
-            };
-            weather.displayCurrentWeather(weatherLiveSampleDataSet);
-            // display an alert message about sample data
-            let messageHTML = "Attention : les données sont des exemples. Contactez l'administrateur pour activer les données réelles." 
-            app.alertMessage(messageHTML);
+            weather.loadSampleDataForWeather();
         }
-        
     },
 
     /**
@@ -80,6 +71,28 @@ let weather = {
             })
         
         return fetchResponse;
+    },
+
+    /** 
+     * Load sample data instead of OpenWeatherMap API data
+     * 
+     * (API desactivated for tests or error from API)
+     */
+    loadSampleDataForWeather: function() {
+        let weatherLiveSampleDataSet = {
+            airTemp: 20,
+            airTempFeelsLike: 18,
+            weatherDescr: "Nuageux",
+            weatherIcon: "02n",
+            visibility: weather.getVisibilityText(10000),
+            humidityRate: 80,
+            UV: Math.round(5),
+            nextHours: [], 
+        };
+        weather.displayCurrentWeather(weatherLiveSampleDataSet);
+        // display an alert message about sample data
+        let messageHTML = "Attention : les données sont des exemples. Contactez l'administrateur pour activer les données réelles." 
+        app.alertMessage(messageHTML);
     },
 
 

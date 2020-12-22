@@ -1,0 +1,32 @@
+let api = {
+
+    /**
+     * API Tides
+     * 
+     */
+    getTidesAPIKey: function() {
+        let APIkey = "";
+        return APIkey;
+    },
+
+    /**
+     * API Open Weather Map
+     * Specific key for API current weather
+     */
+    getAPIKeyForOpenWeatherMap: function() {
+        let APIkey = "";
+        return APIkey;
+    },
+
+
+    /**
+     * API StormGlass
+     * Weather data
+     * @see https://stormglass.io/dashboards/
+     */
+    getAPIStormGlass: function() {
+        let APIkey = "";
+        return APIkey;
+    },
+
+}

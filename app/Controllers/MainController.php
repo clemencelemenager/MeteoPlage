@@ -28,8 +28,7 @@ class MainController extends CoreController
     public function about() {
         $this->show('main/about');
     }
-
-    
     
 
+    
 }

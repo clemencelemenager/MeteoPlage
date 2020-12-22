@@ -6,19 +6,26 @@
     <div class="footer row container-fluid justify-content-center text-center">
         <div class="col-12 links">
         <ul class="list-inline">
-            <li class="list-inline-item"><a href="#">Copyright</a></li>
-            <li class="list-inline-item"><a href="#">Protection des données</a></li>
-            <li class="list-inline-item"><a href="#">Mentions légales</a></li>
+            <!-- <li class="list-inline-item"><a href="#">Copyright</a></li> -->
+            <!-- <li class="list-inline-item"><a href="#">Protection des données</a></li> -->
+            <!-- <li class="list-inline-item"><a href="<?=$baseUri?>/about">Mentions légales</a></li> -->
+            <li class="list-inline-item"><a href="https://github.com/clemencelemenager/MeteoPlage" target="_blank">Voir le projet sur Github</a></li>
+
         </ul>
         </div>
     </div>
 
 </footer>
 
-<script src="<?= $assetsBaseUri ?>js/api.js"></script>
-<script src="<?= $assetsBaseUri ?>js/sea.js"></script>
-<script src="<?= $assetsBaseUri ?>js/weather.js"></script>
-<script src="<?= $assetsBaseUri ?>js/app.js"></script>
+<?php
+  if($currentURL === '/') {?>
+    <script src="<?= $assetsBaseUri ?>js/api.js"></script>
+    <script src="<?= $assetsBaseUri ?>js/sea.js"></script>
+    <script src="<?= $assetsBaseUri ?>js/weather.js"></script>
+    <script src="<?= $assetsBaseUri ?>js/app.js"></script>  
+<?php  
+}
+?>
 
 
 <!-- #Bootstrap core JavaScript -->
