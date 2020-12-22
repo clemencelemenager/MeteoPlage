@@ -20,7 +20,7 @@ Here are the API used in project :
 
 - **Tides** : Timetable for tides
   - Free plan limited to 100 calls / month 
-  - [API documentation]('https://rapidapi.com/apihood/api/tides/endpoints')
+  - [API documentation](https://rapidapi.com/apihood/api/tides/endpoints)
 
 - **StormGlass Weather** : Marine weather
   - Free plan limited to 50 calls / day 
@@ -28,7 +28,7 @@ Here are the API used in project :
 
 - **Open Weather Map** : Live weather
   - Free plan limited to 1M calls / month 
-  - [API documentation]("https://openweathermap.org/api")
+  - [API documentation](https://openweathermap.org/api)
 
 ### Activate API
 
